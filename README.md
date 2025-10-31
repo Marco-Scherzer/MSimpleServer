@@ -10,3 +10,10 @@ It currently runs on both desktop and Android environments via console interface
 While the current focus is on Android GUI integration ( com.marcoscherzer.mminigui ), 
 the core package ( com.marcoscherzer.msimpleserver ) remains platform-independent and compatible with desktop environments.
 
+Common About-Me:
+Im an alrounder not a specialist.
+Not for networking, nor for http things or Android.
+I recently transitioned from multiplatform development to Android-specific projects.
+My current work is intended solely for my own personal use.
+
+
