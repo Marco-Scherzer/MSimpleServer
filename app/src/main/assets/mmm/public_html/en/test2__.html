@@ -1,0 +1,54 @@
+
+<!-- /*
+ * //UNFERTIG UND UNGETESTET
+ * 
+ * Author Marco Scherzer with Microsoft Copilot: Code on Goal-Description
+ * PostAuthoring Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+ */
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API-Testseite</title>
+    <script type="module">
+        import { MApiClient } from "/MApiClient.js";
+
+        "use strict";
+                              
+        const apiClient = new MApiClient("/test2__"); //immer ResourcenName des htmls selbst
+        const responseText = document.getElementById("responseText");
+
+        async function validateTestForm1_UrlApi() {
+            responseText.textContent = "Sende URL-API-Anfrage...";
+            const response = await apiClient.sendRequestWithUrlParams("validateTestForm1", { name: "Marco Scherzer", age: "21" });
+            responseText.textContent = "Antwort (URL-API): " + response;
+        }
+
+        async function validateTestForm1_HeaderApi() {
+            responseText.textContent = "Sende Header-API-Anfrage...";
+            const response = await apiClient.sendRequestWithHeaderParams("validateTestForm1", { name: "Marco Scherzer", age: "21" });
+            responseText.textContent = "Antwort (Header-API): " + response;
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            document.getElementById("testUrlApi").addEventListener("click", validateTestForm1_UrlApi);
+            document.getElementById("testHeaderApi").addEventListener("click", validateTestForm1_HeaderApi);
+        });
+    </script>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+        button { padding: 10px 20px; font-size: 16px; margin: 10px; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <h1>API-Testseite</h1>
+    <button id="testUrlApi">Teste URL-API</button>
+    <button id="testHeaderApi">Teste Header-API</button>
+
+    <p id="responseText"></p>
+
+</body>
+</html>
