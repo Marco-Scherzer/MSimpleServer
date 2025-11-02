@@ -1,3 +1,4 @@
+
 package com.marcoscherzer.minigui;
 
 import static com.marcoscherzer.msimpleserver.http.constants.MHttpMethod.GET;
