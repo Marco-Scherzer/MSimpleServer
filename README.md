@@ -17,11 +17,16 @@
 
 #### While the current focus is on Android GUI integration ( com.marcoscherzer.mminigui ), the core package ( com.marcoscherzer.msimpleserver ) remains platform-independent and compatible with desktop environments.
 
-Important: This private repository is archived at irregular intervals with timestamps stored on an
-independent archiving site.
-For that reason, it may temporarily be set a short time to public during the archiving process.
-It is strictly forbidden to interact with this repository in any way.
-
+## Legal Notice
+This software is proprietary and protected by copyright law.  
+Idea, Author, and Copyright: Marco Scherzer  
+All rights reserved.
+This repository is to be treated as **private**.  
+It is not intended for public collaboration or external contributions.  
+Access is restricted, and any interaction with the repository is strictly forbidden.
+Strictly prohibited:  
+Forking, copying, reverse engineering, decompiling, modifying, redistributing, or any unauthorized
+use of this software.
 
 #### Common About-Me:
 
@@ -30,7 +35,17 @@ Not for networking, nor for http things or Android.
 Thanks to Microsoft Copilot, any HTTP knowledge I needed has been available on demand.
 I recently transitioned from multiplatform development to Android-specific projects.
 My current work is intended solely for internal use within my own self‑employment, which means for
-myself and my projects.
+myself and my projects. Until now, all of my work has been closed-source. I have always worked independently and entirely on
+my own. Everything I have built has been done only on my local computer, and everything I create is formally
+protected by law. Only now, in my later years, I have published something here on GitHub for the first time.
+Except for what I publish here on this GitHub page (https://github.com/Marco-Scherzer),
+all of my software projects remain closed-source.
+
+My source code and any compiled versions that may sometimes appear here,  
+as well as any texts or other content on this page, are protected by copyright. 
+All rights are reserved, which means that any kind of use, copying, linking or downloading and many
+things more is not permitted. If I ever decide to write a license for the binary, so that other people may at least be allowed to
+download the executable or installer, this text will also include the license and the exact location where the binaries can be downloaded.
 
 ### Example
 
@@ -122,33 +137,6 @@ private static MHttpContentMap createAndAddContent(MMultiPlatformFileLoader reso
 ```
 <br>
 
-## Legal Notice
-
-This software is proprietary and protected by copyright law.  
-Idea, Author, and Copyright: Marco Scherzer  
-All rights reserved.
-
-Strictly prohibited:  
-Forking, copying, reverse engineering, decompiling, modifying, redistributing, or any unauthorized
-use of this software.
-
-About this Software:
-Until now, all of my work has been closed-source. I have always worked independently and entirely on
-my own.
-Everything I have built has been done only on my local computer, and everything I create is formally
-protected by law.
-Only now, in my later years, I have published something here on GitHub for the first time.
-Except for what I publish here on this GitHub page (https://github.com/Marco-Scherzer),
-all of my software projects remain closed-source.
-
-My source code and any compiled versions that may sometimes appear here,  
-as well as any texts or other content on this page, are protected by copyright.
-
-All rights are reserved, which means that any kind of use, copying, linking or downloading and many
-things more is not permitted.
-If I ever decide to write a license for the binary, so that other people may at least be allowed to
-download the executable or installer,  
-this text will also include the license and the exact location where the binaries can be downloaded.
 
 ## Repository Sale Notice
 
@@ -178,12 +166,15 @@ actions, I hereby make the following statement once and for all, clearly and exp
 
 ## 1. Abuse and Phishing
 
-To prevent abuse or phishing, there are no other websites, email addresses, or communication
-channels connected to the software on this page except the listed official email address.
+To protect against abuse and phishing, please note:
+There are **no other websites, email addresses, or communication channels** associated with this software except the official contact listed here.
 
-If you find the code or binaries anywhere other than at  
-[https://github.com/Marco-Scherzer](https://github.com/Marco-Scherzer),  
-it is abuse, a scam, and theft of law‑protected intellectual property.
+If you encounter the code or binaries anywhere other than:
+
+- [https://github.com/Marco-Scherzer](https://github.com/Marco-Scherzer)
+- The same repository archived in the Wayback Machine (pre‑publication archiving)
+
+then it constitutes **abuse, a scam, and theft of law‑protected intellectual property**.
 
 In such a case, please inform GitHub and email me.
 
