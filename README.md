@@ -2,6 +2,7 @@
 
 #### Development started in early 2025 and had reached 3 to 4 weeks of progress when it started to work for my own simple scenario purposes. 
 #### This early version focuses on HTTP and HTTPS handler implementations and currently supports only simple HttpServer and HttpsServer features with a focus on security through minimalism.
+
 #### Features after 4 weeks:
 - **Parallel accept loops for redundancy**
 - **General SSL redirection** of unencrypted browser HTTP requests
@@ -26,6 +27,7 @@ It is strictly forbidden to interact with this repository in any way.
 
 Im an oldschool alrounder not a specialist.
 Not for networking, nor for http things or Android.
+Thanks to Microsoft Copilot, any HTTP knowledge I needed has been available on demand.
 I recently transitioned from multiplatform development to Android-specific projects.
 My current work is intended solely for internal use within my own self‑employment, which means for
 myself and my projects.
