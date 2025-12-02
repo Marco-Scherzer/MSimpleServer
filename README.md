@@ -1,7 +1,8 @@
 # This is the Page of MSimpleServer and my Simple Mini Server Architecture.
 
-#### Development started in early 2025 and had reached 3 to 4 weeks of progress when 
-#### it started to work for my own simple scenario purposes. Rough Features
+#### Development started in early 2025 and had reached 3 to 4 weeks of progress when it started to work for my own simple scenario purposes. 
+#### This early version focuses on HTTP and HTTPS handler implementations and currently supports only simple HttpServer and HttpsServer features with a focus on security through minimalism.
+#### Features after 4 weeks:
 - **Parallel accept loops for redundancy**
 - **General SSL redirection** of unencrypted browser HTTP requests
 - **Webpage serving**
@@ -10,8 +11,6 @@
 #### MSimpleServer is a single-developer project implemented entirely in Java. External dependencies: 0.
 
 #### Since October 31, 2025, I decided to additionally develop my project on GitHub.
-
-#### This early version focuses on HTTP and HTTPS handler implementations and currently supports only simple HttpServer and HttpsServer features with a focus on security through minimalism.
 
 #### It currently runs on both desktop and Android environments via console interface.
 
