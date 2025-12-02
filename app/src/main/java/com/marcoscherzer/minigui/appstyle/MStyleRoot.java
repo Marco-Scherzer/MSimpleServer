@@ -8,7 +8,7 @@ import android.graphics.Color;
 import com.marcoscherzer.minigui.lib.msimplegui.style.MStyleUtil;
 
 /**
- * Stylesheet Author/Copyright Marco Scherzer, All Rights Reserved
+ * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
  */
 public class MStyleRoot {
 

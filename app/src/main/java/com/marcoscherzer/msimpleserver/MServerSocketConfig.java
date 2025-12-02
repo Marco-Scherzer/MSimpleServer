@@ -11,7 +11,7 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLServerSocket;
 
 /**
- * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+ * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
  */
 public final class MServerSocketConfig {
 
@@ -26,9 +26,9 @@ public final class MServerSocketConfig {
 
     private String ipaddress;
 
-    /*
- @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
-*/
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     */
     ServerSocket createSocket(int port, int backlog) throws IOException {
         SSLContext sslContext = ssl;
         ServerSocket serverSocket = null;
@@ -61,41 +61,41 @@ public final class MServerSocketConfig {
         return serverSocket;
     }
 
-    /*
- @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
-*/
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     */
     public MServerSocketConfig setBiggestAllowedRequestSize(int maxSize) {
         this.MAX_SIZE = maxSize;
         return this;
     }
 
-    /*
-      Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
-  */
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     */
     public MServerSocketConfig setAddress(String ipString) throws UnknownHostException {
         ipaddress = ipString;
         return this;
     }
 
-    /*
- @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
-*/
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     */
     public MServerSocketConfig setReuseAddressWithinConnectionClosedTimeWait(boolean reuseAdress) {
         this.reuseAdress = reuseAdress;
         return this;
     }
 
-    /*
- @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
-*/
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     */
     public MServerSocketConfig setSocketListeningTimeout(int listeningTimeoutMillis) {
         this.listeningPerConnectionTimeoutMillis = listeningTimeoutMillis;
         return this;
     }
 
-    /*
- @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
-*/
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     */
     public MServerSocketConfig setPerformancePreferences(int connectionTimeout, int latency, int bandwidth) {
         this.connectionTimeout = connectionTimeout;
         this.latency = latency;
@@ -103,16 +103,16 @@ public final class MServerSocketConfig {
         return this;
     }
 
-    /*
- Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
- */
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     */
     SSLContext getSSLContext() {
         return ssl;
     }
 
-    /*
- @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
-*/
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     */
     public MServerSocketConfig setSSLContext(SSLContext ssl) {
         this.ssl = ssl;
         return this;

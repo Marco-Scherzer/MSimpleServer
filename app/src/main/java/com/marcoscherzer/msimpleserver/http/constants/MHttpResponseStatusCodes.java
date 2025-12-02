@@ -1,11 +1,8 @@
 package com.marcoscherzer.msimpleserver.http.constants;
 
-/*
-Author Marco Scherzer (Description,Definition) with Microsoft Copilot (adding up Constants),
-PostAuthor, Ideas & Architectures Marco Scherzer
-Copyright Marco Scherzer, All rights reserved
-History: msimplehttpserver.MHttpResponseStatusCodes
-*/
+/**
+ * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+ */
 public enum MHttpResponseStatusCodes {
     //own codes (for internal workoff)
     VALID_AND_COMPLETE(0, "Request is valid and complete"),
@@ -83,15 +80,24 @@ public enum MHttpResponseStatusCodes {
     private final int code;
     private final String description;
 
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     */
     MHttpResponseStatusCodes(int code, String description) {
         this.code = code;
         this.description = description;
     }
 
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     */
     public String getValue() {
         return code + " " + description;
     }
 
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     */
     @Override
     public String toString() {
         return code + " " + description;

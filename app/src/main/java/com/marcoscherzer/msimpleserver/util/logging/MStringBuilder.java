@@ -3,7 +3,7 @@ package com.marcoscherzer.msimpleserver.util.logging;
 import com.marcoscherzer.msimpleserver.util.logging.MThreadLocalPrintStream.MLogHeader;
 
 /**
- * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved 2003,2024. All Rights Reserved.
+ * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
  */
 public final class MStringBuilder {
     private final StringBuffer sb = new StringBuffer();
@@ -11,7 +11,7 @@ public final class MStringBuilder {
     private MLogHeader logHeader;
 
     /**
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved 2003,2024. All Rights Reserved.
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public MStringBuilder append(String txt) {
         if (logHeader != null) {
@@ -23,7 +23,7 @@ public final class MStringBuilder {
     }
 
     /**
-     * Copyright Marco Scherzer, All rights reserved, Author Marco Scherzer
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public MStringBuilder append(char c) {
         if (logHeader != null) {
@@ -35,7 +35,7 @@ public final class MStringBuilder {
     }
 
     /**
-     * Copyright Marco Scherzer, All rights reserved, Author Marco Scherzer
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public MStringBuilder append(int i) {
         if (logHeader != null) {
@@ -47,7 +47,7 @@ public final class MStringBuilder {
     }
 
     /**
-     * Copyright Marco Scherzer, All rights reserved, Author Marco Scherzer
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public MStringBuilder append(long l) {
         if (logHeader != null) {
@@ -59,7 +59,7 @@ public final class MStringBuilder {
     }
 
     /**
-     * Copyright Marco Scherzer, All rights reserved, Author Marco Scherzer
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public MStringBuilder append(float f) {
         if (logHeader != null) {
@@ -71,7 +71,7 @@ public final class MStringBuilder {
     }
 
     /**
-     * Copyright Marco Scherzer, All rights reserved, Author Marco Scherzer
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public MStringBuilder append(double d) {
         if (logHeader != null) {
@@ -83,7 +83,7 @@ public final class MStringBuilder {
     }
 
     /**
-     * Copyright Marco Scherzer, All rights reserved, Author Marco Scherzer
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public MStringBuilder append(boolean b) {
         if (logHeader != null) {
@@ -95,7 +95,7 @@ public final class MStringBuilder {
     }
 
     /**
-     * Copyright Marco Scherzer, All rights reserved, Author Marco Scherzer
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public MStringBuilder append(Object obj) {
         if (logHeader != null) {
@@ -107,21 +107,21 @@ public final class MStringBuilder {
     }
 
     /**
-     * Copyright Marco Scherzer, All rights reserved, Author Marco Scherzer
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public MLogHeader getLogHeader() {
         return this.logHeader;
     }
 
     /**
-     * Copyright Marco Scherzer, All rights reserved, Author Marco Scherzer
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public void setLogHeader(MLogHeader logHeader) {
         this.logHeader = logHeader;
     }
 
     /**
-     * Copyright Marco Scherzer, All rights reserved, Author Marco Scherzer
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     @Override
     public String toString() {
@@ -129,14 +129,14 @@ public final class MStringBuilder {
     }
 
     /**
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved 2003,2024. All Rights Reserved.
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved 2003,2024. All Rights Reserved.
      */
     public void setLength(int newLength) {
         sb.setLength(newLength);
     }
 
     /**
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved 2003,2024. All Rights Reserved.
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved 2003,2024. All Rights Reserved.
      */
    /* public static void main(String[] args) {
         MStringBuilder ms = new MStringBuilder();

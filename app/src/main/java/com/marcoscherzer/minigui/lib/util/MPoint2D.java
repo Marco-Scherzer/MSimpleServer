@@ -23,10 +23,16 @@ public final class MPoint2D {
         return this.getX() + ", " + this.getY();
     }
 
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, All rights reserved
+     */
     public double getX() {
         return x;
     }
 
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, All rights reserved
+     */
     public double getY() {
         return y;
     }

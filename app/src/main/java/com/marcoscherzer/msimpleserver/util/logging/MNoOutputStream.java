@@ -5,8 +5,7 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 
 /**
- * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
- * History: siehe MW.java
+ * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
  */
 public final class MNoOutputStream extends PrintStream {
     public MNoOutputStream() {

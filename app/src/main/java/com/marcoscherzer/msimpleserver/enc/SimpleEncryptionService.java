@@ -14,22 +14,25 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
 /*
-// UNFERTIG UND UNGETESTET
-
-Author Marco Scherzer with Microsoft Copilot: Code on Goal-Description
-Copyright Marco Scherzer, All rights reserved
+ UNFERTIG UND UNGETESTET
+Author Marco Scherzer , Copyright Marco Scherzer, All rights reserved
 */
 
 public class SimpleEncryptionService {
-
-    // Erzeugt zufälligen AES-Schlüssel
+    /* UNFERTIG UND UNGETESTET
+     Author Marco Scherzer , Copyright Marco Scherzer, All rights reserved
+      Erzeugt zufälligen AES-Schlüssel */
     public static SecretKey generateKey() {
         byte[] keyBytes = new byte[32]; // 256-Bit Schlüssel
         new SecureRandom().nextBytes(keyBytes);
         return new SecretKeySpec(keyBytes, "AES");
     }
+    /*
+    UNFERTIG UND UNGETESTET
+    Author Marco Scherzer , Copyright Marco Scherzer, All rights reserved
+    URL-sichere Base64-Dekodierung
+    */
 
-    // URL-sichere Base64-Dekodierung
     private static String base64UrlDecode(String input) {
         String adjustedInput = input.replace("-", "+").replace("_", "/");
         while (adjustedInput.length() % 4 != 0) {
@@ -38,7 +41,11 @@ public class SimpleEncryptionService {
         return new String(Base64.getDecoder().decode(adjustedInput), StandardCharsets.UTF_8);
     }
 
-    // Verschlüsselt Daten mit AES-GCM
+    /*
+        UNFERTIG UND UNGETESTET
+        Author Marco Scherzer , Copyright Marco Scherzer, All rights reserved
+       Verschlüsselt Daten mit AES-GCM
+        */
     public static String encryptData(String data, SecretKey key) throws Exception {
         Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
         byte[] iv = new byte[12]; // 12 Bytes IV für GCM
@@ -51,7 +58,11 @@ public class SimpleEncryptionService {
         return Base64.getEncoder().encodeToString(iv) + ":" + Base64.getEncoder().encodeToString(encryptedBytes);
     }
 
-    // Entschlüsselt Daten mit AES-GCM
+    /*
+    UNFERTIG UND UNGETESTET
+    Author Marco Scherzer , Copyright Marco Scherzer, All rights reserved
+     Entschlüsselt Daten mit AES-GCM
+    */
     public static String decryptData(String encryptedData, SecretKey key) throws Exception {
         String[] parts = encryptedData.split(":");
         byte[] iv = Base64.getDecoder().decode(parts[0]);
@@ -64,7 +75,12 @@ public class SimpleEncryptionService {
         return new String(decryptedBytes, StandardCharsets.UTF_8);
     }
 
-    // Rück-Mapping der entschlüsselten Parameter
+    /*
+    UNFERTIG UND UNGETESTET
+    Author Marco Scherzer , Copyright Marco Scherzer, All rights reserved
+    Rück-Mapping der entschlüsselten Parameter
+
+     */
     public static Map<String, String> mapDecryptedParameters(Map<String, String> encryptedParams, SecretKey key) throws Exception {
         Map<String, String> mappedParams = new HashMap<>();
 
@@ -79,7 +95,11 @@ public class SimpleEncryptionService {
         return mappedParams;
     }
 
-    // **TESTAUFRUF**
+    /*
+      UNFERTIG UND UNGETESTET
+      Author Marco Scherzer , Copyright Marco Scherzer, All rights reserved
+          // **TESTAUFRUF**
+     */
     public static void main(String[] args) throws Exception {
         SecretKey key = generateKey();
 

@@ -7,39 +7,34 @@ import com.marcoscherzer.msimpleserver.http.validation.MHttpVersion.MValidationP
 import java.util.regex.Pattern;
 
 /**
- * Author Marco Scherzer: Descriptions, Definitions, Architectures, Authoring
- * Microsoft Copilot: Regex on Request/Filling out the Map in SubClasses on REquest
- * Copyright Marco Scherzer, All rights reserved
- * History vor 12.02 ca. mittags: msimplehttpserver.MHttpVersion (move)
- * History vor 12.02 1:30 : httpvalidation.MHttpVersion (namechange)
- * history: httpvalidation.MHttpVersion
+ * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
  */
 public abstract class MHttpVersion extends MProtocolVersion<MValidationPattern> {
 
 
-    /*
-    Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer with Microsoft Copilot(Regex on Request), All rights reserved
-    */
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     */
     private Pattern METHOD_PATTERN = Pattern.compile("^(GET|POST|PUT|DELETE|OPTIONS|HEAD|PATCH|CONNECT|TRACE)$");
 
-    /*
-    Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
-    */
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     */
     protected MHttpVersion(String version, MHttpMethod... methods) {
         super(version);
         setSupportedMethods(methods);
     }
 
-    /*
- @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
-*/
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     */
     public final Pattern getSupportedMethods() {
         return METHOD_PATTERN;
     }
 
-    /*
-       Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
-       */
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     */
     public final MHttpVersion setSupportedMethods(MHttpMethod... supportedMethods) {
         StringBuffer methodsString = new StringBuffer();
         for (MHttpMethod method : supportedMethods) {
@@ -50,11 +45,9 @@ public abstract class MHttpVersion extends MProtocolVersion<MValidationPattern> 
     }
 
 
-    /*
- Author Marco Scherzer with Microsoft Copilot (RegEx on Request)
- PostAuthor, Ideas & Architectures Marco Scherzer
- Copyright Marco Scherzer, All rights reserved
- */
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     */
     public enum MValidationPattern {
         HOST_HEADER("Host: ", "^Host: [a-zA-Z0-9.-]+(:[0-9]+)?$"),
         USER_AGENT_HEADER("User-Agent: ", "^User-Agent: [a-zA-Z0-9\\-\\s/\\.]+$"),
@@ -106,35 +99,33 @@ public abstract class MHttpVersion extends MProtocolVersion<MValidationPattern> 
         private final String headerName;
         private final String pattern;
 
-        /*
-        Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
-        */
+        /**
+         * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+         */
         MValidationPattern(String headerName, String pattern) {
             this.headerName = headerName;
             this.pattern = pattern;
         }
 
-        /*
-        Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
-        */
+        /**
+         * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+         */
         public final String getHeaderName() {
             return headerName;
         }
 
-        /*
-        Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
-        */
+        /**
+         * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+         */
         public final String getPattern() {
             return pattern;
         }
     }
-    
-    
-     
-    
-     /*
-    Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
-    */
+
+
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     */
     /*public void addSupportedHeader(String headerNameList){}*/
 
 

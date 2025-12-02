@@ -9,8 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
- * To my wishes extended by Microsoft Copilot
+ * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
  */
 public final class MStyler {
 
@@ -18,12 +17,15 @@ public final class MStyler {
     private static Map<Class<? extends MStyleable>, MComponentStyler> defaultClass2StylerMap;
     private static Map<Class<? extends MStyleable>, MComponentStyler> currentMap;
 
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     */
     private MStyler() {
         // Utility class — keine Instanz erlaubt
     }
 
     /**
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      * Bisher leer
      */
 
@@ -32,14 +34,8 @@ public final class MStyler {
     }
 
     /**
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      * Bisher funktionslos
-     * unfertig und keine zeit für seitenideen die zeit kosten (es müsste jede eigene komponente
-     * die interen mehrer layoutkomponeten verwendet aufwendiger impl werden.
-     * alle standard-komponenten müssten dazu ein sytlable interface
-     * implemtieren das als flag angibt ob diese beim hirachie durchlauf mitgestylt werden sollen oder nicht.
-     * so können interen layout unter nodes unsichtbar für den styler gemacht werden, wenn diese einfach nciht stylable
-     * implementieren
      */
     public static <MT extends MStyleRoot> void applyDefaultStyles(View root, MT m) {
         defaultClass2StylerMap = new HashMap<>();
@@ -48,15 +44,24 @@ public final class MStyler {
         applyStylesRecursive(root, m, 0, true);
     }
 
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     */
     public static void addUserStyle(Class<? extends MStyleable> theClass, MComponentStyler styler) {
         userClass2StylerMap.put(theClass, styler);
     }
 
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     */
     public static <MT extends MStyleRoot> void applyUserStyles(View root, MT m) {
         currentMap = userClass2StylerMap;
         applyStylesRecursive(root, m, 0, true);
     }
 
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     */
     private static <MT extends MStyleRoot> void applyStylesRecursive(View root, MT m, int depth, boolean isLast) {
         StringBuilder prefix = new StringBuilder();
         for (int i = 0; i < depth; i++) {

@@ -8,7 +8,7 @@ import java.io.InputStream;
 import java.nio.file.Path;
 
 /**
- * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+ * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
  */
 public final class MAndroidFileLoader implements MMultiPlatformFileLoader {
 
@@ -18,7 +18,7 @@ public final class MAndroidFileLoader implements MMultiPlatformFileLoader {
     private String path;
 
     /**
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public MAndroidFileLoader initForAndroidAssetsPath(Context contextIfAndroid, String relativePathWithinAssetsDir) {
         androidContext = contextIfAndroid.getApplicationContext();
@@ -35,7 +35,7 @@ public final class MAndroidFileLoader implements MMultiPlatformFileLoader {
     }
 
     /**
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public MAndroidFileLoader initForAndroidStoragePath(String relativePathWithinUser0Storage) {
         androidContext = null;
@@ -53,7 +53,7 @@ public final class MAndroidFileLoader implements MMultiPlatformFileLoader {
     }
 
     /**
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     @Override
     public String getBaseBath() {
@@ -61,13 +61,16 @@ public final class MAndroidFileLoader implements MMultiPlatformFileLoader {
     }
 
     /**
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     @Override
     public byte[] loadByteArray(Path relativePath) throws IOException {
         return loadByteArray(relativePath.toString());
     }
 
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     */
     @Override
     public byte[] loadByteArray(String relativePath) throws IOException {
         if (androidContext != null && androidPathWithinAssetsPath != null) {
@@ -85,7 +88,7 @@ public final class MAndroidFileLoader implements MMultiPlatformFileLoader {
     }
 
     /**
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     @Override
     public InputStream loadByteInputStream(String relativePath) throws IOException {

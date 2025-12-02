@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.marcoscherzer.msimpleserver">
- 
+
     <!-- Netzwerkberechtigung für lokalen HTTP-Server -->
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -16,7 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MSimpleHttpServer">
 
-        <profileable android:shell="true" android:enabled="true" />
+        <profileable
+            android:shell="true"
+            android:enabled="true" />
 
         <activity
             android:name="com.marcoscherzer.minigui.MMain"

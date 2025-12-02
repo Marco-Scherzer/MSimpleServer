@@ -1,12 +1,9 @@
 package com.marcoscherzer.msimpleserver.http.constants;
 
 
-/*
-Author Marco Scherzer (Description,Definition,Enum-Base-Code) with Microsoft Copilot (adding up Constants),
-PostAuthor, Ideas & Architectures Marco Scherzer
-Copyright Marco Scherzer, All rights reserved
-History: msimplehttpserver.MContentType 
-*/
+/**
+ * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+ */
 
 public enum MHttpContentType {
     // Text
@@ -73,10 +70,16 @@ public enum MHttpContentType {
 
     private final String val;
 
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     */
     MHttpContentType(String val) {
         this.val = val;
     }
 
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     */
     public String getValue() {
         return val;
     }

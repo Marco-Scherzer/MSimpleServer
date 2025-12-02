@@ -20,7 +20,7 @@ import com.marcoscherzer.minigui.lib.msimplegui.style.MComponentStyler;
 import com.marcoscherzer.msimpleserver.R;
 
 /**
- * @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+ * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
  */
 public class MMenuBarStyler implements MComponentStyler<MMenuBar, MStyleRoot> {
 
@@ -49,6 +49,9 @@ public class MMenuBarStyler implements MComponentStyler<MMenuBar, MStyleRoot> {
 
     }
 
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     */
     public void styleButton(MaterialButton button, int iconResource) {
         button.setIconResource(iconResource);
         button.setText("");

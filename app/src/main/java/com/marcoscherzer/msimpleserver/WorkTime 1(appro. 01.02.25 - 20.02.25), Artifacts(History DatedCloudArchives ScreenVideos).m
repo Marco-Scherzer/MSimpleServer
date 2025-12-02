@@ -1,3 +1,5 @@
+WorkTime 1(appro. 01.02.25 - 20.02.25), Artifacts(History DatedCloudArchives ScreenVideos)
+
 Supported Http Responses
 
 200 OK

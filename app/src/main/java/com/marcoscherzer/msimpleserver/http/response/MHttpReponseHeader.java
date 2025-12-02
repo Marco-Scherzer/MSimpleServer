@@ -4,16 +4,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved (Description, Definition, Code)
- * with Microsoft Copilot (adding up Comments, writing some setters onto my request)
- * History: msimplehttpserver.response.MHeader, msimplehttpserver.response.MResponseHeader, msimplehttpserver.httpresponse.MReponseHeader
+ * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
  */
 public final class MHttpReponseHeader {
     private final Map<String, String> headers = new HashMap<>();
 
     /**
      * @return Die Header-Map.
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     Map<String, String> getHeaders() {
         return headers;
@@ -33,7 +31,7 @@ public final class MHttpReponseHeader {
      * - Expires: "Thu, 01 Dec 1994 16:00:00 GMT"
      * - Location: "http://www.example.com/index.html"
      * - Set-Cookie: "sessionId=38afes7a8"
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public MHttpReponseHeader addHeader(final String key, final String value) {
         this.headers.put(key, value);
@@ -45,7 +43,7 @@ public final class MHttpReponseHeader {
      * @return Die aktuelle Instanz von MHeader.
      * Mögliche HTTP-Response-Header:
      * - Server: "Apache/2.4.1 (Unix)"
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public MHttpReponseHeader setServer(final String value) {
         return addHeader("Server", value);
@@ -56,7 +54,7 @@ public final class MHttpReponseHeader {
      * @return Die aktuelle Instanz von MHeader.
      * Mögliche HTTP-Response-Header:
      * - Date: "Tue, 15 Nov 1994 08:12:31 GMT"
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public MHttpReponseHeader setDate(final String value) {
         return addHeader("Date", value);
@@ -68,7 +66,7 @@ public final class MHttpReponseHeader {
      * Mögliche HTTP-Response-Header:
      * - Connection: "keep-alive"
      * - Connection: "close"
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public MHttpReponseHeader setConnection(final String value) {
         return addHeader("Connection", value);
@@ -82,7 +80,7 @@ public final class MHttpReponseHeader {
      * - Cache-Control: "no-store"
      * - Cache-Control: "max-age=3600"
      * - Cache-Control: "must-revalidate"
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public MHttpReponseHeader setCacheControl(final String value) {
         return addHeader("Cache-Control", value);
@@ -93,7 +91,7 @@ public final class MHttpReponseHeader {
      * @return Die aktuelle Instanz von MHeader.
      * Mögliche HTTP-Response-Header:
      * - Expires: "Thu, 01 Dec 1994 16:00:00 GMT"
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public MHttpReponseHeader setExpires(final String value) {
         return addHeader("Expires", value);
@@ -104,7 +102,7 @@ public final class MHttpReponseHeader {
      * @return Die aktuelle Instanz von MHeader.
      * Mögliche HTTP-Response-Header:
      * - Location: "http://www.example.com/index.html"
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public MHttpReponseHeader setLocation(final String value) {
         return addHeader("Location", value);
@@ -117,7 +115,7 @@ public final class MHttpReponseHeader {
      * - Set-Cookie: "sessionId=38afes7a8"
      * - Set-Cookie: "userId=abc123"
      * - Set-Cookie: "authToken=xyz789"
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public MHttpReponseHeader setSetCookie(final String value) {
         return addHeader("Set-Cookie", value);

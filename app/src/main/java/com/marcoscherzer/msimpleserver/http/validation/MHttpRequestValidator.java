@@ -29,12 +29,9 @@ import java.util.regex.Pattern;
 
 import javax.net.ssl.SSLSocket;
 
-/*
-    Author Marco Scherzer: Descriptions, Definitions, Architectures, Authoring 
-    Microsoft Copilot: Rough First Code-Parts on Description-Request, Regex on Request
-    Copyright Marco Scherzer, All rights reserved
-history: msimplehttpserver.request.MHttpRequestValidator
-*/
+/**
+ * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+ */
 public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestData, MHttpVersion> {
     //private static Pattern INVALID_CHARACTERS = Pattern.compile("[^\\x20-\\x7E]");
     private static final Pattern INVALID_CHARACTERS = Pattern.compile("[^\\x20-\\x7E\\r\\n]");
@@ -48,19 +45,17 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
     private Mode mode;
     private MHttpResponseStatusCodes[] errorsToSendPagesForInsteadOfPlain;
 
-    /*
- @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
-*/
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     */
     public MHttpRequestValidator(MHttpVersion... supportedProtocols) {
         super(supportedProtocols);
     }
 //private static final Pattern HEADER_PATTERN = Pattern.compile("^[a-zA-Z0-9-]+:\\s.*$");
 
-    /*
-       Author Marco Scherzer: Descriptions, Definitions, Architectures, Authoring
-       Microsoft Copilot: Rough First Code-Parts on Description-Request, Regex on Request
-       Copyright Marco Scherzer, All rights reserved
-   */
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     */
     private static boolean validateHeader(String line, MValidationPattern p) {
         mout.println("Checking header: " + line);
         if (line.startsWith(p.getHeaderName())) {
@@ -72,55 +67,52 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
         return true;
     }
 
-    /*
-       Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
-       */
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     */
     private static String sanitizeLine(String line) {
         return line.replaceAll(INVALID_CHARACTERS.toString(), ""); // Entfernt nicht druckbare Zeichen
     }
 
-    /*
-       Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
-       */
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     */
     private static boolean isInvalidCharacter(char ch) {
         return INVALID_CHARACTERS.matcher(Character.toString(ch)).find();
     }
 
-    /*
- @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
-*/
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     */
     public MHttpRequestValidator setMaxHeaderSize(int maxHeaderSize) {
         MAX_HEADER_SIZE = maxHeaderSize;
         return this;
     }
 
-    /*
- @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
-*/
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     */
     public MHttpRequestValidator setMaxUrlLength(int maxUrlLength) {
         urlParser.maxUriLength = maxUrlLength;
         return this;
     }
 
     /**
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public MHttpRequestValidator setUpgradeUnencrypted(boolean upgradeUnencrypted) {
         this.upgradeUnencrypted = upgradeUnencrypted;
         return this;
     }
 
-    /*
-        Author Marco Scherzer: Descriptions, Definitions, Architectures, Authoring
-        Microsoft Copilot: Rough First Code-Parts after Description, Regex on Request
-        Copyright Marco Scherzer, All rights reserved
-        history:isValidHttpRequest
-    */
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     */
     @Override
     public MHttpRequestData isValidRequest(Socket socket) {
         MHttpRequestData data = new MHttpRequestData();
         StringBuilder requestBuilder = new StringBuilder();
-        try { //Selfreminder: keinesfalls try mit autoresourceclosing, sonst ganzer socket zu, falls exeption(auch outputstream)
+        try {
             InputStream inputStream = socket.getInputStream();
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
             int ch;
@@ -220,11 +212,9 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
         return data;
     }
 
-    /*
-        Author Marco Scherzer: Descriptions, Definitions, Architectures, Authoring
-        Microsoft Copilot: Rough First Code-Parts on Description-Request, Regex on Request
-        Copyright Marco Scherzer, All rights reserved
-    */
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     */
     private MHttpResponseStatusCodes validateHeaders(MHttpVersion httpVersion, String[] lines, MHttpRequestData data) {
         int headerSize = 0;
         for (int i = 1; i < lines.length; i++) {
@@ -263,11 +253,9 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
         return VALID_AND_COMPLETE;
     }
 
-    /*
-        Author Marco Scherzer: Descriptions, Definitions, Architectures, Authoring
-        Microsoft Copilot: Rough First Code-Parts on Description-Request, Regex on Request
-        Copyright Marco Scherzer, All rights reserved
-    */
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     */
     private boolean checkHeaderSize(MHttpVersion httpVersion, int headerSize) {
         mout.println("Checking header size: " + headerSize);
         if (headerSize > MAX_HEADER_SIZE) {
@@ -277,10 +265,9 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
         return true;
     }
 
-    /*
-  Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
-   Evtl später doch nur entweder MHttpRequestData oder MHttpRequestValidator.MHttpRequestData
-  */
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     */
     public static final class MHttpRequestData {
         private final Map<String, String> headers = new HashMap<>();
         //private boolean validAndComplete;
@@ -292,36 +279,58 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
         private MHttpResponseStatusCodes responseCode;
 
 
-        // Getter-Methoden
+        /**
+         * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+         */
         public String getRequestMethod() {
             return requestMethod;
         }
 
+        /**
+         * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+         */
         public String getResourcePath() {
             return resourcePath;
         }
 
+        /**
+         * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+         */
         public String getEndpointQuery() {
             return resourceMethod;
         }
 
+        /**
+         * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+         */
         public String getProtocol() {
             return protocol;
         }
 
+        /**
+         * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+         */
         public Map<String, String> getHeaders() {
             return headers;
         }
 
+        /**
+         * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+         */
         public Map<String, String> getResourceMethodParameters() {
             return resourceMethodParameters;
         }
 
+        /**
+         * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+         */
         public MHttpResponseStatusCodes isValidAndCompleteOrErrorCode() {
             return responseCode;
         }
 
-
+        /**
+         * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+         */
         @Override
         public String toString() {
             StringBuilder sb = new StringBuilder();
@@ -341,12 +350,9 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
         }
     }
 
-    /*
-    Author Marco Scherzer: Descriptions, Definitions, Architectures, Authoring
-    Microsoft Copilot: Code-Parts on Description-Request, Regex on Request, Search for edge cases
-    Copyright Marco Scherzer, All rights reserved
-    später evtl in separate klasse auslagern
-*/
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     */
     public static final class MUrlParser {
 
         private static final int MAX_PARAM_LENGTH = 128; // Maximale erlaubte Länge für Parameterwerte
@@ -356,10 +362,16 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
 
         private int maxUriLength = 1024;
 
+        /**
+         * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+         */
         public void setMaxUrlLength(int maxUrlLength) {
             this.maxUriLength = maxUrlLength;
         }
 
+        /**
+         * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+         */
         public MHttpRequestData parseUrl(String url, MHttpRequestData data) {
             String path = "";
 

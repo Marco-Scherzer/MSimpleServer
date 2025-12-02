@@ -8,11 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Author Marco Scherzer (Description, Definition, writing) with Microsoft Copilot (writing),
- * PostAuthor, Ideas & Architectures Marco Scherzer
- * Copyright Marco Scherzer, All rights reserved
- * history: msimplehttpserver.request.MRequest
- * Evtl später doch nur entweder MHttpRequestValidator.MHttpRequestData oder MHttpRequest
+ * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
  */
 public final class MHttpRequest {
     private final String requestMethod;
@@ -24,15 +20,9 @@ public final class MHttpRequest {
     public PrintWriter out = new MNullPrintStringWriter();
     private Map<String, String> resourceMethodParameters = new HashMap<>();
 
+
     /**
-     @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
-      *  Evtl später doch nur entweder MHttpRequestData oder MHttpRequestValidator.MHttpRequestData
-      * @param inputStream Der Eingabestream.
-     * @throws IOException Falls eine E/A-Operation fehlschlägt.
-     */
-    /**
-     * @param requestData Die HTTP-Request-Daten.
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public MHttpRequest(final MHttpRequestData requestData) {
         this.requestMethod = requestData.getRequestMethod();
@@ -45,64 +35,56 @@ public final class MHttpRequest {
     }
 
     /**
-     * @return Die HTTP-Methode.
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public String getRequestMethod() {
         return requestMethod;
     }
 
     /**
-     * @return Die HTTP-Methode.
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public Map<String, String> getResourceMethodParameters() {
         return resourceMethodParameters;
     }
 
     /**
-     * @return Der Pfad.
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public String getResourcePath() {
         return resourcePath;
     }
 
     /**
-     * @return Der Pfad.
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public String getResourceMethod() {
         return endpointQuery;
     }
 
     /**
-     * @return Das Protokoll.
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public String getProtocol() {
         return protocol;
     }
 
     /**
-     * @return Die Header der Anfrage.
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public MHttpRequestHeader getHeaders() {
         return headers;
     }
 
     /**
-     * @return Der Body der Anfrage.
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public String getBody() {
         return body;
     }
 
     /**
-     * @return Eine String-Darstellung der Anfrage.
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     @Override
     public String toString() {

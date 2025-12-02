@@ -6,12 +6,12 @@ import static com.marcoscherzer.msimpleserver.http.constants.MHttpMethod.HEAD;
 import static com.marcoscherzer.msimpleserver.http.constants.MHttpMethod.POST;
 
 /**
- * Author Marco Scherzer: Descriptions, Definitions, Architectures, Authoring
- * Microsoft Copilot: Regex on Request/Filling out the Map in SubClasses on Request
- * Copyright Marco Scherzer, All rights reserved
- * history: httpvalidation.MHttp_1_0
+ * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
  */
 public final class MHttp_1_0 extends MHttpVersion {
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     */
     public MHttp_1_0() {
         super("HTTP/1.0", GET, POST, HEAD);
         this.headerMap.put("Host: ", MValidationPattern.HOST_HEADER);

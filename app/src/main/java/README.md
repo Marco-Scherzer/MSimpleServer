@@ -1,17 +1,10 @@
 # This is the Page of MSimpleServer and my Simple Mini Server Architecture.
 
-#### Development started in early 2025 and had reached 3 to 4 weeks of progress when 
-#### it started to work for my own simple scenario purposes. Rough Features
-- **Parallel accept loops for redundancy**
-- **General SSL redirection** of unencrypted browser HTTP requests
-- **Webpage serving**
-- **Custom REST API** with own endpoint declarations
-
-#### MSimpleServer is a single-developer project implemented entirely in Java. External dependencies: 0.
-
-#### Since October 31, 2025, I decided to additionally develop my project on GitHub.
+#### Development started in early 2025 (3 weeks) and has currently reached four weeks of progress (status as of October 31, 2025).
 
 #### This early version focuses on HTTP and HTTPS handler implementations and currently supports only simple HttpServer and HttpsServer features with a focus on security through minimalism.
+
+#### MSimpleServer is a single-developer project implemented entirely in Java. External dependencies: 0.
 
 #### It currently runs on both desktop and Android environments via console interface.
 
@@ -22,6 +15,7 @@ independent archiving site.
 For that reason, it may temporarily be set a short time to public during the archiving process.
 It is strictly forbidden to interact with this repository in any way.
 
+###
 
 #### Common About-Me:
 
@@ -30,95 +24,6 @@ Not for networking, nor for http things or Android.
 I recently transitioned from multiplatform development to Android-specific projects.
 My current work is intended solely for internal use within my own self‑employment, which means for
 myself and my projects.
-
-### Example
-
-```java
-/**
- * @version 0.0.1 preAlpha
- * @author Marco Scherzer
- * Author, Ideas, APIs, Nomenclatures & Architectures: Marco Scherzer
- * Copyright Marco Scherzer, All Rights Reserved
- */
-private static MSimpleMiniServer createAndStartServer(MHttpContentMap contentMap, MMultiPlatformFileLoader certFileLoader) throws Exception {
-    mout.println("MSimpleServer (Unready Development Version, current project-time approx. 4 weeks).\n" +
-                 "MSimpleServer Author/Copyright Marco Scherzer. All Rights Reserved.\n" +
-                 "Program started.");
-
-    MThreadLocalPrintStream.setLogHeader(
-        new MLogHeader()
-            .addField("", THREADNAME, "")
-            .addField("@", TIMEFIELD, "|\t")
-    );
-    MThreadLocalPrintStream.setLogMode(MThreadLocalPrintStream.MGlobalLogMode.logOutToSetupedOut);
-
-    mout.println("adding content...");
-
-    MHttpVersion protocol = new MHttp_1_1().setSupportedMethods(GET);
-
-    MHttpRequestValidator v = new MHttpRequestValidator(protocol)
-            .setMaxHeaderSize(8192)
-            .setUpgradeUnencrypted(true);
-
-    MHttpRequestHandler content1RequestHandler = new MHttpRequestHandler(contentMap.getMap(), v)
-            .setAdressAndPortForHttpsRedirectResponses("192.168.0.3", 7733)
-            .setSendErrorPagesFor(_404_NOT_FOUND);
-
-    MServerSocketConfig httpSocket1 = new MServerSocketConfig()
-            .setAddress("192.168.0.3")
-            .setBiggestAllowedRequestSize(8192);
-
-    MServerSocketConfig httpsSocket1 = new MServerSocketConfig()
-            .setAddress("192.168.0.3")
-            .setSSLContext(MSSLConfig1.create(certFileLoader))
-            .setBiggestAllowedRequestSize(8192);
-
-    MSimpleMiniServer server = new MSimpleMiniServer();
-    server.start(7777, httpSocket1, content1RequestHandler, 1, 65535);
-    server.start(7733, httpsSocket1, content1RequestHandler, 1, 65535);
-
-    return server;
-} 
-
-/**
- * @version 0.0.1 preAlpha
- * @author Marco Scherzer
- * Author, Ideas, APIs, Nomenclatures & Architectures: Marco Scherzer
- * Copyright Marco Scherzer, All Rights Reserved
- */
-private static MHttpContentMap createAndAddContent(MMultiPlatformFileLoader resourceFileLoader) throws Exception {
-    MHttpResource.setHttpResourceFileLoader(resourceFileLoader);
-
-    MHttpResource root = new MHttpResource(Locale.ENGLISH, "/test2__.html")
-        .addResourceMethod("validateTestForm1", new MResourceMethod() {
-            @Override
-            public byte[] call(Map<String, String> params) {
-                String r = "MSimpleServer says: validateTestForm1(" + params + ") called";
-                mout.println(r);
-                return r.getBytes();
-            }
-        })
-        .addResourceMethod("validateTestForm2", new MResourceMethod() {
-            @Override
-            public byte[] call(Map<String, String> params) {
-                String r = "MSimpleServer says: validateTestForm2(" + params + ") called";
-                mout.println(r);
-                return r.getBytes();
-            }
-        });
-
-    MHttpContentMap contentMap = new MHttpContentMap();
-    contentMap.addContent("/", root, false)
-              .addContent("/test2__", root, false)
-              .addContent("/MApiClient.js", Locale.ENGLISH, "MApiClient.js", false);
-
-    contentMap.addContent("_404_NOT_FOUND", Locale.ENGLISH, "notFound.html", false)
-              .addContent("/test.pdf", Locale.ENGLISH, "test.pdf", false);
-
-    return contentMap;
-}
-
-```
 
 <br>
 <br>
@@ -153,7 +58,7 @@ this text will also include the license and the exact location where the binarie
 
 ## Repository Sale Notice
 
-This repository is offered non-exclusiv for sale in its current, up‑to‑date code state.
+This repository is offered for sale in its current, up‑to‑date code state.
 If you are interested, please contact me via my listed email address
 
 **Important Notice:**

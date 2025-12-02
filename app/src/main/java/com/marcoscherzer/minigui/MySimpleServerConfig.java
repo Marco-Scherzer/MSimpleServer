@@ -28,13 +28,13 @@ import java.util.Locale;
 import java.util.Map;
 
 /**
- * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+ * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
  * aktuell muss nach schließen und reaktivieren von wlan der server neu gestartet werden
  */
 public final class MySimpleServerConfig {
 
     /**
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public static MSimpleMiniServer createAndStartServerOnDesktop() {
         MSimpleMiniServer server = null;
@@ -55,7 +55,7 @@ public final class MySimpleServerConfig {
     }
 
     /**
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public static MSimpleMiniServer createAndStartServerOnAndroid(Context context) {
         MSimpleMiniServer server = null;
@@ -76,7 +76,7 @@ public final class MySimpleServerConfig {
     }
 
     /**
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     private static MSimpleMiniServer createAndStartServer(MHttpContentMap contentMap, MMultiPlatformFileLoader certFileLoader) throws Exception {
         mout.println("MSimpleServer (Unready Development Version, current project-time appro. 4 weeks). \nMSimpleServer Author/Copyright Marco Scherzer. All Rights Reserved.\nProgram started.");
@@ -114,7 +114,7 @@ public final class MySimpleServerConfig {
     }
 
     /**
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     private static MHttpContentMap createAndAddContent(MMultiPlatformFileLoader resourceFileLoader) throws Exception {
         MHttpResource.setHttpResourceFileLoader(resourceFileLoader);

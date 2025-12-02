@@ -7,10 +7,12 @@ import com.marcoscherzer.msimpleserver.mpool.MSimplePool.MJob;
 import java.util.function.Supplier;
 
 /**
- * Author: Marco Scherzer
- * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, Architectures & Copyright Marco Scherzer 2017, All rights reserved, base-principle reimplementation 2025. All Rights Reserved.
+ * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
  */
 class Main {
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     */
     public static void main_(String[] args) {
         MSimplePool pool = new MSimplePool();
         // Test 1:Supplier memtest. Submit suppliers for 3 minutes
@@ -47,6 +49,9 @@ class Main {
         pool.shutdown();
     }
 
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     */
     static final class MT1 implements Supplier {
         static int i;
 

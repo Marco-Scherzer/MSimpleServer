@@ -28,6 +28,9 @@ public class MBorderDrawableBuilder {
     private float strokeWidthDp;
     private EnumSet<BorderEdge> strokeEdges;
 
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     */
     public MBorderDrawableBuilder() {
         this.fillColor = 0x00000000;  // transparent
         this.rippleColor = 0;
@@ -37,6 +40,9 @@ public class MBorderDrawableBuilder {
         this.strokeEdges = EnumSet.noneOf(BorderEdge.class);
     }
 
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     */
     public static final void styleViewWithBackground(View view, MBorderDrawableBuilder style, final int tp, final int lp, final int bp, final int rp) {
         final Drawable bg = style != null ? style.create(view.getContext()) : null;
         if (bg != null) view.setBackground(bg);
@@ -49,22 +55,32 @@ public class MBorderDrawableBuilder {
         view.setPadding(padLeft, padTop, padRight, padBottom);
     }
 
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     */
     public MBorderDrawableBuilder setFillColor(int color) {
         this.fillColor = color;
         return this;
     }
 
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     */
     public MBorderDrawableBuilder setCornerRadius(float radiusDp) {
         this.cornerRadiusDp = radiusDp;
         return this;
     }
 
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     */
     public MBorderDrawableBuilder setRippleColor(int color) {
         this.rippleColor = color;
         return this;
     }
 
     /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      * Setzt Rahmen nur an den angegebenen Rändern.
      * Wenn kein Edge übergeben wird, werden alle Ränder gezeichnet.
      */
@@ -81,22 +97,37 @@ public class MBorderDrawableBuilder {
         return this;
     }
 
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     */
     public int getStrokePx(Context ctx) {
         return dpToPx(ctx, strokeWidthDp);
     }
 
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     */
     public EnumSet<BorderEdge> getStrokeEdges() {
         return EnumSet.copyOf(strokeEdges);
     }
 
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     */
     private int dpToPx(Context ctx, float dp) {
         return Math.round(dp * ctx.getResources().getDisplayMetrics().density);
     }
 
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     */
     private float dpToPxF(Context ctx, float dp) {
         return dp * ctx.getResources().getDisplayMetrics().density;
     }
 
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     */
     public Drawable create(Context context) {
         int strokePx = dpToPx(context, strokeWidthDp);
         float radiusPx = dpToPxF(context, cornerRadiusDp);
@@ -116,8 +147,14 @@ public class MBorderDrawableBuilder {
         return content;
     }
 
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     */
     public enum BorderEdge {TOP, LEFT, BOTTOM, RIGHT}
 
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     */
     private static class MBorderDrawable extends Drawable {
 
         private final int fillColor;
@@ -131,6 +168,9 @@ public class MBorderDrawableBuilder {
         private final RectF rect = new RectF();
         private final Path roundClip = new Path();
 
+        /**
+         * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+         */
         MBorderDrawable(int fillColor,
                         int strokeColor,
                         int strokePx,
@@ -149,6 +189,9 @@ public class MBorderDrawableBuilder {
             strokePaint.setColor(strokeColor);
         }
 
+        /**
+         * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+         */
         @Override
         public void draw(Canvas canvas) {
             rect.set(getBounds());
@@ -219,6 +262,9 @@ public class MBorderDrawableBuilder {
             }
         }
 
+        /**
+         * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+         */
         @Override
         public void setAlpha(int alpha) {
             fillPaint.setAlpha(alpha);
@@ -226,6 +272,9 @@ public class MBorderDrawableBuilder {
             invalidateSelf();
         }
 
+        /**
+         * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+         */
         @Override
         public void setColorFilter(ColorFilter colorFilter) {
             fillPaint.setColorFilter(colorFilter);
@@ -233,6 +282,9 @@ public class MBorderDrawableBuilder {
             invalidateSelf();
         }
 
+        /**
+         * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+         */
         @Override
         public int getOpacity() {
             return PixelFormat.TRANSLUCENT;

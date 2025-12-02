@@ -1,3 +1,4 @@
+WorkTime 3(28.05.2025(1day), 29.05.2025(4 hours), 30.05.2025(1day), 31.05.2025(1day)), Artifacts(History DatedCloudArchives)
 Supported Http Responses
 
 200 OK

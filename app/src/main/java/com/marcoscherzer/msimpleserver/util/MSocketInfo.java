@@ -11,13 +11,13 @@ import javax.net.ssl.SSLPeerUnverifiedException;
 import javax.net.ssl.SSLSession;
 import javax.net.ssl.SSLSocket;
 
-/*
-Author Marco Scherzer (Description,Definition) with Microsoft Copilot (writing),
-PostAuthor, Ideas & Architectures Marco Scherzer
-Copyright Marco Scherzer, All rights reserved
-*/
+/**
+ * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+ */
 public class MSocketInfo {
-
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     */
     public static String toString(Socket socket) {
         StringBuilder sb = new StringBuilder();
         MPrintStringWriter errorStream = new MPrintStringWriter();
@@ -145,6 +145,9 @@ public class MSocketInfo {
         return sb.append("\n").append(errorStream.getStringWriter().toString()).toString();
     }
 
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     */
     private static void logHandshakeSessionDetails(StringBuilder sb, SSLSession session, String indent, MPrintStringWriter errorStream) {
         if (session != null) {
             sb.append(indent).append("Handshake Session ID: ").append(Arrays.toString(session.getId())).append("\n");
@@ -175,6 +178,9 @@ public class MSocketInfo {
         }
     }
 
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     */
     private static void logSessionDetails(StringBuilder sb, SSLSession session, String indent, MPrintStringWriter errorStream) {
         if (session != null) {
             sb.append(indent).append("Session ID: ").append(Arrays.toString(session.getId())).append("\n");
@@ -205,6 +211,9 @@ public class MSocketInfo {
         }
     }
 
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     */
     private static void logSSLParameters(StringBuilder sb, SSLParameters sslParameters, String indent) {
         sb.append(indent).append("Algorithm Constraints: ").append(sslParameters.getAlgorithmConstraints()).append("\n");
         sb.append(indent).append("Application Protocols: ").append(Arrays.toString(sslParameters.getApplicationProtocols())).append("\n");

@@ -22,10 +22,7 @@ import java.util.HashMap;
 import java.util.Locale;
 
 /**
- * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
- * History bis 4.2.2025 MSimpleHttpServer (ausgelagert)
- * History: msimplehttpserver.MResource
- * toDo: evtl später in 2 klassen aufsplitten , eine zum setten, die zweite für die nur intern verwendeten Meths
+ * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
  */
 public final class MHttpResource {
 
@@ -44,10 +41,7 @@ public final class MHttpResource {
     private boolean cacheAtClient;
 
     /**
-     * @param fileName Der Dateiname.
-     * @param language Die Sprachen.
-     * @throws IOException Falls eine E/A-Operation fehlschlägt.
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public MHttpResource(Locale language, String fileName) throws Exception {
         //this.persistenceBasePath = persistenceBasePath;
@@ -66,17 +60,14 @@ public final class MHttpResource {
     }
 
     /**
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public static void setHttpResourceFileLoader(MMultiPlatformFileLoader configuredFileLoader) {
         httpFileLoader = configuredFileLoader;
     }
 
     /**
-     * @param mimeType Der MIME-Typ.
-     * @return Das erkannte Charset.
-     * @throws IOException Falls eine E/A-Operation fehlschlägt.
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     private static Charset detectCharset(String mimeType) throws IOException {
         if (mimeType != null && mimeType.contains("charset=")) {
@@ -91,7 +82,7 @@ public final class MHttpResource {
     }
 
     /**
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public MHttpResource addResourceMethod(String resourceMethodName, MResourceMethod resourceMethod) {
         resourceMethods.put(resourceMethodName, resourceMethod);
@@ -99,7 +90,7 @@ public final class MHttpResource {
     }
 
     /**
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public MHttpResource addCompatibleTypes(MHttpContentType... fallbackTypes) {
         for (MHttpContentType c : fallbackTypes) this.compatibleContentTypes.add(c.toString());
@@ -108,21 +99,21 @@ public final class MHttpResource {
 
     /**
      * @param languages Die hinzuzufügenden Sprachen.
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public void addCompatibleLanguages(Locale... languages) {
         Collections.addAll(this.compatibleLanguages, languages);
     }
 
     /**
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public void addCompatibleCompressionTypes(MSupportedCompressionType... compatibleCompressionTypes) {
         Collections.addAll(this.compatibleCompressionTypes, compatibleCompressionTypes);
     }
 
     /**
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public MHttpResource setCacheAtClient(boolean cacheAtClient) {
         this.cacheAtClient = cacheAtClient;
@@ -132,7 +123,7 @@ public final class MHttpResource {
     /**
      * @param language Die Sprache.
      * @return Die geladenen Ressourcendaten.
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public byte[] loadResource(String language) {
         byte[] b = this.resource;
@@ -155,7 +146,7 @@ public final class MHttpResource {
 
     /**
      * @return Der MIME-Typ.
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public String getRealContentType() {
         return realMimeType;
@@ -163,7 +154,7 @@ public final class MHttpResource {
 
     /**
      * @return Das Charset.
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public Charset getCharset() {
         return charset;
@@ -171,7 +162,7 @@ public final class MHttpResource {
 
     /**
      * @return Ob die Ressource im Speicher gehalten wird.
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public boolean getKeepInMemory() {
         return this.keepInMemory;
@@ -179,7 +170,7 @@ public final class MHttpResource {
 
     /**
      * @param keepInMemory Ob die Ressource im Speicher gehalten werden soll.
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public MHttpResource setKeepInMemory(boolean keepInMemory) {
         this.keepInMemory = keepInMemory;
@@ -187,14 +178,14 @@ public final class MHttpResource {
     }
 
     /**
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public boolean getCacheAtClient(boolean cacheAtClient) {
         return this.cacheAtClient;
     }
 
     /**
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public MResourceMethod getResourceMethod(String resourceMethodName) {
         return resourceMethods.get(resourceMethodName);
@@ -202,7 +193,7 @@ public final class MHttpResource {
 
     /**
      * @return Die Sprachen der Ressource.
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public String[] getCompatibleLanguages() {
         String[] out = new String[compatibleLanguages.size() + 1];
@@ -213,7 +204,7 @@ public final class MHttpResource {
     }
 
     /**
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public String[] getCompatibleContentTypes() {
         String[] out = new String[compatibleContentTypes.size() + 1];
@@ -234,7 +225,7 @@ public final class MHttpResource {
 
 
     /**
-     @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
       * @return Der Basis-Pfad für die Persistenz.
      */
    /* public final String getPersistenceBasePath() {
@@ -243,7 +234,7 @@ public final class MHttpResource {
 
     /**
      * @return Der Dateiname.
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public String getName() {
         return this.fileName;
