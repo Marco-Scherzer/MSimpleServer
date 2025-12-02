@@ -1,9 +1,9 @@
 # This is the Page of MSimpleServer and my Simple Mini Server Architecture.
-### Development started in early 2025 (3 weeks) and has currently reached four weeks of progress (status as of October 31, 2025).
-### This early version focuses on HTTP and HTTPS handler implementations and currently supports only simple HttpServer and HttpsServer features with a focus on security through minimalism.
-### MSimpleServer is a single-developer project implemented entirely in Java. External dependencies: 0.
-### It currently runs on both desktop and Android environments via console interface.
-### While the current focus is on Android GUI integration ( com.marcoscherzer.mminigui ), the core package ( com.marcoscherzer.msimpleserver ) remains platform-independent and compatible with desktop environments.
+#### Development started in early 2025 (3 weeks) and has currently reached four weeks of progress (status as of October 31, 2025).
+#### This early version focuses on HTTP and HTTPS handler implementations and currently supports only simple HttpServer and HttpsServer features with a focus on security through minimalism.
+#### MSimpleServer is a single-developer project implemented entirely in Java. External dependencies: 0.
+#### It currently runs on both desktop and Android environments via console interface.
+#### While the current focus is on Android GUI integration ( com.marcoscherzer.mminigui ), the core package ( com.marcoscherzer.msimpleserver ) remains platform-independent and compatible with desktop environments.
 Important: This private repository is archived at irregular intervals with timestamps stored on an independent archiving site.
 For that reason, it may temporarily be set a short time to public during the archiving process. 
 It is strictly forbidden to interact with this repository in any way.
