@@ -17,6 +17,7 @@ import java.util.List;
 /**
  * MGridBuilder&MGridBuilder-API, Copyright Marco Scherzer Closed Source Development, All Rights Reserved
  * MGridBuilder-JavaFX Version, Copyright Marco Scherzer Closed Source Development, All Rights Reserved
+ *
  * @version 0.0.1 preAlpha MGridBuilder-Android UI Version(Port-Try via Microsoft Copilot), Copyright Marco Scherzer Closed Source Development, All Rights Reserved
  * untested
  */
@@ -65,7 +66,7 @@ public class MGridBuilder {
     }
 
     /*** author Marco Scherzer, Copyright Marco Scherzer , All rights reserved */
-    public GridLine addLine(float percentHeight) {
+    public MGridLine addLine(float percentHeight) {
         rowHeights.add(percentHeight);
         cumulativeRowHeight += percentHeight;
 
@@ -83,7 +84,7 @@ public class MGridBuilder {
         guide.setLayoutParams(lp);
         layout.addView(guide);
 
-        return new GridLine(hGuides.size() - 1);
+        return new MGridLine(hGuides.size() - 1);
     }
 
     /*** author Marco Scherzer, Copyright Marco Scherzer , All rights reserved */
@@ -108,12 +109,12 @@ public class MGridBuilder {
     */
 
     /*** author Marco Scherzer, Copyright Marco Scherzer , All rights reserved */
-    public class GridLine {
+    public class MGridLine {
         private final int rowIndex;
         private final ArrayList<FrameLayout> lineOfWrappers;
         private int currentCol = 0;
 
-        GridLine(int rowIndex) {
+        MGridLine(int rowIndex) {
             this.rowIndex = rowIndex;
             lineOfWrappers = new ArrayList<FrameLayout>();
             coord2wrapperMap.add(lineOfWrappers);
@@ -123,7 +124,7 @@ public class MGridBuilder {
         /**
          * author Marco Scherzer, Copyright Marco Scherzer , All rights reserved
          */
-        private GridLine attach(
+        private MGridLine attach(
                 final View view,
                 final int tp, final int lp, final int bp, final int rp,
                 final int tm, final int lm, final int bm, final int rm,
@@ -174,7 +175,7 @@ public class MGridBuilder {
 
         /*** author Marco Scherzer, Copyright Marco Scherzer , All rights reserved */
         // 1) default, no background, default gravity CENTER
-        public GridLine add(View view) {
+        public MGridLine add(View view) {
             return attach(
                     view,
                     /*tp*/0, /*lp*/0, /*bp*/0, /*rp*/0,
@@ -186,7 +187,7 @@ public class MGridBuilder {
 
         /*** author Marco Scherzer, Copyright Marco Scherzer , All rights reserved */
         // 2) default + MCStyle, default gravity CENTER
-        public GridLine add(View view, MBorderDrawableBuilder style) {
+        public MGridLine add(View view, MBorderDrawableBuilder style) {
             return attach(
                     view,
                     0, 0, 0, 0,
@@ -198,7 +199,7 @@ public class MGridBuilder {
 
         /*** author Marco Scherzer, Copyright Marco Scherzer , All rights reserved */
         // 3) uniform Margin, no background, default gravity CENTER
-        public GridLine addWithMargins(View view, int allMargin) {
+        public MGridLine addWithMargins(View view, int allMargin) {
             return attach(
                     view,
                     0, 0, 0, 0,
@@ -210,7 +211,7 @@ public class MGridBuilder {
 
         /*** author Marco Scherzer, Copyright Marco Scherzer , All rights reserved */
         // 3) Margins, no background, default gravity CENTER
-        public GridLine addWithMargins(View view, int tm, int lm, int bm, int rm) {
+        public MGridLine addWithMargins(View view, int tm, int lm, int bm, int rm) {
             return attach(
                     view,
                     0, 0, 0, 0,
@@ -222,7 +223,7 @@ public class MGridBuilder {
 
         /*** author Marco Scherzer, Copyright Marco Scherzer , All rights reserved */
         // 4) uniform Margin + MCStyle, default gravity CENTER
-        public GridLine addWithMargins(View view, int allMargin, MBorderDrawableBuilder style) {
+        public MGridLine addWithMargins(View view, int allMargin, MBorderDrawableBuilder style) {
             return attach(
                     view,
                     0, 0, 0, 0,
@@ -234,7 +235,7 @@ public class MGridBuilder {
 
         /*** author Marco Scherzer, Copyright Marco Scherzer , All rights reserved */
         // 5) individual Insets (Padding) + MCStyle, default gravity CENTER
-        public GridLine addWithPadding(
+        public MGridLine addWithPadding(
                 View view,
                 int tp, int lp, int bp, int rp,
                 MBorderDrawableBuilder style
@@ -250,7 +251,7 @@ public class MGridBuilder {
 
         /*** author Marco Scherzer, Copyright Marco Scherzer , All rights reserved */
         // 6) uniform Padding, no background, default gravity CENTER
-        public GridLine addWithPaddings(View view, int allPadding) {
+        public MGridLine addWithPaddings(View view, int allPadding) {
             return attach(
                     view,
                     allPadding, allPadding, allPadding, allPadding,
@@ -262,7 +263,7 @@ public class MGridBuilder {
 
         /*** author Marco Scherzer, Copyright Marco Scherzer , All rights reserved */
         // 7) uniform Padding, no background, default gravity CENTER
-        public GridLine addWithPaddings(View view, int tp, int lp, int bp, int rp) {
+        public MGridLine addWithPaddings(View view, int tp, int lp, int bp, int rp) {
             return attach(
                     view, tp, lp, bp, rp,
                     0, 0, 0, 0,
@@ -273,7 +274,7 @@ public class MGridBuilder {
 
         /*** author Marco Scherzer, Copyright Marco Scherzer , All rights reserved */
         // 7) uniform Padding + MCStyle, default gravity CENTER
-        public GridLine addWithPaddings(View view, int allPadding, MBorderDrawableBuilder style) {
+        public MGridLine addWithPaddings(View view, int allPadding, MBorderDrawableBuilder style) {
             return attach(
                     view,
                     allPadding, allPadding, allPadding, allPadding,
@@ -285,9 +286,9 @@ public class MGridBuilder {
 
         /*** author Marco Scherzer, Copyright Marco Scherzer , All rights reserved */
         // 8) uniform Padding + uniform Margin, no background, default gravity CENTER
-        public GridLine addWithMarginsAndPaddings(View view,
-                                                  int allPadding,
-                                                  int allMargin
+        public MGridLine addWithMarginsAndPaddings(View view,
+                                                   int allPadding,
+                                                   int allMargin
         ) {
             return attach(
                     view,
@@ -300,10 +301,10 @@ public class MGridBuilder {
 
         /*** author Marco Scherzer, Copyright Marco Scherzer , All rights reserved */
         // 9) uniform Padding + uniform Margin + MCStyle, default gravity CENTER
-        public GridLine addWithMarginsAndPaddings(View view,
-                                                  int allPadding,
-                                                  int allMargin,
-                                                  MBorderDrawableBuilder style
+        public MGridLine addWithMarginsAndPaddings(View view,
+                                                   int allPadding,
+                                                   int allMargin,
+                                                   MBorderDrawableBuilder style
         ) {
             return attach(
                     view,
@@ -316,7 +317,7 @@ public class MGridBuilder {
 
         /*** author Marco Scherzer, Copyright Marco Scherzer , All rights reserved */
         // 10) individuelle Insets + individuelle Margins + MCStyle, default gravity CENTER
-        public GridLine addWithMarginAndPadding(
+        public MGridLine addWithMarginAndPadding(
                 View view,
                 int tp, int lp, int bp, int rp,
                 int tm, int lm, int bm, int rm,
@@ -356,7 +357,7 @@ public class MGridBuilder {
          * unready and untested
          * */
         // 1) View + Gravity
-        public GridLine add(View view, int gravity) {
+        public MGridLine add(View view, int gravity) {
             return attach(
                     view,
                     /*tp*/0, /*lp*/0, /*bp*/0, /*rp*/0,
@@ -370,7 +371,7 @@ public class MGridBuilder {
          * unready and untested
          * */
         // 2) View + MCStyle + Gravity
-        public GridLine add(View view, MBorderDrawableBuilder style, int gravity) {
+        public MGridLine add(View view, MBorderDrawableBuilder style, int gravity) {
             return attach(
                     view,
                     0, 0, 0, 0,
@@ -384,7 +385,7 @@ public class MGridBuilder {
          * unready and untested
          * */
         // 3) uniform Margin + Gravity
-        public GridLine addWithMargins(View view, int allMargin, int gravity) {
+        public MGridLine addWithMargins(View view, int allMargin, int gravity) {
             return attach(
                     view,
                     0, 0, 0, 0,
@@ -398,7 +399,7 @@ public class MGridBuilder {
          * unready and untested
          * */
         // 4) uniform Margin + MCStyle + Gravity
-        public GridLine addWithMargins(View view, int allMargin, MBorderDrawableBuilder style, int gravity) {
+        public MGridLine addWithMargins(View view, int allMargin, MBorderDrawableBuilder style, int gravity) {
             return attach(
                     view,
                     0, 0, 0, 0,
@@ -412,7 +413,7 @@ public class MGridBuilder {
          * unready and untested
          * */
         // 5) individual Insets + MCStyle + Gravity
-        public GridLine addWithPadding(
+        public MGridLine addWithPadding(
                 View view,
                 int tp, int lp, int bp, int rp,
                 MBorderDrawableBuilder style,
@@ -431,7 +432,7 @@ public class MGridBuilder {
          * unready and untested
          * */
         // 6) uniform Padding + Gravity
-        public GridLine addWithPaddings(View view, int allPadding, int gravity) {
+        public MGridLine addWithPaddings(View view, int allPadding, int gravity) {
             return attach(
                     view,
                     allPadding, allPadding, allPadding, allPadding,
@@ -445,7 +446,7 @@ public class MGridBuilder {
          * unready and untested
          * */
         // 7) uniform Padding + MCStyle + Gravity
-        public GridLine addWithPaddings(View view, int allPadding, MBorderDrawableBuilder style, int gravity) {
+        public MGridLine addWithPaddings(View view, int allPadding, MBorderDrawableBuilder style, int gravity) {
             return attach(
                     view,
                     allPadding, allPadding, allPadding, allPadding,
@@ -459,7 +460,7 @@ public class MGridBuilder {
          * unready and untested
          * */
         // 8) uniform Padding + uniform Margin + Gravity
-        public GridLine addWithMarginsAndPaddings(View view, int allPadding, int allMargin, int gravity) {
+        public MGridLine addWithMarginsAndPaddings(View view, int allPadding, int allMargin, int gravity) {
             return attach(
                     view,
                     allPadding, allPadding, allPadding, allPadding,
@@ -473,7 +474,7 @@ public class MGridBuilder {
          * unready and untested
          * */
         // 9) uniform Padding + uniform Margin + MCStyle + Gravity
-        public GridLine addWithMarginsAndPaddings(View view, int allPadding, int allMargin, MBorderDrawableBuilder style, int gravity) {
+        public MGridLine addWithMarginsAndPaddings(View view, int allPadding, int allMargin, MBorderDrawableBuilder style, int gravity) {
             return attach(
                     view,
                     allPadding, allPadding, allPadding, allPadding,
@@ -487,7 +488,7 @@ public class MGridBuilder {
          * unready and untested
          */
         // 10) individual Insets + individual Margins + MCStyle + Gravity
-        public GridLine addWithMarginAndPadding(
+        public MGridLine addWithMarginAndPadding(
                 View view,
                 int tp, int lp, int bp, int rp,
                 int tm, int lm, int bm, int rm,

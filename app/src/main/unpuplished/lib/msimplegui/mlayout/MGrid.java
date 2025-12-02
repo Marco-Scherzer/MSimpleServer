@@ -10,8 +10,9 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 /**
  * MGridBuilder&MGridBuilder-API, Copyright Marco Scherzer Closed Source Development, All Rights Reserved
  * MGridBuilder-JavaFX Version, Copyright Marco Scherzer Closed Source Development, All Rights Reserved
+ *
  * @version 0.0.1 preAlpha MGridBuilder-Android UI Version(Port-Try via Microsoft Copilot),
- *  Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+ * Marco Scherzer, Author, Ideas & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
  */
 public final class MGrid extends ConstraintLayout {
     private FrameLayout[][] cellMatrix;

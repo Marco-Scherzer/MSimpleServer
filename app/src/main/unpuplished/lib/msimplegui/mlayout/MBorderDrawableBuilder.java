@@ -16,7 +16,7 @@ import java.util.Collections;
 import java.util.EnumSet;
 
 /**
- * @version 0.0.1 preAlpha, author Marco Scherzer, Copyright Marco Scherzer , All rights reserved
+ * @version 0.0.1 author Marco Scherzer, Copyright Marco Scherzer , All rights reserved
  */
 public class MBorderDrawableBuilder {
 
@@ -27,6 +27,7 @@ public class MBorderDrawableBuilder {
     private int strokeColor;
     private float strokeWidthDp;
     private EnumSet<BorderEdge> strokeEdges;
+
     public MBorderDrawableBuilder() {
         this.fillColor = 0x00000000;  // transparent
         this.rippleColor = 0;

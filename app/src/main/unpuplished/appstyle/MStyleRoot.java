@@ -48,7 +48,7 @@ public class MStyleRoot {
     public static final int MSECTION_LABEL_TEXT_ALIGNMENT = TEXT_ALIGNMENT_TEXT_START;
 
 
-//----------------------------------------------------------------------
+    //----------------------------------------------------------------------
     public static final int MSECTION_DATALABEL_TEXT_ALIGNMENT = TEXT_ALIGNMENT_TEXT_START;
     public static final int MSECTION_BACKGROUND_COLOR = 0x00000000; // transparent;
     public static final int MSECTION_LABEL_FONT_SIZE = 14;
@@ -64,7 +64,7 @@ public class MStyleRoot {
     public static final boolean MGRID_CELLS_SHOW_TOP_BORDER = true;
 
 
-//----------------------------------------------------------------------
+    //----------------------------------------------------------------------
     public static final boolean MGRID_CELLS_SHOW_LEFT_BORDER = true;
     public static final boolean MGRID_CELLS_SHOW_BOTTOM_BORDER = true;
     public static final boolean MGRID_CELLS_SHOW_RIGHT_BORDER = true;
@@ -141,7 +141,7 @@ public class MStyleRoot {
     public final int DROPDOWN_HINT_COLOR = TEXT_LIGHT_COLOR;
     // === Button ===
     public final int BUTTON_TEXT_COLOR = TEXT_MID_COLOR;
-//--------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------
     public final float BUTTON_TEXT_SIZE = 16f;
     public final int BUTTON_BACKGROUND_COLOR = BASE;
     public final int BUTTON_SHADOW_COLOR = CONTROL_SHADOW;
@@ -248,6 +248,7 @@ public class MStyleRoot {
     public final float TEXTVIEW_SHADOW_DX = 0f;
     public final float TEXTVIEW_SHADOW_DY = 1f;
     public final int TEXTVIEW_SHADOW_COLOR = CONTROL_SHADOW;
+
     public MStyleRoot() {
         // Utility class — keine Instanz erlaubt
     }
