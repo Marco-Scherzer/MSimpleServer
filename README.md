@@ -118,8 +118,6 @@ private static MHttpContentMap createAndAddContent(MMultiPlatformFileLoader reso
 }
 
 ```
-
-<br>
 <br>
 
 ## Legal Notice
