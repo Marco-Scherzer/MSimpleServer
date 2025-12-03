@@ -1,7 +1,8 @@
-/*
- * //UNFERTIG UND UNGETESTET
- * 
- * Author Marco Scherzer with Microsoft Copilot: Code on Goal-Description
+/**
+ * UNFERTIG UND UNGETESTET
+ *
+ * Author: Marco Scherzer with Microsoft Copilot
+ * Code on Goal-Description
  * Copyright Marco Scherzer, All rights reserved
  */
 
@@ -17,7 +18,7 @@
  */
 export class MApiClient {
     /**
-     * @param {string} baseUrl Die Basis-URL der API
+     * @param {string} baseUrl - Die Basis-URL der API
      */
     constructor(baseUrl) {
         this.baseUrl = baseUrl;
@@ -25,9 +26,9 @@ export class MApiClient {
 
     /**
      * GET-Anfrage mit URL-Parametern
-     * @param {string} methodName Name der Methode
-     * @param {RequestParams} params Schlüssel-Wert-Paare als Parameter
-     * @returns {Promise<string>} Serverantwort als Text
+     * @param {string} methodName - Name der Methode
+     * @param {RequestParams} params - Schlüssel-Wert-Paare als Parameter
+     * @returns {Promise<string>} - Serverantwort als Text
      */
     async sendRequestWithUrlParams(methodName, params) {
         // Validierung der Parameter
@@ -42,9 +43,9 @@ export class MApiClient {
 
     /**
      * GET-Anfrage mit Header-Parametern
-     * @param {string} methodName Name der Methode
-     * @param {RequestParams} params Schlüssel-Wert-Paare als Parameter
-     * @returns {Promise<string>} Serverantwort als Text
+     * @param {string} methodName - Name der Methode
+     * @param {RequestParams} params - Schlüssel-Wert-Paare als Parameter
+     * @returns {Promise<string>} - Serverantwort als Text
      */
     async sendRequestWithHeaderParams(methodName, params) {
         // Validierung der Parameter
@@ -61,8 +62,8 @@ export class MApiClient {
 
 /**
  * Validiert die Parameter zur Laufzeit
- * @param {RequestParams} params Schlüssel-Wert-Paare als Parameter
- * @throws {TypeError} Falls ein Parameter nicht den Regeln entspricht
+ * @param {RequestParams} params - Schlüssel-Wert-Paare als Parameter
+ * @throws {TypeError} - Falls ein Parameter nicht den Regeln entspricht
  */
 function validateParams(params) {
     if (typeof params !== "object" || params === null) {
@@ -74,5 +75,4 @@ function validateParams(params) {
         }
     });
 }
-
 

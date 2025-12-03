@@ -333,12 +333,12 @@ public final class MThreadLocalPrintStream {
          * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
          */
         public void flushBufferToTargetStream() {
-            System.out.println("flushBufferToTargetStream fullLoggingActive " + activeGlobalLogMode);
+            //System.out.println("flushBufferToTargetStream fullLoggingActive " + activeGlobalLogMode);
             outputPool.submit(new Runnable() {
                 final MDualStringBuffer buffer = getBufferForCurrentThread();
 
                 public void run() {
-                    System.out.println("logJob running");
+                    //System.out.println("logJob running");
                     try {
                         if (activeGlobalLogMode == MGlobalLogMode.logOutToSetupedOut) {
                             MThreadLocalPrintStream.out.write(buffer.outBuffer.toString().getBytes(StandardCharsets.UTF_8));

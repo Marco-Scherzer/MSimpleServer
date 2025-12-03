@@ -123,12 +123,16 @@ public class MHttpRequestHandler extends MRequestHandler {
         switch (errorCode) {
             case INTERNAL_SERVER_ERROR:
                 httpErrorCode = MHttpResponseStatusCodes._500_INTERNAL_SERVER_ERROR;
+                break;
             case REQUEST_TIMEOUT:
                 httpErrorCode = MHttpResponseStatusCodes._408_REQUEST_TIMEOUT;
+                break;
             case TOO_MANY_REQUESTS:
                 httpErrorCode = MHttpResponseStatusCodes._429_TOO_MANY_REQUESTS;
+                break;
             case SERVICE_UNAVAILABLE:
                 httpErrorCode = MHttpResponseStatusCodes._503_SERVICE_UNAVAILABLE;
+                break;
         }
         return createResponse(request, httpErrorCode, additionalMessage, createErrorContent(httpErrorCode, additionalMessage).getBytes());
     }
@@ -191,10 +195,14 @@ public class MHttpRequestHandler extends MRequestHandler {
         if (connection != null) {
             response.getHeader().setConnection(connection);
         }
+        //ToDo:  Header Resource Method
+
+
 
         byte[] resourceBytes;
         if (request.getResourceMethod() != "") {
-            //evtl später neuinstanzen mit state für ResourceMethod,
+            //evtl später neuinstanzen mit state für ResourceMethod
+            //System.exit(0);//wird für Header Resource Method noch nicht betreten, da die impl noch nicht fertig ist.
             resourceBytes = resource.getResourceMethod(request.getResourceMethod()).call(request.getResourceMethodParameters());
 
         } else {

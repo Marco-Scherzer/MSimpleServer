@@ -192,6 +192,10 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
                 return data;
             }
 //----------------------------------------- HTTP-Version > 0.9 -------------------------------------------
+            //ToDo: angefangene erweiterung: manche params verschlüsselt im header transportieren
+            // Bisher wird header nur validiert und nur resource method aufrufe die alle infos in der url haben funktionieren
+            // unterscheidung zwischen url api aufruf und header api aufruf
+
             // Überprüfe Header
             if ((data.responseCode = validateHeaders(P, lines, data)) != VALID_AND_COMPLETE)
                 return data;
@@ -478,7 +482,7 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
                             data.responseCode = MHttpResponseStatusCodes._400_BAD_REQUEST;
                             return data;
                         }
-
+//toDo:
                         data.resourceMethodParameters.put(keyValue[0], keyValue[1]);
                     }
                 }
@@ -499,7 +503,7 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
 
             mout.println("Url-Syntax ist korrekt!");
             mout.println("Ressource: " + resourcePath);
-            mout.println("Methodenname: " + methodName);
+            mout.println("resourceMethod: " + methodName);
             mout.println("Query-Parameter: " + parameterPart);
             return data;
         }
