@@ -30,14 +30,20 @@ use of this software.
 
 #### Common About-Me (to prevent wrong imaginations):
 
-I’m a 43‑year‑old old‑school developer. I’m an all‑rounder, not a specialist. Not for networking, nor for HTTP things or Android. I’ve been developing since my very early childhood.
+I am a 43‑year‑old old‑school developer. I am an all‑rounder, not a specialist. 
+Not for networking, not for HTTP things or Android. 
+I have been developing since my very early childhood. 
 According to the calculation of Microsoft Copilot, 
-I spent more than twice as many hours developing as someone who starts at 20 with a 40‑hours‑per‑week job, 
-because I developed most of my life Monday till Sunday for more than 12 hours a day.
-Since end 20 despite of massiv health issues and having been in the following yeras 4 times operated in this context.
-Even if I let only count it the last 25 serious to take years 
-sadly this is already more than two times 25 years sitting in front of a computer solving problems.
-Moreover, I have always been an extremely money‑poor person. 
+I spent more than twice as many hours developing as someone who starts at 20, 
+is at the same age and has a 40‑hours‑per‑week job, 
+because I developed most of my life Monday till Sunday for more than 12 hours a day. 
+Since the end of my twenties despite massive health issues and having been operated 
+four times in the following years in this context. 
+Even if I let only count the time since I was 20, 
+sadly this is already more than two times 23 years 
+(calculated as 7/5 days × 1.5 × 8 hours = 2.1 × 23 years ≈ 48.3 years) sitting in front of a computer solving problems.
+Moreover, I have always been an extremely money‑poor person, intentionally living most of my life in an almost ascetic way, 
+enjoying only the simple things in life.
 This will finally be one of my last projects because I planed since longer time already to stop development forever,
 despite of helpfull things like Microsoft Copilot that save me frist time in lofe time since I started using it in November 2024.
 Happily any HTTP knowledge I needed for this Project to refresh has been available on demand through Microsoft Copilot.
