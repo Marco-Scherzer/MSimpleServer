@@ -16,8 +16,7 @@
 
 #### While the current focus is on Android GUI integration ( com.marcoscherzer.mminigui ), the core package ( com.marcoscherzer.msimpleserver ) remains platform-independent and compatible with desktop environments.
 
-#### Note: Because I use Git as an addition to my history for proof of authorship,
-#### I regularly commit things in my (anyway *to treat as private*) repositories in an unready state where nothing works.
+#### Note: Because I use Git as an addition to my history for proof of authorship, I regularly commit things in my (anyway *to treat as private*) repositories in an unready state where nothing works.
 
 
 ## Legal Notice
@@ -31,7 +30,7 @@ Strictly prohibited:
 Forking, copying, reverse engineering, decompiling, modifying, redistributing, or any unauthorized
 use of this software.
 
-#### Common About-Me (just to prevent wrong imaginations about people like me who write software):
+### Common About-Me (just to prevent wrong imaginations about people like me who write software):
 
 I am a 43‑year‑old old‑school developer. I am an all‑rounder, not a specialist. 
 Not for networking, not for HTTP things or Android. 
@@ -50,14 +49,23 @@ enjoying only the simple things in life.
 This will finally be one of my last projects because I have planned for a long time already to stop development forever, 
 despite helpful things like Microsoft Copilot that, since I started using it in November 2024, 
 for the first time in my life has saved me an amount of time.
-Happily, any HTTP knowledge I needed to refresh for this project has been available on demand through Microsoft Copilot
+Happily, any HTTP knowledge I needed to refresh for this project has been available on demand through Microsoft Copilot.
+
 I recently transitioned from multiplatform development to Android-specific projects.
 My current work is intended solely for internal use within my own self‑employment, which means for
 myself and my projects. Until now, all of my work has been closed-source. I have always worked independently and entirely on
 my own. Everything I have built has been done only on my local computer, and everything I create is formally
 protected by law. Only now, in my later years, I have published something here on GitHub for the first time.
+I did this in my old days as a kind of character test to the world,  
+because I always had more bad than good imaginations about open source and developing openly.  
+But sadly, until now it has always shown up sooner or later that I have been right from the beginning with my opinions about things in life, which I tell to others.  
+Despite that, I sometimes give certain things a chance to come to a final conclusion for myself.  
+But I calculate with the worst case (that my code is just stolen or other negative things happen).
 Except for what I publish here on this GitHub page (https://github.com/Marco-Scherzer),
-all of my software projects remain closed-source.
+all of my software projects remain closed-source. I did this on my old days as a kind of character test to the world,
+because I always had more bad than good imagniations about open source and developing open. But sadly until know
+it always showed up sooner or later that I've benn from the beginning on always right with my opions about things during life.
+
 
 My source code and any compiled versions that may sometimes appear here,  
 as well as any texts or other content on this page, are protected by copyright. 
