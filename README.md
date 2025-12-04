@@ -34,6 +34,7 @@ I’m a 43‑year‑old old‑school developer. I’m an all‑rounder, not a sp
 According to the calculation of Microsoft Copilot, 
 I spent more than twice as many hours developing as someone who starts at 20 with a 40‑hours‑per‑week job, 
 because I developed most of my life Monday till Sunday for more than 12 hours a day.
+Since end 20 despite of massiv health issues and having been in the following yeras 4 times operated in this context.
 Even if I let only count it the last 25 serious to take years 
 sadly this is already more than two times 25 years sitting in front of a computer solving problems.
 Moreover, I have always been an extremely money‑poor person. 
