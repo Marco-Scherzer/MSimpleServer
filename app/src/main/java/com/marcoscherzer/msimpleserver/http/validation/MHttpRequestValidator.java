@@ -203,7 +203,7 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
                 return data;
             //ToDo: angefangene erweiterung. post statt encrypted header data, da aufwandstechnisch doch etwa gleich
 
-            if ((data.responseCode = validatePost(version, postLines, data)) != VALID_AND_COMPLETE)
+            if ((data.responseCode = validatePost(postLines, data)) != VALID_AND_COMPLETE)
                 return data;
 
 
@@ -226,7 +226,7 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
     /**
      * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
-    private MHttpResponseStatusCodes validatePost(MHttpVersion httpVersion,String[] lines, MHttpRequestData data) {
+    private MHttpResponseStatusCodes validatePost(String[] lines, MHttpRequestData data) {
 
         data.body =
         return VALID_AND_COMPLETE;
