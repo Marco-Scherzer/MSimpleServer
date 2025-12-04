@@ -22,7 +22,7 @@ public abstract class MHttpVersion extends MProtocolVersion<MValidationPattern> 
      */
     protected MHttpVersion(String version, MHttpMethod... methods) {
         super(version);
-        setSupportedMethods(methods);
+        setRestrictSupportedMethods(methods);
     }
 
     /**
@@ -35,7 +35,7 @@ public abstract class MHttpVersion extends MProtocolVersion<MValidationPattern> 
     /**
      * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
-    public final MHttpVersion setSupportedMethods(MHttpMethod... supportedMethods) {
+    public final MHttpVersion setRestrictSupportedMethods(MHttpMethod... supportedMethods) {
         StringBuffer methodsString = new StringBuffer();
         for (MHttpMethod method : supportedMethods) {
             methodsString.append(method).append("|");

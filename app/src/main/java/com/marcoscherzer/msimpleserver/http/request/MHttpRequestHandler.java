@@ -36,11 +36,11 @@ import javax.net.ssl.SSLSocket;
  */
 public class MHttpRequestHandler extends MRequestHandler {
     private final HashMap<String, MHttpResource> url2Resource;
-    // private final Mode mode;
     private final MHttpRequestValidator requestValidator;
     private MHttpResponseStatusCodes[] errorsToSendPagesForInsteadOfPlain;
     private int portForHttpsRedirectResponses;
     private String addressForHttpsRedirectResponses;
+
 
     /**
      * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
@@ -48,7 +48,6 @@ public class MHttpRequestHandler extends MRequestHandler {
     public MHttpRequestHandler(HashMap<String, MHttpResource> url2Resource, MHttpRequestValidator requestValidator) {
         this.requestValidator = requestValidator;
         this.url2Resource = url2Resource;
-        //this.mode=mode;
     }
 
     /**
@@ -195,15 +194,15 @@ public class MHttpRequestHandler extends MRequestHandler {
         if (connection != null) {
             response.getHeader().setConnection(connection);
         }
-        //ToDo:  Header Resource Method
-
-
 
         byte[] resourceBytes;
         if (request.getResourceMethod() != "") {
             //evtl später neuinstanzen mit state für ResourceMethod
             //System.exit(0);//wird für Header Resource Method noch nicht betreten, da die impl noch nicht fertig ist.
-            resourceBytes = resource.getResourceMethod(request.getResourceMethod()).call(request.getResourceMethodParameters());
+            MResourceMethod m = resource.getResourceMethod(request.getResourceMethod());
+//toDo
+            m.mapParamsIfStrucutured()
+            resourceBytes = m.call(request.getResourceMethodParameters());
 
         } else {
             resourceBytes = resource.loadResource(contentLanguage);

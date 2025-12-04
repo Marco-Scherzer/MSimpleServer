@@ -31,7 +31,8 @@ public final class MHttpRequest {
         this.protocol = requestData.getProtocol();
         this.headers = new MHttpRequestHeader(requestData.getHeaders());
         this.resourceMethodParameters = requestData.getResourceMethodParameters();
-        this.body = "";
+        this.body = requestData.getBody(); //post
+        //this.body = "";
     }
 
     /**

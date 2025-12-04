@@ -42,14 +42,19 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
 
     private int MAX_HEADER_SIZE = 8192; // Maximale Größe der Header
     private boolean upgradeUnencrypted;
-    private Mode mode;
     private MHttpResponseStatusCodes[] errorsToSendPagesForInsteadOfPlain;
-
+    private final MParameterMode mode;
+    public enum MParameterMode{
+        URL,
+        HEADER,
+        // POST
+    }
     /**
      * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
-    public MHttpRequestValidator(MHttpVersion... supportedProtocols) {
+    public MHttpRequestValidator(MParameterMode mode, MHttpVersion... supportedProtocols) {
         super(supportedProtocols);
+        this.mode = mode;
     }
 //private static final Pattern HEADER_PATTERN = Pattern.compile("^[a-zA-Z0-9-]+:\\s.*$");
 
@@ -111,7 +116,7 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
     @Override
     public MHttpRequestData isValidRequest(Socket socket) {
         MHttpRequestData data = new MHttpRequestData();
-        StringBuilder requestBuilder = new StringBuilder();
+        StringBuilder request = new StringBuilder();
         try {
             InputStream inputStream = socket.getInputStream();
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
@@ -124,15 +129,15 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
                     data.responseCode = _400_BAD_REQUEST;
                     return data;
                 }
-                requestBuilder.append((char) ch);
+                request.append((char) ch);
                 // Überprüfe auf das Ende der Header (CRLF gefolgt von CRLF)
-                if (requestBuilder.length() >= 4 &&
-                        requestBuilder.substring(requestBuilder.length() - 4).equals("\r\n\r\n")) {
+                if (request.length() >= 4 &&
+                        request.substring(request.length() - 4).equals("\r\n\r\n")) {
                     break;
                 }
             }
 
-            String[] lines = requestBuilder.toString().split("\r\n");
+            String[] lines = request.toString().split("\r\n");
 
 
             mout.println("Überprüfe die Request-Line: " + lines[0]);
@@ -152,10 +157,10 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
             String method = parts[0];
             String protocol = parts[2];
 
-            MHttpVersion P = null;
+            MHttpVersion version = null;
             for (int i = 0; i < getSupportedProtocols().size(); i++) {
-                P = getSupportedProtocols().get(i);
-                if (P.getVersion() == data.protocol) break;
+                version = getSupportedProtocols().get(i);
+                if (version.getVersion() == data.protocol) break;
             }
 
             // Überprüfe Protokoll
@@ -167,7 +172,7 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
             //(Protokoll ist vorhanden und supported)
 
             // Überprüfe Methode
-            if (!P.getSupportedMethods().matcher(method).matches()) {
+            if (!version.getSupportedMethods().matcher(method).matches()) {
                 mout.println("Fehler: Ungültige Methode: " + method);
                 data.responseCode = _405_METHOD_NOT_ALLOWED;
                 return data;
@@ -192,13 +197,15 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
                 return data;
             }
 //----------------------------------------- HTTP-Version > 0.9 -------------------------------------------
-            //ToDo: angefangene erweiterung: manche params verschlüsselt im header transportieren
-            // Bisher wird header nur validiert und nur resource method aufrufe die alle infos in der url haben funktionieren
-            // unterscheidung zwischen url api aufruf und header api aufruf
 
             // Überprüfe Header
-            if ((data.responseCode = validateHeaders(P, lines, data)) != VALID_AND_COMPLETE)
+            if ((data.responseCode = validateHeaders(version, lines, data)) != VALID_AND_COMPLETE)
                 return data;
+            //ToDo: angefangene erweiterung. post statt encrypted header data, da aufwandstechnisch doch etwa gleich
+
+            if ((data.responseCode = validatePost(version, postLines, data)) != VALID_AND_COMPLETE)
+                return data;
+
 
             data.responseCode = VALID_AND_COMPLETE;
         } catch (UnsupportedEncodingException exc) {
@@ -214,6 +221,15 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
         }
 
         return data;
+    }
+
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     */
+    private MHttpResponseStatusCodes validatePost(MHttpVersion httpVersion,String[] lines, MHttpRequestData data) {
+
+        data.body =
+        return VALID_AND_COMPLETE;
     }
 
     /**
@@ -274,6 +290,7 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
      */
     public static final class MHttpRequestData {
         private final Map<String, String> headers = new HashMap<>();
+        private String body;
         //private boolean validAndComplete;
         private final Map<String, String> resourceMethodParameters = new HashMap<>();
         private String requestMethod;
@@ -316,6 +333,13 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
          */
         public Map<String, String> getHeaders() {
             return headers;
+        }
+
+        /**
+         * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+         */
+        public String getBody() {
+            return body;
         }
 
         /**
@@ -482,7 +506,7 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
                             data.responseCode = MHttpResponseStatusCodes._400_BAD_REQUEST;
                             return data;
                         }
-//toDo:
+
                         data.resourceMethodParameters.put(keyValue[0], keyValue[1]);
                     }
                 }

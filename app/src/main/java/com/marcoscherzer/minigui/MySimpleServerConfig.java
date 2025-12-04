@@ -3,6 +3,7 @@ package com.marcoscherzer.minigui;
 
 import static com.marcoscherzer.msimpleserver.http.constants.MHttpMethod.GET;
 import static com.marcoscherzer.msimpleserver.http.constants.MHttpResponseStatusCodes._404_NOT_FOUND;
+import static com.marcoscherzer.msimpleserver.http.validation.MHttpRequestValidator.MParameterMode.URL;
 import static com.marcoscherzer.msimpleserver.util.logging.MThreadLocalPrintStream.MLogHeaderFieldType.THREADNAME;
 import static com.marcoscherzer.msimpleserver.util.logging.MThreadLocalPrintStream.MLogHeaderFieldType.TIMEFIELD;
 import static com.marcoscherzer.msimpleserver.util.logging.MThreadLocalPrintStream.mout;
@@ -24,6 +25,7 @@ import com.marcoscherzer.msimpleserver.util.fileloader.MMultiPlatformFileLoader;
 import com.marcoscherzer.msimpleserver.util.logging.MThreadLocalPrintStream;
 import com.marcoscherzer.msimpleserver.util.logging.MThreadLocalPrintStream.MLogHeader;
 
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
@@ -84,15 +86,19 @@ public final class MySimpleServerConfig {
         MThreadLocalPrintStream.setLogMode(MThreadLocalPrintStream.MGlobalLogMode.logOutToSetupedOut);
         mout.println("adding content...");
 
-        MHttpVersion protocol = new MHttp_1_1().setSupportedMethods(GET);
+        MHttpVersion protocol = new MHttp_1_1().setRestrictSupportedMethods(GET);
 
-        MHttpRequestValidator v = new MHttpRequestValidator(protocol)
+        MHttpRequestValidator v = new MHttpRequestValidator(URL,protocol)
                 .setMaxHeaderSize(8192)
                 .setUpgradeUnencrypted(true);
 
         MHttpRequestHandler content1RequestHandler = new MHttpRequestHandler(contentMap.getMap(), v)
                 .setAdressAndPortForHttpsRedirectResponses("192.168.0.3", 7733)
                 .setSendErrorPagesFor(_404_NOT_FOUND);
+        MHttpRequestHandler content1RequestHandler2 = new MHttpRequestHandler(contentMap.getMap(), v)
+                .setAdressAndPortForHttpsRedirectResponses("192.168.0.3", 7733)
+                .setSendErrorPagesFor(_404_NOT_FOUND);
+
 
         MServerSocketConfig httpSocket1 = new MServerSocketConfig()
                 .setAddress("192.168.0.3")
@@ -107,7 +113,7 @@ public final class MySimpleServerConfig {
 
         MSimpleMiniServer server = new MSimpleMiniServer();
         server.start(7777, httpSocket1, content1RequestHandler, 1, 65535);//evtl localhost konektierungsmöglichkeiten erweitern(clientseitig)
-        server.start(7733, httpsSocket1, content1RequestHandler, 1, 65535);
+        server.start(7733, httpsSocket1, content1RequestHandler2, 1, 65535);
 
 
         return server;
@@ -119,7 +125,12 @@ public final class MySimpleServerConfig {
     private static MHttpContentMap createAndAddContent(MMultiPlatformFileLoader resourceFileLoader) throws Exception {
         MHttpResource.setHttpResourceFileLoader(resourceFileLoader);
         MHttpResource root = new MHttpResource(Locale.ENGLISH, "/test2__.html")
-                .addResourceMethod("validateTestForm1", new MResourceMethod() {
+                .addResourceMethod("validateTestForm1", new MResourceMethod<Map<String, String>>() {
+                    @Override
+                    public HashMap<String, String> mapParamsIfStrucutured(String bodyOrUrlParams) {
+                        return null;
+                    }
+
                     @Override
                     public byte[] call(Map<String, String> params) {
                         String r = "MSimpleServer says: validateTestForm1(" + params + ") called";
@@ -127,13 +138,18 @@ public final class MySimpleServerConfig {
                         return r.getBytes();
                     }
                 })
-                .addResourceMethod("validateTestForm2", new MResourceMethod() {
+                .addResourceMethod("validateTestForm2", new MResourceMethod<Map<String, String>>() {
+                    @Override
+                    public HashMap<String, String> mapParamsIfStrucutured(String bodyOrUrlParams) {
+                        return null;
+                    }
                     @Override
                     public byte[] call(Map<String, String> params) {
                         String r = "MSimpleServer says: validateTestForm2(" + params + ") called";
                         mout.println(r);
                         return r.getBytes();
                     }
+
                 });
 
         MHttpContentMap contentMap = new MHttpContentMap();
