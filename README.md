@@ -2,7 +2,6 @@
 
 #### Development started in early 2025 and had reached 3 to 4 weeks of progress when it started to work for my own simple scenario purposes. 
 #### This early version focuses on HTTP and HTTPS handler implementations and currently supports only simple HttpServer and HttpsServer features with a focus on security through minimalism.
-
 #### Features after 4 weeks:
 - **Parallel accept loops for redundancy**
 - **General SSL redirection** of unencrypted browser HTTP requests
@@ -17,6 +16,10 @@
 
 #### While the current focus is on Android GUI integration ( com.marcoscherzer.mminigui ), the core package ( com.marcoscherzer.msimpleserver ) remains platform-independent and compatible with desktop environments.
 
+#### Note: Because I use Git as an addition to my history for proof of authorship,
+#### I regularly commit things in my (anyway *to treat as private*) repositories in an unready state where nothing works.
+
+
 ## Legal Notice
 This software is proprietary and protected by copyright law.  
 Idea, Author, and Copyright: Marco Scherzer  
@@ -28,7 +31,7 @@ Strictly prohibited:
 Forking, copying, reverse engineering, decompiling, modifying, redistributing, or any unauthorized
 use of this software.
 
-#### Common About-Me (to prevent wrong imaginations):
+#### Common About-Me (just to prevent wrong imaginations about people like me who write software):
 
 I am a 43‑year‑old old‑school developer. I am an all‑rounder, not a specialist. 
 Not for networking, not for HTTP things or Android. 
@@ -44,9 +47,10 @@ sadly this is already more than two times 23 years
 (calculated as 7/5 days × 1.5 × 8 hours = 2.1 × 23 years ≈ 48.3 years) sitting in front of a computer solving problems.
 Moreover, I have always been an extremely money‑poor person, intentionally living most of my life in an almost ascetic way, 
 enjoying only the simple things in life.
-This will finally be one of my last projects because I planed since longer time already to stop development forever,
-despite of helpfull things like Microsoft Copilot that save me frist time in lofe time since I started using it in November 2024.
-Happily any HTTP knowledge I needed for this Project to refresh has been available on demand through Microsoft Copilot.
+This will finally be one of my last projects because I have planned for a long time already to stop development forever, 
+despite helpful things like Microsoft Copilot that, since I started using it in November 2024, 
+for the first time in my life has saved me an amount of time.
+Happily, any HTTP knowledge I needed to refresh for this project has been available on demand through Microsoft Copilot
 I recently transitioned from multiplatform development to Android-specific projects.
 My current work is intended solely for internal use within my own self‑employment, which means for
 myself and my projects. Until now, all of my work has been closed-source. I have always worked independently and entirely on
