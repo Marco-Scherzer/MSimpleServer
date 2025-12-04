@@ -28,11 +28,18 @@ Strictly prohibited:
 Forking, copying, reverse engineering, decompiling, modifying, redistributing, or any unauthorized
 use of this software.
 
-#### Common About-Me:
+#### Common About-Me (to prevent wrong imaginations):
 
-Im an oldschool alrounder not a specialist.
-Not for networking, nor for http things or Android.
-Thanks to Microsoft Copilot, any HTTP knowledge I needed has been available on demand.
+I’m a 43‑year‑old old‑school developer. I’m an all‑rounder, not a specialist. Not for networking, nor for HTTP things or Android. I’ve been developing since my very early childhood.
+According to the calculation of Microsoft Copilot, 
+I spent more than twice as many hours developing as someone who starts at 20 with a 40‑hours‑per‑week job, 
+because I developed most of my life Monday till Sunday for more than 12 hours a day.
+Even if I let only count it the last 25 serious to take years 
+sadly this is already more than two times 25 years sitting in front of a computer solving problems.
+Moreover, I have always been an extremely money‑poor person. 
+This will finally be one of my last projects because I planed since longer time already to stop development forever,
+despite of helpfull things like Microsoft Copilot that save me frist time in lofe time since I started using it in November 2024.
+Happily any HTTP knowledge I needed for this Project to refresh has been available on demand through Microsoft Copilot.
 I recently transitioned from multiplatform development to Android-specific projects.
 My current work is intended solely for internal use within my own self‑employment, which means for
 myself and my projects. Until now, all of my work has been closed-source. I have always worked independently and entirely on

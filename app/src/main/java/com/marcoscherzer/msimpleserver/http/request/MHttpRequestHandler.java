@@ -198,10 +198,10 @@ public class MHttpRequestHandler extends MRequestHandler {
         byte[] resourceBytes;
         if (request.getResourceMethod() != "") {
             //evtl später neuinstanzen mit state für ResourceMethod
-            //System.exit(0);//wird für Header Resource Method noch nicht betreten, da die impl noch nicht fertig ist.
+            //System.exit(0);
             MResourceMethod m = resource.getResourceMethod(request.getResourceMethod());
 //toDo
-            m.mapParamsIfStrucutured()
+            m.mapParamsIfStructured();
             resourceBytes = m.call(request.getResourceMethodParameters());
 
         } else {

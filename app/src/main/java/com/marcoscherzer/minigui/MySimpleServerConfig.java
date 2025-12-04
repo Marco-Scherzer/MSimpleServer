@@ -127,7 +127,7 @@ public final class MySimpleServerConfig {
         MHttpResource root = new MHttpResource(Locale.ENGLISH, "/test2__.html")
                 .addResourceMethod("validateTestForm1", new MResourceMethod<Map<String, String>>() {
                     @Override
-                    public HashMap<String, String> mapParamsIfStrucutured(String bodyOrUrlParams) {
+                    public HashMap<String, String> mapParamsIfStructured(String bodyOrUrlParams) {
                         return null;
                     }
 
@@ -140,7 +140,7 @@ public final class MySimpleServerConfig {
                 })
                 .addResourceMethod("validateTestForm2", new MResourceMethod<Map<String, String>>() {
                     @Override
-                    public HashMap<String, String> mapParamsIfStrucutured(String bodyOrUrlParams) {
+                    public HashMap<String, String> mapParamsIfStructured(String bodyOrUrlParams) {
                         return null;
                     }
                     @Override
