@@ -4,22 +4,25 @@ import static com.marcoscherzer.msimpleserver.http.constants.MHttpResponseStatus
 import static com.marcoscherzer.msimpleserver.http.constants.MHttpResponseStatusCodes._400_BAD_REQUEST;
 import static com.marcoscherzer.msimpleserver.http.constants.MHttpResponseStatusCodes._405_METHOD_NOT_ALLOWED;
 import static com.marcoscherzer.msimpleserver.http.constants.MHttpResponseStatusCodes._413_PAYLOAD_TOO_LARGE;
+import static com.marcoscherzer.msimpleserver.http.constants.MHttpResponseStatusCodes._415_UNSUPPORTED_MEDIA_TYPE;
 import static com.marcoscherzer.msimpleserver.http.constants.MHttpResponseStatusCodes._505_HTTP_VERSION_NOT_SUPPORTED;
+import static com.marcoscherzer.msimpleserver.http.validation.MParameterMode.POST;
 import static com.marcoscherzer.msimpleserver.util.logging.MThreadLocalPrintStream.mout;
 
 import com.marcoscherzer.msimpleserver.MRequestValidator;
-import com.marcoscherzer.msimpleserver.MSimpleMiniServer.Mode;
 import com.marcoscherzer.msimpleserver.http.constants.MHttpResponseStatusCodes;
 import com.marcoscherzer.msimpleserver.http.request.MHttpContentMap;
 import com.marcoscherzer.msimpleserver.http.validation.MHttpRequestValidator.MHttpRequestData;
 import com.marcoscherzer.msimpleserver.http.validation.MHttpVersion.MValidationPattern;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.Socket;
+import java.net.URLConnection;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
@@ -107,7 +110,9 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
     }
 
     /**
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha, @author Marco Scherzer,
+     * Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer,
+     * Copyright Marco Scherzer, All rights reserved
      */
     @Override
     public MHttpRequestData isValidRequest(Socket socket) {
@@ -134,7 +139,6 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
             }
 
             String[] lines = request.toString().split("\r\n");
-
 
             mout.println("Überprüfe die Request-Line: " + lines[0]);
             if (lines.length == 0) {
@@ -174,35 +178,67 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
                 return outData;
             }
 
-
             //Überprüfe Url und setze data-attribute für url meth name und query-parameters oder return errorResponseCode
             outData = urlParser.parseUrl(parts[1], outData);
             if (outData.responseCode != null) return outData;
 
-
             outData.requestMethod = method;
             outData.protocol = protocol;
 
-            //LogBuch/Gedankengänge Copyright Marco Scherzer
-            //HTTP-Statuscode 301 (Moved Permanently) oder 302 (Found)  HTTPS-URL in  Location-Header
-            //Ziel: um nachzuladende http resourcen in websitecode evtl auf https umzuleiten
-            //Vorbedingung: jeder request (http oder https) wird zunächst am richtigen Port gestellt(Browserintern http=80,https=443)
-            //einzige einfache Möglichkeit: upgrade jeder http verbindung; d.h http-port nur noch zum engegennehmen und upgraden unsicherer verbindungen
-
+            // Upgrade unsicherer Verbindungen
             if (!(socket instanceof SSLSocket) && upgradeUnencrypted) {
                 mout.println("Fehler: Request kam über unsicheres http");
                 outData.responseCode = MHttpResponseStatusCodes._302_FOUND;
                 return outData;
             }
-//----------------------------------------- HTTP-Version > 0.9 -------------------------------------------
+
+            //----------------------------------------- HTTP-Version > 0.9 -------------------------------------------
             outData.mode = mode;
             // Überprüfe Header
             validateHeaders(version, lines, outData);
             if (outData.responseCode != VALID_AND_COMPLETE) return outData;
 
-            validatePost(postLines, outData);//ToDo: angefangene erweiterung. post statt encrypted header data, da aufwandstechnisch doch etwa gleich
-            if (outData.responseCode != VALID_AND_COMPLETE) return outData;
+            /*
+             * benutzungskonventionsdefinition: POST wirkt überschreibend bzgl kompletter URL-Parameter
+             * diese werden neu gesetzt
+             */
+            //toDo
+            if (mode == POST) { // evtl später wieder ohne mode nur über supported protocolls
+                // Content-Length aus Header holen
+                String cl = outData.getHeaders().get("Content-Length");
+                if (cl == null) {
+                    mout.println("Fehler: Content-Length fehlt.");
+                    outData.responseCode = _400_BAD_REQUEST;
+                    return outData;
+                }
+                int contentLength;
+                try {
+                    contentLength = Integer.parseInt(cl.trim());
+                } catch (NumberFormatException e) {
+                    mout.println("Fehler: Ungültiger Content-Length.");
+                    outData.responseCode = _400_BAD_REQUEST;
+                    return outData;
+                }
 
+                // Body-Bytes lesen
+                byte[] bodyBytes = new byte[contentLength];
+                int readTotal = 0;
+                while (readTotal < contentLength) {
+                    int n = inputStream.read(bodyBytes, readTotal, contentLength - readTotal);
+                    if (n == -1) break;
+                    readTotal += n;
+                }
+                if (readTotal < contentLength) {
+                    mout.println("Fehler: Body unvollständig gelesen.");
+                    outData.responseCode = _400_BAD_REQUEST;
+                    return outData;
+                }
+
+                outData.bodyBytes = bodyBytes; // Binärdaten speichern
+
+                validatePost(outData.bodyBytes, outData);
+                if (outData.responseCode != VALID_AND_COMPLETE) return outData;
+            }
 
             outData.responseCode = VALID_AND_COMPLETE;
         } catch (UnsupportedEncodingException exc) {
@@ -220,14 +256,58 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
         return outData;
     }
 
-    /**
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
-     */
-    private void validatePost(String[] lines, MHttpRequestData outData) {
 
-        outData.body =
-                outData.responseCode = VALID_AND_COMPLETE;
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer,
+     * Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer,
+     * Copyright Marco Scherzer, All rights reserved
+     * todo UNGETESTET , erste ideen skizze
+     */
+    private void validatePost(byte[] bodyBytes, MHttpRequestData outData) {
+        String ct = outData.getHeaders().get("Content-Type");
+
+        // Falls kein Content-Type Header vorhanden ist → automatisch bestimmen
+        if (ct == null) {
+            try (ByteArrayInputStream bais = new ByteArrayInputStream(bodyBytes)) {
+                ct = URLConnection.guessContentTypeFromStream(bais);
+            } catch (IOException e) {
+                mout.println("Fehler: Content-Type konnte nicht bestimmt werden.");
+                outData.responseCode = _415_UNSUPPORTED_MEDIA_TYPE;
+                return;
+            }
+        }
+
+        if (bodyBytes == null || bodyBytes.length == 0) {
+            mout.println("Fehler: POST-Body fehlt oder leer.");
+            outData.responseCode = _400_BAD_REQUEST;
+            return;
+        }
+
+        // Behandlung nach Content-Type
+        if (ct != null && ct.startsWith("application/x-www-form-urlencoded")) {
+            String body = new String(bodyBytes, StandardCharsets.UTF_8);
+
+            // synthetische URL bauen
+            String syntheticUrl = outData.getResourcePath() + "/" + outData.getEndpointQuery() + "?" + body;
+
+            // vorhandenen Parser nutzen
+            urlParser.parseUrl(syntheticUrl, outData);
+
+            if (outData.responseCode != VALID_AND_COMPLETE) {
+                mout.println("Fehler beim Parsen des POST-Bodys.");
+                return;
+            }
+
+            outData.responseCode = VALID_AND_COMPLETE;
+            return;
+        }
+
+        // JSON oder Binärdaten aktuell nicht unterstützt → 415
+        mout.println("Fehler: Unsupported Content-Type: " + ct);
+        outData.responseCode = _415_UNSUPPORTED_MEDIA_TYPE;
     }
+
+
 
     /**
      * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
@@ -290,7 +370,7 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
      */
     public static final class MHttpRequestData {
         private final Map<String, String> headers = new HashMap<>();
-        private String body;
+        private byte[] bodyBytes;
         private MParameterMode mode;
         //private boolean validAndComplete;
         private final Map<String, String> resourceMethodParameters = new HashMap<>();
@@ -345,8 +425,8 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
         /**
          * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
          */
-        public String getBody() {
-            return body;
+        public String getBodyBytes() {
+            return bodyBytes;
         }
 
         /**

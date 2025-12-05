@@ -125,7 +125,7 @@ public final class MySimpleServerConfig {
     private static MHttpContentMap createAndAddContent(MMultiPlatformFileLoader resourceFileLoader) throws Exception {
         MHttpResource.setHttpResourceFileLoader(resourceFileLoader);
         MHttpResource root = new MHttpResource(Locale.ENGLISH, "/test2__.html")
-                .addResourceMethod("validateTestForm1", new MResourceMethod<Map<String, String>>() {
+                .addResourceMethod("validateTestForm1", new MResourceMethod() {
                     @Override
                     public HashMap<String, String> mapParamsIfStructured(String bodyOrUrlParams) {
                         return null;
@@ -138,7 +138,7 @@ public final class MySimpleServerConfig {
                         return r.getBytes();
                     }
                 })
-                .addResourceMethod("validateTestForm2", new MResourceMethod<Map<String, String>>() {
+                .addResourceMethod("validateTestForm2", new MResourceMethod() {
                     @Override
                     public HashMap<String, String> mapParamsIfStructured(String bodyOrUrlParams) {
                         return null;

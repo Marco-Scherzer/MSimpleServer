@@ -197,11 +197,9 @@ public class MHttpRequestHandler extends MRequestHandler {
 
         byte[] resourceBytes;
         if (request.getResourceMethod() != "") {
-            //evtl später neuinstanzen mit state für ResourceMethod
-            //System.exit(0);
             MResourceMethod m = resource.getResourceMethod(request.getResourceMethod());
-//toDo
-            m.mapParamsIfStructured();
+
+            //strukturierte parameter in map schreiben
             resourceBytes = m.call(request.getResourceMethodParameters());
 
         } else {
