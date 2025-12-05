@@ -10,6 +10,7 @@ import static com.marcoscherzer.msimpleserver.http.validation.MParameterMode.POS
 import static com.marcoscherzer.msimpleserver.util.logging.MThreadLocalPrintStream.mout;
 
 import com.marcoscherzer.msimpleserver.MRequestValidator;
+import com.marcoscherzer.msimpleserver.http.constants.MHttpContentType;
 import com.marcoscherzer.msimpleserver.http.constants.MHttpResponseStatusCodes;
 import com.marcoscherzer.msimpleserver.http.request.MHttpContentMap;
 import com.marcoscherzer.msimpleserver.http.validation.MHttpRequestValidator.MHttpRequestData;
@@ -262,18 +263,17 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
 
 
     /**
-     * @version 0.0.4 preAlpha, @author Marco Scherzer,
+     * @version 0.0.1 preAlpha, @author Marco Scherzer,
      * Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer,
      * Copyright Marco Scherzer, All rights reserved
      * todo UNGETESTET , erste ideen skizze
      */
     private void validatePost(byte[] bodyBytes, MHttpRequestData outData) {
-        String ct = outData.getHeaders().get("Content-Type");
+        String contentType = outData.getHeaders().get("Content-Type");
 
-        // Falls kein Content-Type Header vorhanden ist → automatisch bestimmen
-        if (ct == null) {
+        if (contentType == null) {
             try (ByteArrayInputStream bais = new ByteArrayInputStream(bodyBytes)) {
-                ct = URLConnection.guessContentTypeFromStream(bais);
+                contentType = URLConnection.guessContentTypeFromStream(bais);
             } catch (IOException e) {
                 mout.println("Fehler: Content-Type konnte nicht bestimmt werden.");
                 outData.responseCode = _415_UNSUPPORTED_MEDIA_TYPE;
@@ -288,10 +288,10 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
         }
 
         // Charset-Parameter entfernen, falls vorhanden
-        String baseCt = ct.split(";")[0].trim().toLowerCase();
+        String baseCt = contentType.split(";")[0].trim().toLowerCase();
         String charsetName = "UTF-8"; // Default
-        if (ct.toLowerCase().contains("charset=")) {
-            String[] parts = ct.split("charset=");
+        if (contentType.toLowerCase().contains("charset=")) {
+            String[] parts = contentType.split("charset=");
             if (parts.length > 1) {
                 charsetName = parts[1].trim();
             }
@@ -306,35 +306,55 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
             return;
         }
 
-        switch (baseCt) {
-            case "application/x-www-form-urlencoded":
-                String body = new String(bodyBytes, charset);
-                // synthetische URL bauen
-                String syntheticUrl = outData.getResourcePath() + "/" + outData.getEndpointQuery() + "?" + body;
-                // vorhandenen Parser nutzen
-                urlParser.parseUrl(syntheticUrl, outData);
-                if (outData.responseCode != VALID_AND_COMPLETE) {
-                    mout.println("Fehler beim Parsen des POST-Bodys.");
-                    return;
-                }
-                outData.responseCode = VALID_AND_COMPLETE;
-                return;
-            case "application/json":
-                mout.println("Hinweis: JSON-Body empfangen. Rufe parser auf");
-                // TODO: später JSON-Handler via optional settable handler != null
-                outData.responseCode = _415_UNSUPPORTED_MEDIA_TYPE;//derweile unsupported
-                return;
-            case "application/octet-stream":
-                mout.println("Hinweis: Binärdaten-Body empfangen, keine weitere Validierung.");
-                // TODO: später handler via optional settable handler != null
-                outData.responseCode = _415_UNSUPPORTED_MEDIA_TYPE; //derweile unsupported
-                return;
-            default:
-                mout.println("Fehler: Unsupported Content-Type: " + ct);
+        // Enum aus Header-String bestimmen
+        MHttpContentType type = null;
+        for (MHttpContentType ctEnum : MHttpContentType.values()) {
+            if (ctEnum.getValue().equalsIgnoreCase(baseCt)) {
+                type = ctEnum;
+                break;
+            }
+        }
+
+        if (type != null) {
+            MContentTypeHandler handler = handlers.get(type);
+            if (handler != null) {
+                handler.handle(bodyBytes, charset, outData);
+            } else {
+                mout.println("Fehler: Kein Handler für Content-Type: " + type.getValue());
                 outData.responseCode = _415_UNSUPPORTED_MEDIA_TYPE;
-                return;
+            }
+        } else {
+            mout.println("Fehler: Unsupported Content-Type: " + contentType);
+            outData.responseCode = _415_UNSUPPORTED_MEDIA_TYPE;
         }
     }
+
+
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * Jeder Handler verarbeitet den Body und setzt den responseCode in outData.
+     */
+    public interface MContentTypeHandler {
+        void handle(byte[] bodyBytes, Charset charset, MHttpRequestData outData);
+    }
+
+    private final Map<MHttpContentType, MContentTypeHandler> handlers = new HashMap<>();
+
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * Fügt einen Content-Type-Handler zur internen Map hinzu.
+     * @param type der Content-Type als Enum (z.B. MHttpContentType.APPLICATION_JSON)
+     * @param handler die Handler-Instanz, die diesen Content-Type verarbeitet
+     */
+    public void addHandler(MHttpContentType type, MContentTypeHandler handler) {
+        if (type == null || handler == null) {
+            throw new IllegalArgumentException("Content-Type und Handler dürfen nicht null sein.");
+        }
+        handlers.put(type, handler);
+        mout.println("Handler für Content-Type '" + type.getValue() + "' registriert.");
+    }
+
+
 
     /**
      * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
