@@ -44,11 +44,7 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
     private boolean upgradeUnencrypted;
     private MHttpResponseStatusCodes[] errorsToSendPagesForInsteadOfPlain;
     private final MParameterMode mode;
-    public enum MParameterMode{
-        URL,
-        HEADER,
-        // POST
-    }
+
     /**
      * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
@@ -115,7 +111,7 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
      */
     @Override
     public MHttpRequestData isValidRequest(Socket socket) {
-        MHttpRequestData data = new MHttpRequestData();
+        MHttpRequestData outData = new MHttpRequestData();
         StringBuilder request = new StringBuilder();
         try {
             InputStream inputStream = socket.getInputStream();
@@ -126,8 +122,8 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
                     String name = Character.getName(ch);
                     if (name == null) name = "unassigned Character";
                     mout.println("Fehler: Ungültiges Zeichen erkannt - " + name);
-                    data.responseCode = _400_BAD_REQUEST;
-                    return data;
+                    outData.responseCode = _400_BAD_REQUEST;
+                    return outData;
                 }
                 request.append((char) ch);
                 // Überprüfe auf das Ende der Header (CRLF gefolgt von CRLF)
@@ -143,15 +139,15 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
             mout.println("Überprüfe die Request-Line: " + lines[0]);
             if (lines.length == 0) {
                 mout.println("Fehler: Fehlende Request-Line.");
-                data.responseCode = _400_BAD_REQUEST;
-                return data;
+                outData.responseCode = _400_BAD_REQUEST;
+                return outData;
             }
 
             String[] parts = lines[0].split(" ");
             if (parts.length < 3) {
                 mout.println("Fehler: Das Format der Request-Line ist falsch. Überprüfte Teile: " + Arrays.toString(parts));
-                data.responseCode = _400_BAD_REQUEST;
-                return data;
+                outData.responseCode = _400_BAD_REQUEST;
+                return outData;
             }
 
             String method = parts[0];
@@ -160,30 +156,32 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
             MHttpVersion version = null;
             for (int i = 0; i < getSupportedProtocols().size(); i++) {
                 version = getSupportedProtocols().get(i);
-                if (version.getVersion() == data.protocol) break;
+                if (version.getVersion() == outData.protocol) break;
             }
 
             // Überprüfe Protokoll
             if (!this.getSupportedProtocolsPattern().matcher(protocol).matches()) {
                 mout.println("Fehler: Ungültiges Protokoll: " + protocol);
-                data.responseCode = _505_HTTP_VERSION_NOT_SUPPORTED;
-                return data;
+                outData.responseCode = _505_HTTP_VERSION_NOT_SUPPORTED;
+                return outData;
             }
             //(Protokoll ist vorhanden und supported)
 
             // Überprüfe Methode
             if (!version.getSupportedMethods().matcher(method).matches()) {
                 mout.println("Fehler: Ungültige Methode: " + method);
-                data.responseCode = _405_METHOD_NOT_ALLOWED;
-                return data;
+                outData.responseCode = _405_METHOD_NOT_ALLOWED;
+                return outData;
             }
+
+
             //Überprüfe Url und setze data-attribute für url meth name und query-parameters oder return errorResponseCode
-            data = urlParser.parseUrl(parts[1], data);
-            if (data.responseCode != null) return data;
+            outData = urlParser.parseUrl(parts[1], outData);
+            if (outData.responseCode != null) return outData;
 
 
-            data.requestMethod = method;
-            data.protocol = protocol;
+            outData.requestMethod = method;
+            outData.protocol = protocol;
 
             //LogBuch/Gedankengänge Copyright Marco Scherzer
             //HTTP-Statuscode 301 (Moved Permanently) oder 302 (Found)  HTTPS-URL in  Location-Header
@@ -193,49 +191,48 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
 
             if (!(socket instanceof SSLSocket) && upgradeUnencrypted) {
                 mout.println("Fehler: Request kam über unsicheres http");
-                data.responseCode = MHttpResponseStatusCodes._302_FOUND;
-                return data;
+                outData.responseCode = MHttpResponseStatusCodes._302_FOUND;
+                return outData;
             }
 //----------------------------------------- HTTP-Version > 0.9 -------------------------------------------
-
+            outData.mode = mode;
             // Überprüfe Header
-            if ((data.responseCode = validateHeaders(version, lines, data)) != VALID_AND_COMPLETE)
-                return data;
-            //ToDo: angefangene erweiterung. post statt encrypted header data, da aufwandstechnisch doch etwa gleich
+            validateHeaders(version, lines, outData);
+            if (outData.responseCode != VALID_AND_COMPLETE) return outData;
 
-            if ((data.responseCode = validatePost(postLines, data)) != VALID_AND_COMPLETE)
-                return data;
+            validatePost(postLines, outData);//ToDo: angefangene erweiterung. post statt encrypted header data, da aufwandstechnisch doch etwa gleich
+            if (outData.responseCode != VALID_AND_COMPLETE) return outData;
 
 
-            data.responseCode = VALID_AND_COMPLETE;
+            outData.responseCode = VALID_AND_COMPLETE;
         } catch (UnsupportedEncodingException exc) {
             mout.println("Fehler: Nicht unterstützte URL Kodierung - ");
             exc.printStackTrace(mout);
-            data.responseCode = _400_BAD_REQUEST;
-            return data;
+            outData.responseCode = _400_BAD_REQUEST;
+            return outData;
         } catch (IOException exc) {
             mout.println("Fehler beim Lesen des InputStreams. IO-Exception - ");
             exc.printStackTrace(mout);
-            data.responseCode = _400_BAD_REQUEST;
-            return data;
+            outData.responseCode = _400_BAD_REQUEST;
+            return outData;
         }
 
-        return data;
+        return outData;
     }
 
     /**
      * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
-    private MHttpResponseStatusCodes validatePost(String[] lines, MHttpRequestData data) {
+    private void validatePost(String[] lines, MHttpRequestData outData) {
 
-        data.body =
-        return VALID_AND_COMPLETE;
+        outData.body =
+                outData.responseCode = VALID_AND_COMPLETE;
     }
 
     /**
      * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
-    private MHttpResponseStatusCodes validateHeaders(MHttpVersion httpVersion, String[] lines, MHttpRequestData data) {
+    private void validateHeaders(MHttpVersion httpVersion, String[] lines, MHttpRequestData outData) {
         int headerSize = 0;
         for (int i = 1; i < lines.length; i++) {
             String line = lines[i];
@@ -246,7 +243,8 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
 
             headerSize += line.length();
             if (!checkHeaderSize(httpVersion, headerSize)) {
-                return _413_PAYLOAD_TOO_LARGE;
+                outData.responseCode = _413_PAYLOAD_TOO_LARGE;
+                return;
             }
 
             // Mehrzeilige Header berücksichtigen
@@ -254,7 +252,8 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
                 line += " " + lines[++i].trim();
                 headerSize += lines[i].length();
                 if (!checkHeaderSize(httpVersion, headerSize)) {
-                    return _413_PAYLOAD_TOO_LARGE;
+                    outData.responseCode = _413_PAYLOAD_TOO_LARGE;
+                    return;
                 }
             }
 
@@ -264,13 +263,14 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
                 if (validateHeader(line, p)) {
                     String[] headerParts = line.split(":", 2);
                     if (headerParts.length == 2) {
-                        data.headers.put(headerParts[0].trim(), headerParts[1].trim());
+                        outData.headers.put(headerParts[0].trim(), headerParts[1].trim());
                         break;
                     }
-                } else return _400_BAD_REQUEST;
+                } else outData.responseCode = _400_BAD_REQUEST;
             }
         }
-        return VALID_AND_COMPLETE;
+        outData.responseCode = VALID_AND_COMPLETE;
+        return;
     }
 
     /**
@@ -291,6 +291,7 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
     public static final class MHttpRequestData {
         private final Map<String, String> headers = new HashMap<>();
         private String body;
+        private MParameterMode mode;
         //private boolean validAndComplete;
         private final Map<String, String> resourceMethodParameters = new HashMap<>();
         private String requestMethod;
@@ -299,6 +300,12 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
         private String protocol;
         private MHttpResponseStatusCodes responseCode;
 
+        /**
+         * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+         */
+        public MParameterMode getMode() {
+            return mode;
+        }
 
         /**
          * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved

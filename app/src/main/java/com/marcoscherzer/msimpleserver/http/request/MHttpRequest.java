@@ -1,6 +1,8 @@
 package com.marcoscherzer.msimpleserver.http.request;
 
+import com.marcoscherzer.msimpleserver.http.validation.MHttpRequestValidator;
 import com.marcoscherzer.msimpleserver.http.validation.MHttpRequestValidator.MHttpRequestData;
+import com.marcoscherzer.msimpleserver.http.validation.MParameterMode;
 import com.marcoscherzer.msimpleserver.util.logging.MNullPrintStringWriter;
 
 import java.io.PrintWriter;
@@ -17,6 +19,8 @@ public final class MHttpRequest {
     private final String protocol;
     private final MHttpRequestHeader headers;
     private final String body;
+    private final MParameterMode mode;
+
     public PrintWriter out = new MNullPrintStringWriter();
     private Map<String, String> resourceMethodParameters = new HashMap<>();
 
@@ -32,6 +36,7 @@ public final class MHttpRequest {
         this.headers = new MHttpRequestHeader(requestData.getHeaders());
         this.resourceMethodParameters = requestData.getResourceMethodParameters();
         this.body = requestData.getBody(); //post
+        this.mode = requestData.getMode();
         //this.body = "";
     }
 
@@ -75,6 +80,13 @@ public final class MHttpRequest {
      */
     public MHttpRequestHeader getHeaders() {
         return headers;
+    }
+
+    /**
+     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     */
+    public MParameterMode getMode() {
+        return mode;
     }
 
     /**

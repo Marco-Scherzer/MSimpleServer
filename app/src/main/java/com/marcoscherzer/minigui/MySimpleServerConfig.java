@@ -3,7 +3,7 @@ package com.marcoscherzer.minigui;
 
 import static com.marcoscherzer.msimpleserver.http.constants.MHttpMethod.GET;
 import static com.marcoscherzer.msimpleserver.http.constants.MHttpResponseStatusCodes._404_NOT_FOUND;
-import static com.marcoscherzer.msimpleserver.http.validation.MHttpRequestValidator.MParameterMode.URL;
+import static com.marcoscherzer.msimpleserver.http.validation.MParameterMode.URL;
 import static com.marcoscherzer.msimpleserver.util.logging.MThreadLocalPrintStream.MLogHeaderFieldType.THREADNAME;
 import static com.marcoscherzer.msimpleserver.util.logging.MThreadLocalPrintStream.MLogHeaderFieldType.TIMEFIELD;
 import static com.marcoscherzer.msimpleserver.util.logging.MThreadLocalPrintStream.mout;
