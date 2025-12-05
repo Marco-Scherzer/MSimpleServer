@@ -35,7 +35,7 @@ import java.util.regex.Pattern;
 import javax.net.ssl.SSLSocket;
 
 /**
- * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+ * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
  */
 public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestData, MHttpVersion> {
     //private static Pattern INVALID_CHARACTERS = Pattern.compile("[^\\x20-\\x7E]");
@@ -51,7 +51,7 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
     private final MParameterMode mode;
 
     /**
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public MHttpRequestValidator(MParameterMode mode, MHttpVersion... supportedProtocols) {
         super(supportedProtocols);
@@ -60,7 +60,7 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
 //private static final Pattern HEADER_PATTERN = Pattern.compile("^[a-zA-Z0-9-]+:\\s.*$");
 
     /**
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     private static boolean validateHeader(String line, MValidationPattern p) {
         mout.println("Checking header: " + line);
@@ -74,21 +74,21 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
     }
 
     /**
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     private static String sanitizeLine(String line) {
         return line.replaceAll(INVALID_CHARACTERS.toString(), ""); // Entfernt nicht druckbare Zeichen
     }
 
     /**
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     private static boolean isInvalidCharacter(char ch) {
         return INVALID_CHARACTERS.matcher(Character.toString(ch)).find();
     }
 
     /**
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public MHttpRequestValidator setMaxHeaderSize(int maxHeaderSize) {
         MAX_HEADER_SIZE = maxHeaderSize;
@@ -96,7 +96,7 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
     }
 
     /**
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public MHttpRequestValidator setMaxUrlLength(int maxUrlLength) {
         urlParser.maxUriLength = maxUrlLength;
@@ -104,7 +104,7 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
     }
 
     /**
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public MHttpRequestValidator setUpgradeUnencrypted(boolean upgradeUnencrypted) {
         this.upgradeUnencrypted = upgradeUnencrypted;
@@ -112,7 +112,7 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
     }
 
     /**
-     * @version 0.0.1 preAlpha, @author Marco Scherzer,
+     * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer,
      * Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer,
      * Copyright Marco Scherzer, All rights reserved
      */
@@ -263,7 +263,7 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
 
 
     /**
-     * @version 0.0.1 preAlpha, @author Marco Scherzer,
+     * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer,
      * Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer,
      * Copyright Marco Scherzer, All rights reserved
      * todo UNGETESTET , erste ideen skizze
@@ -331,7 +331,7 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
 
 
     /**
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      * Jeder Handler verarbeitet den Body und setzt den responseCode in outData.
      */
     public interface MContentTypeHandler {
@@ -341,7 +341,7 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
     private final Map<MHttpContentType, MContentTypeHandler> handlers = new HashMap<>();
 
     /**
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      * Fügt einen Content-Type-Handler zur internen Map hinzu.
      * @param type der Content-Type als Enum (z.B. MHttpContentType.APPLICATION_JSON)
      * @param handler die Handler-Instanz, die diesen Content-Type verarbeitet
@@ -357,7 +357,7 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
 
 
     /**
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     private void validateHeaders(MHttpVersion httpVersion, String[] lines, MHttpRequestData outData) {
         int headerSize = 0;
@@ -401,7 +401,7 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
     }
 
     /**
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     private boolean checkHeaderSize(MHttpVersion httpVersion, int headerSize) {
         mout.println("Checking header size: " + headerSize);
@@ -413,7 +413,7 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
     }
 
     /**
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public static final class MHttpRequestData {
         private final Map<String, String> headers = new HashMap<>();
@@ -428,70 +428,70 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
         private MHttpResponseStatusCodes responseCode;
 
         /**
-         * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+         * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
          */
         public MParameterMode getMode() {
             return mode;
         }
 
         /**
-         * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+         * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
          */
         public String getRequestMethod() {
             return requestMethod;
         }
 
         /**
-         * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+         * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
          */
         public String getResourcePath() {
             return resourcePath;
         }
 
         /**
-         * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+         * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
          */
         public String getEndpointQuery() {
             return resourceMethod;
         }
 
         /**
-         * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+         * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
          */
         public String getProtocol() {
             return protocol;
         }
 
         /**
-         * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+         * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
          */
         public Map<String, String> getHeaders() {
             return headers;
         }
 
         /**
-         * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+         * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
          */
         public String getBodyBytes() {
             return bodyBytes;
         }
 
         /**
-         * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+         * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
          */
         public Map<String, String> getResourceMethodParameters() {
             return resourceMethodParameters;
         }
 
         /**
-         * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+         * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
          */
         public MHttpResponseStatusCodes isValidAndCompleteOrErrorCode() {
             return responseCode;
         }
 
         /**
-         * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+         * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
          */
         @Override
         public String toString() {
@@ -513,7 +513,7 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
     }
 
     /**
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public static final class MUrlParser {
 
@@ -525,14 +525,14 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
         private int maxUriLength = 1024;
 
         /**
-         * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+         * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
          */
         public void setMaxUrlLength(int maxUrlLength) {
             this.maxUriLength = maxUrlLength;
         }
 
         /**
-         * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+         * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
          */
         public MHttpRequestData parseUrl(String url, MHttpRequestData data) {
             String path = "";

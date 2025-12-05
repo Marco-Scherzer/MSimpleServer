@@ -32,7 +32,7 @@ import java.util.HashMap;
 import javax.net.ssl.SSLSocket;
 
 /**
- * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+ * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
  */
 public class MHttpRequestHandler extends MRequestHandler {
     private final HashMap<String, MHttpResource> url2Resource;
@@ -43,7 +43,7 @@ public class MHttpRequestHandler extends MRequestHandler {
 
 
     /**
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public MHttpRequestHandler(HashMap<String, MHttpResource> url2Resource, MHttpRequestValidator requestValidator) {
         this.requestValidator = requestValidator;
@@ -51,7 +51,7 @@ public class MHttpRequestHandler extends MRequestHandler {
     }
 
     /**
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     static final String createErrorContent(MHttpResponseStatusCodes errorCode, String message) {
         return "<html>" +
@@ -66,7 +66,7 @@ public class MHttpRequestHandler extends MRequestHandler {
     }
 
     /**
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public final MHttpRequestHandler setSendErrorPagesFor(MHttpResponseStatusCodes... errorsToSendPagesForInsteadOfPlain) {
         this.errorsToSendPagesForInsteadOfPlain = errorsToSendPagesForInsteadOfPlain;
@@ -76,7 +76,7 @@ public class MHttpRequestHandler extends MRequestHandler {
     /**
      * @param port Der https-Redirect-Port für https-Redirect-Responses.
      * @return Die aktuelle Instanz von MRequestHandler.
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      * Setzt den Client-Side Port für https-Redirect-Responses die ausgeführt werden wenn der unsichere http Port vom Client/Browser in Requests verwendet wird.
      * Damit spricht der Client im folgenden https Request dann den gesetzten Port an.
      * Dies kann z.B bei Client-Requests über Port-Weiterleitung in VirtualBox oder über einen Proxy/ReversProxys sinnvoll sein,
@@ -90,7 +90,7 @@ public class MHttpRequestHandler extends MRequestHandler {
     }
 
     /**
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     @Override
     protected MJob<?> createNewResponseJob(MSimpleObservableSocket socket, MInternalStatusCodes internalErrorCode) {
@@ -108,14 +108,14 @@ public class MHttpRequestHandler extends MRequestHandler {
 */
 
     /**
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     private final MHttpResponse createErrorResponse(MHttpRequest request, MHttpResponseStatusCodes errorCode, String additionalMessage) throws Exception {
         return createResponse(request, errorCode, additionalMessage, createErrorContent(errorCode, additionalMessage).getBytes());
     }
 
     /**
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     private final MHttpResponse createLowLevelErrorResponse(MHttpRequest request, MInternalStatusCodes errorCode, String additionalMessage) throws Exception {
         MHttpResponseStatusCodes httpErrorCode = null;
@@ -142,7 +142,7 @@ public class MHttpRequestHandler extends MRequestHandler {
      * @param additionalMessage Die zusätzliche Nachricht.
      * @return Die HTTP-Fehlerantwort.
      * @throws Exception Falls eine E/A-Operation fehlschlägt.
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     private final MHttpResponse createResponse(MHttpRequest request, MHttpResponseStatusCodes responseCode, String additionalMessage, byte[] content) throws Exception {
         MHttpResponse response = new MHttpResponse();
@@ -171,7 +171,7 @@ public class MHttpRequestHandler extends MRequestHandler {
      * @param request Die HTTP-Anfrage.
      * @return Das Ergebnis der Ressourcenanfrage.
      * @throws Exception Falls eine E/A-Operation fehlschlägt.
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     private final MValue3D<MHttpResponseStatusCodes, String, MHttpResponse> createResourceResponse(MHttpRequest request) throws Exception {
         mout.println("Checking if resource \"" + request.getResourcePath() + "\" exists...");
@@ -216,7 +216,7 @@ public class MHttpRequestHandler extends MRequestHandler {
     }
 
     /**
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     class MResponseJob extends MJob {
 
@@ -226,7 +226,7 @@ public class MHttpRequestHandler extends MRequestHandler {
 
 
         /**
-         * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+         * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
          */
         MResponseJob(MSimpleObservableSocket socket, MInternalStatusCodes internalErrorCode) {
             this.socket = socket;
@@ -235,7 +235,7 @@ public class MHttpRequestHandler extends MRequestHandler {
         }
 
         /**
-         * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+         * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
          */
         @Override
         public final Void call() {
@@ -309,7 +309,7 @@ public class MHttpRequestHandler extends MRequestHandler {
         /**
          * @param response Die HTTP-Antwort.
          * @throws Exception Falls eine E/A-Operation fehlschlägt.
-         * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+         * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
          */
         private final void writeResponse(MHttpResponse response) { //response.create());//response.create() - contentHeaderAndBody.createEncodedBody()
             try {
@@ -329,7 +329,7 @@ public class MHttpRequestHandler extends MRequestHandler {
         }
 
         /**
-         * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+         * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
          */
         private MHttpResponse createRedirectResponse(MHttpRequest request, MHttpResponseStatusCodes errorCode, String additionalMessage) throws Exception {
             MHttpResponse response = createResponse(request, errorCode, additionalMessage, null);

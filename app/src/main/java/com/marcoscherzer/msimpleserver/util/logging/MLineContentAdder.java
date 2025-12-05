@@ -1,7 +1,7 @@
 package com.marcoscherzer.msimpleserver.util.logging;
 
 /**
- * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved 2003,2024. All Rights Reserved.
+ * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved 2003,2024. All Rights Reserved.
  * History: siehe MStringBuilder
  */
 public class MLineContentAdder {

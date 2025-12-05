@@ -11,7 +11,7 @@ import java.util.zip.GZIPOutputStream;
 import java.util.zip.InflaterInputStream;
 
 /**
- * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+ * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
  */
 public final class MCompression {
 
@@ -19,7 +19,7 @@ public final class MCompression {
      * @param data Die komprimierten Daten.
      * @return Die dekomprimierten Daten.
      * @throws IOException Falls eine E/A-Operation fehlschlägt.
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public static byte[] decompress(byte[] data) throws IOException {
         if (isGzip(data)) {
@@ -40,7 +40,7 @@ public final class MCompression {
      * @param data           Die zu komprimierenden Daten.
      * @return Die komprimierten Daten.
      * @throws IOException Falls eine E/A-Operation fehlschlägt.
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public static byte[] compress(String compressionTyp, byte[] data) throws IOException {
         return compress(MSupportedCompressionType.valueOf(compressionTyp), data);
@@ -51,7 +51,7 @@ public final class MCompression {
      * @param data           Die zu komprimierenden Daten.
      * @return Die komprimierten Daten.
      * @throws IOException Falls eine E/A-Operation fehlschlägt.
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public static byte[] compress(MSupportedCompressionType compressionTyp, byte[] data) throws IOException {
         byte[] out = data;
@@ -76,7 +76,7 @@ public final class MCompression {
      * @param data Die zu komprimierenden Daten.
      * @return Die komprimierten Daten im GZIP-Format.
      * @throws IOException Falls eine E/A-Operation fehlschlägt.
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     private static byte[] gzip(byte[] data) throws IOException {
         mout.print("\ngzipping byte[] with length " + data.length);
@@ -96,7 +96,7 @@ public final class MCompression {
      * @param data Die zu komprimierenden Daten.
      * @return Die komprimierten Daten im Deflate-Format.
      * @throws IOException Falls eine E/A-Operation fehlschlägt.
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     private static byte[] deflate(byte[] data) throws IOException {
         mout.print("\ndeflating byte[] with length " + data.length);
@@ -116,7 +116,7 @@ public final class MCompression {
      * @param data Die zu dekomprimierenden Daten im GZIP-Format.
      * @return Die dekomprimierten Daten.
      * @throws IOException Falls eine E/A-Operation fehlschlägt.
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public static byte[] gzipDecompress(byte[] data) throws IOException {
         ByteArrayInputStream byteStream = new ByteArrayInputStream(data);
@@ -138,7 +138,7 @@ public final class MCompression {
      * @param data Die zu dekomprimierenden Daten im Deflate-Format.
      * @return Die dekomprimierten Daten.
      * @throws IOException Falls eine E/A-Operation fehlschlägt.
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public static byte[] deflateDecompress(byte[] data) throws IOException {
         ByteArrayInputStream byteStream = new ByteArrayInputStream(data);
@@ -157,14 +157,14 @@ public final class MCompression {
     }
 
     /**
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     private static boolean isGzip(byte[] data) {
         return (data[0] == (byte) 0x1F) && (data[1] == (byte) 0x8B);
     }
 
     /**
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     private static boolean isIdentity(byte[] data) {
         //evtl noch ändern
@@ -172,7 +172,7 @@ public final class MCompression {
     }
 
     /**
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     private static boolean isDeflate(byte[] data) {
         try {
@@ -183,14 +183,14 @@ public final class MCompression {
     }
 
     /**
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     private static boolean isBrotli(byte[] data) {
         return (data.length > 2 && data[0] == (byte) 0xCE && data[1] == (byte) 0xB2);
     }
 
     /**
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public enum MSupportedCompressionType {
         UNDEFINED("*/*"),
@@ -201,14 +201,14 @@ public final class MCompression {
         private final String value;
 
         /**
-         * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+         * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
          */
         MSupportedCompressionType(String value) {
             this.value = value;
         }
 
         /**
-         * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+         * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
          */
         public final String getValue() {
             return value;

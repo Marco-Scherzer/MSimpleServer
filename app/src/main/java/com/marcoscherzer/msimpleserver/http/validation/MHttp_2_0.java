@@ -11,11 +11,11 @@ import static com.marcoscherzer.msimpleserver.http.constants.MHttpMethod.PUT;
 import static com.marcoscherzer.msimpleserver.http.constants.MHttpMethod.TRACE;
 
 /**
- * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+ * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
  */
 public final class MHttp_2_0 extends MHttpVersion {
     /**
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public MHttp_2_0(String version) {
         super("HTTP/2.0", GET, POST, HEAD, OPTIONS, PUT, DELETE, TRACE, CONNECT, PATCH);

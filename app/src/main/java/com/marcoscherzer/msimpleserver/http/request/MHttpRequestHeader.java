@@ -10,14 +10,14 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 /**
- * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+ * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
  */
 public final class MHttpRequestHeader {
     private final Map<String, String> headers;
 
     /**
      * @param headers Die Header-Map.
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     MHttpRequestHeader(Map<String, String> headers) {
         this.headers = headers;
@@ -26,7 +26,7 @@ public final class MHttpRequestHeader {
     /**
      * @param key Der Schlüssel des Headers.
      * @return Der Wert des Headers.
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public String get(String key) {
         return headers.get(key);
@@ -34,7 +34,7 @@ public final class MHttpRequestHeader {
 
     /**
      * @return Die Header-Entry-Set.
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     Set<Entry<String, String>> entrySet() {
         return headers.entrySet();
@@ -44,7 +44,7 @@ public final class MHttpRequestHeader {
      * @param resource Die Ressource.
      * @return Der evaluierte Content-Type und das Charset.
      * Falls kein accept-Header existiert wird resource.getMimeType() einfach zurückgegeben
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public String getEvaluatedContentTypeAndCharset(MHttpResource resource) {
         mout.println("Checking request compatiblity possiblities (acceptable response parameters): Content-Type");
@@ -59,7 +59,7 @@ public final class MHttpRequestHeader {
 
     /**
      * @return Das evaluierte Content-Encoding.
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public String getEvaluatedContentEncoding(MHttpResource resource) {
         mout.println("Checking request compatiblity possiblities (acceptable response parameters): Content-Encoding");
@@ -71,7 +71,7 @@ public final class MHttpRequestHeader {
     /**
      * @param resource Die Ressource.
      * @return Die evaluierte Content-Language.
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public String getEvaluatedContentLanguage(MHttpResource resource) {
         mout.println("Checking request compatiblity possiblities (acceptable response parameters): Content-Language");

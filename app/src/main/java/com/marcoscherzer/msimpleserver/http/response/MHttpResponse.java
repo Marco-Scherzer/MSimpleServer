@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
- * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+ * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
  */
 public final class MHttpResponse {
     private final MHttpReponseHeader header = new MHttpReponseHeader();
@@ -14,7 +14,7 @@ public final class MHttpResponse {
 
     /**
      * @return Die Header der Antwort.
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public MHttpReponseHeader getHeader() {
         return header;
@@ -22,7 +22,7 @@ public final class MHttpResponse {
 
     /**
      * @return Der Body der Antwort.
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public MHttpResponseBody getBody() {
         return contentHeaderAndBody;
@@ -31,7 +31,7 @@ public final class MHttpResponse {
     /**
      * @param protocol Das Protokoll.
      * @return Die aktuelle Instanz von MHttpResponse.
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public MHttpResponse setProtocol(final String protocol) {
         this.protocol = protocol;
@@ -41,7 +41,7 @@ public final class MHttpResponse {
     /**
      * @param statusCode Der Statuscode.
      * @return Die aktuelle Instanz von MHttpResponse.
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public MHttpResponse setStatusCode(final String statusCode) {
         this.statusCode = statusCode;
@@ -51,7 +51,7 @@ public final class MHttpResponse {
     /**
      * @return Das HTTP/HTTPS-Antwortbytearray.
      * @throws IOException Falls eine E/A-Operation fehlschlägt.
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public byte[] create() throws IOException {
         byte[] body = contentHeaderAndBody.createEncodedBody();
@@ -76,7 +76,7 @@ public final class MHttpResponse {
 
     /**
      * @return Eine String-Darstellung der Antwort.
-     * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     @Override
     public String toString() {
@@ -113,7 +113,7 @@ public final class MHttpResponse {
 
 
     /**
-     @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
       * @param args Die Befehlszeilenargumente.
      */
     /*public static void main(String[] args) {
