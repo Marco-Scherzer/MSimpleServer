@@ -11,9 +11,5 @@ public final class MHttp_0_9 extends MHttpVersion {
      */
     public MHttp_0_9() {
         super("HTTP/0.9", GET);
-        this.headerMap.put("Host: ", MValidationPattern.HOST_HEADER);
-        this.headerMap.put("User-Agent: ", MValidationPattern.USER_AGENT_HEADER);
-        this.headerMap.put("Accept: ", MValidationPattern.ACCEPT_HEADER);
-        // Weitere Header für HTTP/0.9 ergänzen, falls nötig
     }
 }

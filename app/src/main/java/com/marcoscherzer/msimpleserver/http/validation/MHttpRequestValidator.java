@@ -323,7 +323,7 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
                 return;
             case "application/octet-stream":
                 mout.println("Hinweis: Binärdaten-Body empfangen, keine weitere Validierung.");
-                // TODO: später andler via abstrakter methode
+                // TODO: später handler via abstrakter methode
                 outData.responseCode = _415_UNSUPPORTED_MEDIA_TYPE; //derweile unsupported
                 return;
             default:
@@ -332,10 +332,6 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
                 return;
         }
     }
-
-
-
-
 
     /**
      * @version 0.0.1 preAlpha, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
