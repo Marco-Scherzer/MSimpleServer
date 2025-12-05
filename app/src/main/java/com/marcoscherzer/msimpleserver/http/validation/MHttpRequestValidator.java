@@ -321,12 +321,12 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
                 return;
             case "application/json":
                 mout.println("Hinweis: JSON-Body empfangen. Rufe parser auf");
-                // TODO: später JSON-Handler via abstrakter methode
+                // TODO: später JSON-Handler via optional settable listener != null
                 outData.responseCode = _415_UNSUPPORTED_MEDIA_TYPE;//derweile unsupported
                 return;
             case "application/octet-stream":
                 mout.println("Hinweis: Binärdaten-Body empfangen, keine weitere Validierung.");
-                // TODO: später handler via abstrakter methode
+                // TODO: später handler via optional settable listener != null
                 outData.responseCode = _415_UNSUPPORTED_MEDIA_TYPE; //derweile unsupported
                 return;
             default:
