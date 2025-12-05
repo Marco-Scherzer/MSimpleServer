@@ -194,54 +194,57 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
             }
 
             //----------------------------------------- HTTP-Version > 0.9 -------------------------------------------
-            outData.mode = mode;
-            // Überprüfe Header
-            validateHeaders(version, lines, outData);
-            if (outData.responseCode != VALID_AND_COMPLETE) return outData;
-
-            /*
-             * benutzungskonventionsdefinition: POST wirkt überschreibend bzgl kompletter URL-Parameter
-             * diese werden neu gesetzt
-             */
-            //toDo
-            if (mode == POST) { // evtl später wieder ohne mode nur über supported protocolls
-                // Content-Length aus Header holen
-                String cl = outData.getHeaders().get("Content-Length");
-                if (cl == null) {
-                    mout.println("Fehler: Content-Length fehlt.");
-                    outData.responseCode = _400_BAD_REQUEST;
-                    return outData;
-                }
-                int contentLength;
-                try {
-                    contentLength = Integer.parseInt(cl.trim());
-                } catch (NumberFormatException e) {
-                    mout.println("Fehler: Ungültiger Content-Length.");
-                    outData.responseCode = _400_BAD_REQUEST;
-                    return outData;
-                }
-
-                // Body-Bytes lesen
-                byte[] bodyBytes = new byte[contentLength];
-                int readTotal = 0;
-                while (readTotal < contentLength) {
-                    int n = inputStream.read(bodyBytes, readTotal, contentLength - readTotal);
-                    if (n == -1) break;
-                    readTotal += n;
-                }
-                if (readTotal < contentLength) {
-                    mout.println("Fehler: Body unvollständig gelesen.");
-                    outData.responseCode = _400_BAD_REQUEST;
-                    return outData;
-                }
-
-                outData.bodyBytes = bodyBytes; // Binärdaten speichern
-
-                validatePost(outData.bodyBytes, outData);
+            if(!version.getVersion().equals("0.9")) {
+                outData.mode = mode;
+                // Überprüfe Header
+                validateHeaders(version, lines, outData);
                 if (outData.responseCode != VALID_AND_COMPLETE) return outData;
-            }
 
-            outData.responseCode = VALID_AND_COMPLETE;
+                /*
+                 * benutzungskonventionsdefinition: POST wirkt überschreibend bzgl kompletter URL-Parameter
+                 * diese werden neu gesetzt
+                 */
+
+                //toDo
+                if (mode == POST) { //fester api-mode auf server definierbar(klarer und sicherer), möglichkeiten via supported wäre wegen kombination get post komplexer
+                    // Content-Length aus Header holen
+                    String cl = outData.getHeaders().get("Content-Length");
+                    if (cl == null) {
+                        mout.println("Fehler: Content-Length fehlt.");
+                        outData.responseCode = _400_BAD_REQUEST;
+                        return outData;
+                    }
+                    int contentLength;
+                    try {
+                        contentLength = Integer.parseInt(cl.trim());
+                    } catch (NumberFormatException e) {
+                        mout.println("Fehler: Ungültiger Content-Length.");
+                        outData.responseCode = _400_BAD_REQUEST;
+                        return outData;
+                    }
+
+                    // Body-Bytes lesen
+                    byte[] bodyBytes = new byte[contentLength];
+                    int readTotal = 0;
+                    while (readTotal < contentLength) {
+                        int n = inputStream.read(bodyBytes, readTotal, contentLength - readTotal);
+                        if (n == -1) break;
+                        readTotal += n;
+                    }
+                    if (readTotal < contentLength) {
+                        mout.println("Fehler: Body unvollständig gelesen.");
+                        outData.responseCode = _400_BAD_REQUEST;
+                        return outData;
+                    }
+
+                    outData.bodyBytes = bodyBytes; // Binärdaten speichern
+
+                    validatePost(outData.bodyBytes, outData);
+                    if (outData.responseCode != VALID_AND_COMPLETE) return outData;
+                }
+
+                outData.responseCode = VALID_AND_COMPLETE;
+            }
         } catch (UnsupportedEncodingException exc) {
             mout.println("Fehler: Nicht unterstützte URL Kodierung - ");
             exc.printStackTrace(mout);
