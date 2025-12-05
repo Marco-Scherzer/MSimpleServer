@@ -259,7 +259,7 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
 
 
     /**
-     * @version 0.0.1 preAlpha, @author Marco Scherzer,
+     * @version 0.0.4 preAlpha, @author Marco Scherzer,
      * Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer,
      * Copyright Marco Scherzer, All rights reserved
      * todo UNGETESTET , erste ideen skizze
@@ -285,45 +285,54 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
         }
 
         // Charset-Parameter entfernen, falls vorhanden
-        String baseCt = ct.split(";")[0].trim();
-        String charset = "UTF-8"; // Default
+        String baseCt = ct.split(";")[0].trim().toLowerCase();
+        String charsetName = "UTF-8"; // Default
         if (ct.toLowerCase().contains("charset=")) {
             String[] parts = ct.split("charset=");
             if (parts.length > 1) {
-                charset = parts[1].trim();
+                charsetName = parts[1].trim();
             }
         }
 
-        // Behandlung nach Content-Type
-        if ("application/x-www-form-urlencoded".equalsIgnoreCase(baseCt)) {
-            String body;
-            try {
-                body = new String(bodyBytes, Charset.forName(charset));
-            } catch (Exception e) {
-                mout.println("Fehler: Ungültiges Charset im Content-Type: " + charset);
-                outData.responseCode = _415_UNSUPPORTED_MEDIA_TYPE;
-                return;
-            }
-
-            // synthetische URL bauen
-            String syntheticUrl = outData.getResourcePath() + "/" + outData.getEndpointQuery() + "?" + body;
-
-            // vorhandenen Parser nutzen
-            urlParser.parseUrl(syntheticUrl, outData);
-
-            if (outData.responseCode != VALID_AND_COMPLETE) {
-                mout.println("Fehler beim Parsen des POST-Bodys.");
-                return;
-            }
-
-            outData.responseCode = VALID_AND_COMPLETE;
+        Charset charset;
+        try {
+            charset = Charset.forName(charsetName);
+        } catch (Exception e) {
+            mout.println("Fehler: Ungültiges Charset im Content-Type: " + charsetName);
+            outData.responseCode = _415_UNSUPPORTED_MEDIA_TYPE;
             return;
         }
 
-        // JSON oder Binärdaten aktuell nicht unterstützt → 415
-        mout.println("Fehler: Unsupported Content-Type: " + ct);
-        outData.responseCode = _415_UNSUPPORTED_MEDIA_TYPE;
+        switch (baseCt) {
+            case "application/x-www-form-urlencoded":
+                String body = new String(bodyBytes, charset);
+                // synthetische URL bauen
+                String syntheticUrl = outData.getResourcePath() + "/" + outData.getEndpointQuery() + "?" + body;
+                // vorhandenen Parser nutzen
+                urlParser.parseUrl(syntheticUrl, outData);
+                if (outData.responseCode != VALID_AND_COMPLETE) {
+                    mout.println("Fehler beim Parsen des POST-Bodys.");
+                    return;
+                }
+                outData.responseCode = VALID_AND_COMPLETE;
+                return;
+            case "application/json":
+                mout.println("Hinweis: JSON-Body empfangen. Rufe parser auf");
+                // TODO: später JSON-Handler via abstrakter methode
+                outData.responseCode = _415_UNSUPPORTED_MEDIA_TYPE;//derweile unsupported
+                return;
+            case "application/octet-stream":
+                mout.println("Hinweis: Binärdaten-Body empfangen, keine weitere Validierung.");
+                // TODO: später andler via abstrakter methode
+                outData.responseCode = _415_UNSUPPORTED_MEDIA_TYPE; //derweile unsupported
+                return;
+            default:
+                mout.println("Fehler: Unsupported Content-Type: " + ct);
+                outData.responseCode = _415_UNSUPPORTED_MEDIA_TYPE;
+                return;
+        }
     }
+
 
 
 
