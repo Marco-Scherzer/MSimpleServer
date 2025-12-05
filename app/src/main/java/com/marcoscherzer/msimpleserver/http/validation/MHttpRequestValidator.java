@@ -24,6 +24,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.Socket;
 import java.net.URLConnection;
 import java.net.URLDecoder;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -283,9 +284,26 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
             return;
         }
 
+        // Charset-Parameter entfernen, falls vorhanden
+        String baseCt = ct.split(";")[0].trim();
+        String charset = "UTF-8"; // Default
+        if (ct.toLowerCase().contains("charset=")) {
+            String[] parts = ct.split("charset=");
+            if (parts.length > 1) {
+                charset = parts[1].trim();
+            }
+        }
+
         // Behandlung nach Content-Type
-        if (ct != null && ct.startsWith("application/x-www-form-urlencoded")) {
-            String body = new String(bodyBytes, StandardCharsets.UTF_8);
+        if ("application/x-www-form-urlencoded".equalsIgnoreCase(baseCt)) {
+            String body;
+            try {
+                body = new String(bodyBytes, Charset.forName(charset));
+            } catch (Exception e) {
+                mout.println("Fehler: Ungültiges Charset im Content-Type: " + charset);
+                outData.responseCode = _415_UNSUPPORTED_MEDIA_TYPE;
+                return;
+            }
 
             // synthetische URL bauen
             String syntheticUrl = outData.getResourcePath() + "/" + outData.getEndpointQuery() + "?" + body;
@@ -306,6 +324,7 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
         mout.println("Fehler: Unsupported Content-Type: " + ct);
         outData.responseCode = _415_UNSUPPORTED_MEDIA_TYPE;
     }
+
 
 
 
