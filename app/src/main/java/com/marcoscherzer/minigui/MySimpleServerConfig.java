@@ -16,6 +16,7 @@ import com.marcoscherzer.msimpleserver.http.request.MHttpContentMap;
 import com.marcoscherzer.msimpleserver.http.request.MHttpRequestHandler;
 import com.marcoscherzer.msimpleserver.http.request.MHttpResource;
 import com.marcoscherzer.msimpleserver.http.request.MResourceMethod;
+import com.marcoscherzer.msimpleserver.http.request.MSimpleRuntimeTypecastMap;
 import com.marcoscherzer.msimpleserver.http.validation.MHttpRequestValidator;
 import com.marcoscherzer.msimpleserver.http.validation.MHttpVersion;
 import com.marcoscherzer.msimpleserver.http.validation.MHttp_1_1;
@@ -127,8 +128,9 @@ public final class MySimpleServerConfig {
         MHttpResource root = new MHttpResource(Locale.ENGLISH, "/test2__.html")
                 .addResourceMethod("validateTestForm1", new MResourceMethod() {
                     @Override
-                    public byte[] call(Map<String, Object> params) {
+                    public byte[] call(MSimpleRuntimeTypecastMap params) {
                         String r = "MSimpleServer says: validateTestForm1(" + params + ") called";
+                        String s= params.get("name");
                         mout.println(r);
 
                         return r.getBytes();

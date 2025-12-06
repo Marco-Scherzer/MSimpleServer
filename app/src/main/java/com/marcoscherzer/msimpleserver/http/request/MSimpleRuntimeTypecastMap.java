@@ -8,21 +8,14 @@ import java.util.HashMap;
          * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
          * Typisierter Zugriff auf Werte.
          * @param key Schlüssel in der Map
-         * @param type erwarteter Typ
          * @param <T> generischer Typ
          * @return Wert als T oder null
          * @throws ClassCastException wenn der Wert nicht vom erwarteten Typ ist
          */
         @SuppressWarnings("unchecked")
-        public final <T> T get(String key, Class<T> type) throws ClassCastException{
+        public final <T> T get(String key) throws ClassCastException{
             Object value = super.get(key);
             if (value == null) return null;
-            if (!type.isInstance(value)) {
-                throw new ClassCastException(
-                        "Key '" + key + "' enthält " + value.getClass().getName() +
-                                ", erwartet: " + type.getName()
-                );
-            }
             return (T) value;
         }
 }
