@@ -213,9 +213,9 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
                     postVal.validatePost(bodyBytes, outData);
                     if (outData.getResponseCode() != VALID_AND_COMPLETE) return outData;
                 }
-
-                outData.setResponseCode(VALID_AND_COMPLETE);
             }
+            outData.setResponseCode(VALID_AND_COMPLETE);
+
         } catch (UnsupportedEncodingException exc) {
             mout.println("Fehler: Nicht unterstützte URL Kodierung - ");
             exc.printStackTrace(mout);

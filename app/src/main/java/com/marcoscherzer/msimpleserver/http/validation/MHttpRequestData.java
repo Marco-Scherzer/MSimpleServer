@@ -24,12 +24,12 @@ public final class MHttpRequestData {
     /**
      * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
-    void setResourcePath(String responseCode) { this.resourcePath = resourcePath; }
+    void setResourcePath(String resourcePath) { this.resourcePath = resourcePath; }
 
     /**
      * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
-    void setResourceMethod(String responseCode) { this.resourceMethod = resourceMethod; }
+    void setResourceMethod(String resourceMethod) { this.resourceMethod = resourceMethod; }
 
     /**
      * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved

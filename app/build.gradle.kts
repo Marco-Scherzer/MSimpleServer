@@ -36,6 +36,10 @@ dependencies {
     // AndroidX & Material
     implementation(libs.appcompat)
     implementation(libs.material)
+
+    // Gson für JSON-Parsing
+    implementation(libs.gson)
+
     // Test Libraries
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)

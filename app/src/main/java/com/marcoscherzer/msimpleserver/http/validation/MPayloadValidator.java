@@ -8,6 +8,9 @@ import static com.marcoscherzer.msimpleserver.util.logging.MThreadLocalPrintStre
 import com.marcoscherzer.msimpleserver.http.constants.MHttpContentType;
 import com.marcoscherzer.msimpleserver.http.constants.MHttpResponseStatusCodes;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URLConnection;
@@ -23,6 +26,7 @@ final class MPayloadValidator {
 
 private final Map<MHttpContentType, MContentTypeHandler > handlers = new HashMap<>();
     private MUrlApiValidator urlParser;
+
     MPayloadValidator(MUrlApiValidator urlParser){
         this.urlParser = urlParser;
     }
@@ -36,6 +40,7 @@ private final Map<MHttpContentType, MContentTypeHandler > handlers = new HashMap
         public MHttpResponseStatusCodes handle(byte[] bodyBytes, Charset charset, MHttpRequestData outData) {
             String body = new String(bodyBytes, charset);
             String syntheticUrl = outData.getResourcePath() + "/" + outData.getEndpointQuery() + "?" + body;
+            //parst alle parameter und setzt sie via outData.getResourceMethodParameters().put()
             urlParser.parseUrl(syntheticUrl, outData);
             if (outData.getResponseCode() != VALID_AND_COMPLETE) {
                 mout.println("Fehler beim Parsen des POST-Bodys.");
@@ -51,15 +56,26 @@ private final Map<MHttpContentType, MContentTypeHandler > handlers = new HashMap
      * Handler für application/json
      */
     static final MContentTypeHandler JsonHandler = new MContentTypeHandler() {
+        private final Gson gson = new Gson();
+
         @Override
         public MHttpResponseStatusCodes handle(byte[] bodyBytes, Charset charset, MHttpRequestData outData) {
             String body = new String(bodyBytes, charset);
-            mout.println("Hinweis: JSON-Body empfangen. Übergabe an Parser.");
-            // TODO: später optionalen Handler einsetzen
-            outData.setResponseCode(_415_UNSUPPORTED_MEDIA_TYPE); // derweil unsupported
+            mout.println("Hinweis: JSON-Body empfangen. Übergabe an Gson-Parser.");
+            try {
+                // JSON direkt in Map<String,Object> parsen
+                Map<String,Object> params = gson.fromJson(body, new TypeToken<Map<String,Object>>(){}.getType());
+                outData.getResourceMethodParameters().putAll(params);
+
+                outData.setResponseCode(VALID_AND_COMPLETE);
+            } catch (Exception e) {
+                mout.println("Fehler beim JSON-Parsing: " + e.getMessage());
+                outData.setResponseCode(_400_BAD_REQUEST); // Client hat ungültiges JSON geschickt
+            }
             return outData.getResponseCode();
         }
     };
+
 
     /**
      * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
@@ -69,7 +85,8 @@ private final Map<MHttpContentType, MContentTypeHandler > handlers = new HashMap
         @Override
         public MHttpResponseStatusCodes handle(byte[] bodyBytes, Charset charset, MHttpRequestData outData) {
             mout.println("Hinweis: Binärdaten-Body empfangen.");
-            // TODO: später optionalen Handler einsetzen
+            // TODO: parameter aus bodybytes pasren, später mit opt Handler und oder mapper
+
             outData.setResponseCode(_415_UNSUPPORTED_MEDIA_TYPE); // derweil unsupported
             return outData.getResponseCode();
         }
@@ -132,7 +149,7 @@ final void validatePost(byte[] bodyBytes, MHttpRequestData outData) {
         if (handler != null) {
             MHttpResponseStatusCodes responseCode = handler.handle(bodyBytes, charset, outData);
             //outDataCheck
-
+//toDo
         } else {
             mout.println("Fehler: Kein Handler für Content-Type: " + type.getValue());
             outData.setResponseCode(_415_UNSUPPORTED_MEDIA_TYPE);

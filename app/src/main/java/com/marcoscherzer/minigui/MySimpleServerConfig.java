@@ -128,7 +128,7 @@ public final class MySimpleServerConfig {
                     @Override
                     public byte[] call(MParameterMap p) {
                         String r = "MSimpleServer says: validateTestForm1(" + p + ") called";
-                        String s= p.get("name");
+                        String s = p.get("name");
                         mout.println(r);
 
                         return r.getBytes();
