@@ -316,7 +316,7 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
         if (type != null) {
             MContentTypeHandler handler = handlers.get(type);
             if (handler != null) {
-                MHttpResponseStatusCodes responseCode = handler.handle(bodyBytes, charset);
+                MHttpResponseStatusCodes responseCode = handler.handle(bodyBytes, charset, outData);
                 //outDataCheck
 
             } else {

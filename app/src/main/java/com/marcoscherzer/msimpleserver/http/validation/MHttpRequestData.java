@@ -20,6 +20,15 @@ public final class MHttpRequestData {
     private String protocol;
     private MHttpResponseStatusCodes responseCode;
 
+    /**
+     * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     */
+    void setResourcePath(String responseCode) { this.resourcePath = resourcePath; }
+
+    /**
+     * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+     */
+    void setResourceMethod(String responseCode) { this.resourceMethod = resourceMethod; }
 
     /**
      * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
