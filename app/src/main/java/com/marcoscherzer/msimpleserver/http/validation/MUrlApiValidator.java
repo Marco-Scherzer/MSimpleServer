@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
  * RESTRICTIVE NON STANDARD REST API, URL COMPATIBLE
  * @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
  */
-final class MUrlParser {
+final class MUrlApiValidator {
 
     private static final int MAX_PARAM_LENGTH = 128; // Maximale erlaubte Länge für Parameterwerte
     private static final Pattern PATH_PATTERN = Pattern.compile("^/[^=&\\s]*$"); // Kein '=', '&' oder Leerraum erlaubt
@@ -25,28 +25,28 @@ final class MUrlParser {
     /**
      * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
-    public void setMaxUrlLength(int maxUrlLength) {
+    public final void setMaxUrlLength(int maxUrlLength) {
         this.maxUriLength = maxUrlLength;
     }
 
     /**
      * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
-    public int getMaxUrlLength() {
+    public final int getMaxUrlLength() {
         return maxUriLength;
     }
 
     /**
      * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
-    public MHttpRequestData parseUrl(String url, MHttpRequestData data) {
+    public final MHttpRequestData parseUrl(String url, MHttpRequestData outData) {
         String path = "";
 
         // Überprüfe URL-Länge
         if (url.length() > maxUriLength) {
             mout.println("Fehler: URI Länge zu lang: " + url.length() + ", Maximal erlaubte Länge: " + maxUriLength);
-            data.setResponseCode(MHttpResponseStatusCodes._414_URI_TOO_LONG);
-            return data;
+            outData.setResponseCode(MHttpResponseStatusCodes._414_URI_TOO_LONG);
+            return outData;
         }
 
         path = URLDecoder.decode(url, StandardCharsets.UTF_8);
@@ -57,20 +57,20 @@ final class MUrlParser {
 
         if (firstQuestionMark != -1 && firstQuestionMark != lastQuestionMark) {
             mout.println("Fehler: Mehrere '?' in der URL.");
-            data.setResponseCode(MHttpResponseStatusCodes._400_BAD_REQUEST);
-            return data;
+            outData.setResponseCode(MHttpResponseStatusCodes._400_BAD_REQUEST);
+            return outData;
         }
 
         // **Überprüfung: Falls `=` oder `&` vor `?` auftaucht, ist die URL ungültig**
         if (firstQuestionMark != -1 && path.substring(0, firstQuestionMark).contains("=")) {
             mout.println("Fehler: '=' darf nur als Zuweisungsoperator nach '?' verwendet werden.");
-            data.setResponseCode(MHttpResponseStatusCodes._400_BAD_REQUEST);
-            return data;
+            outData.setResponseCode(MHttpResponseStatusCodes._400_BAD_REQUEST);
+            return outData;
         }
         if (firstQuestionMark != -1 && path.substring(0, firstQuestionMark).contains("&")) {
             mout.println("Fehler: '&' darf nur als Parametertrenner nach einem Methodenaufruf verwendet werden.");
-            data.setResponseCode(MHttpResponseStatusCodes._400_BAD_REQUEST);
-            return data;
+            outData.setResponseCode(MHttpResponseStatusCodes._400_BAD_REQUEST);
+            return outData;
         }
 
         String resourcePath = "";
@@ -87,15 +87,15 @@ final class MUrlParser {
             // **Methoden ohne Ressourcen verhindern**
             if (resourcePath.isEmpty()) {
                 mout.println("Fehler: Methode kann nicht ohne eine Ressource existieren.");
-                data.setResponseCode(MHttpResponseStatusCodes._400_BAD_REQUEST);
-                return data;
+                outData.setResponseCode(MHttpResponseStatusCodes._400_BAD_REQUEST);
+                return outData;
             }
 
             // **Überprüfung des Methoden-Namens gemäß Java-Konventionen**
             if (!METHOD_NAME_PATTERN.matcher(methodName).matches() || methodName.length() > 64) {
                 mout.println("Fehler: Ungültiger Methodenname nach Java-Konventionen: " + methodName);
-                data.setResponseCode(MHttpResponseStatusCodes._400_BAD_REQUEST);
-                return data;
+                outData.setResponseCode(MHttpResponseStatusCodes._400_BAD_REQUEST);
+                return outData;
             }
 
             // **Methoden ohne Parameter sind erlaubt (`testresource/method?`)**
@@ -103,8 +103,8 @@ final class MUrlParser {
                 // **Überprüfung der Query-Syntax**
                 if (!QUERY_PATTERN.matcher(parameterPart).matches()) {
                     mout.println("Fehler: Ungültige Query-Syntax oder nicht alle Parameter vorhanden: " + parameterPart);
-                    data.setResponseCode(MHttpResponseStatusCodes._400_BAD_REQUEST);
-                    return data;
+                    outData.setResponseCode(MHttpResponseStatusCodes._400_BAD_REQUEST);
+                    return outData;
                 }
 
                 // Query-Parameter speichern und doppelte Parameter verhindern
@@ -114,39 +114,39 @@ final class MUrlParser {
 
                     if (keyValue.length < 2 || keyValue[1].isEmpty()) {
                         mout.println("Fehler: Alle Parameter müssen einen Wert haben: " + param);
-                        data.setResponseCode(MHttpResponseStatusCodes._400_BAD_REQUEST);
-                        return data;
+                        outData.setResponseCode(MHttpResponseStatusCodes._400_BAD_REQUEST);
+                        return outData;
                     }
 
                     // **Prüfung: Nur genau ein `=` in jedem Parameter erlaubt**
                     if (param.chars().filter(ch -> ch == '=').count() > 1) {
                         mout.println("Fehler: Mehrfache '=' in einem Parameter sind nicht erlaubt: " + param);
-                        data.setResponseCode(MHttpResponseStatusCodes._400_BAD_REQUEST);
-                        return data;
+                        outData.setResponseCode(MHttpResponseStatusCodes._400_BAD_REQUEST);
+                        return outData;
                     }
 
                     // **Prüfung der Parameterlänge**
                     if (keyValue[1].length() > MAX_PARAM_LENGTH) {
                         mout.println("Fehler: Parameterwert überschreitet die maximale Länge von " + MAX_PARAM_LENGTH + " Zeichen: " + keyValue[1]);
-                        data.setResponseCode(MHttpResponseStatusCodes._400_BAD_REQUEST;
-                        return data;
+                        outData.setResponseCode(MHttpResponseStatusCodes._400_BAD_REQUEST);
+                        return outData;
                     }
 
                     // **Prüfung des Parameternamens gemäß Java-Konventionen**
                     if (!METHOD_NAME_PATTERN.matcher(keyValue[0]).matches()) {
                         mout.println("Fehler: Ungültiger Parametername nach Java-Konventionen: " + keyValue[0]);
-                        data.setResponseCode(MHttpResponseStatusCodes._400_BAD_REQUEST;
-                        return data;
+                        outData.setResponseCode(MHttpResponseStatusCodes._400_BAD_REQUEST);
+                        return outData;
                     }
 
                     // **Einheitliche Fehlermeldung bei doppelten Parametern**
-                    if (data.getResourceMethodParameters().containsKey(keyValue[0])) {
+                    if (outData.getResourceMethodParameters().containsKey(keyValue[0])) {
                         mout.println("Fehler: Doppelter Parameter '" + keyValue[0] + "' erkannt. Bitte korrigieren.");
-                        data.setResponseCode(MHttpResponseStatusCodes._400_BAD_REQUEST;
-                        return data;
+                        outData.setResponseCode(MHttpResponseStatusCodes._400_BAD_REQUEST);
+                        return outData;
                     }
 
-                    data.getResourceMethodParameters().put(keyValue[0], keyValue[1]);
+                    outData.getResourceMethodParameters().put(keyValue[0], keyValue[1]);
                 }
             }
         } else {
@@ -155,19 +155,19 @@ final class MUrlParser {
 
             if (!PATH_PATTERN.matcher(resourcePath).matches()) {
                 mout.println("Fehler: Ungültiger Ressourcenpfad: '=' und '&' sind nur in Query-Parametern erlaubt.");
-                data.setResponseCode(MHttpResponseStatusCodes._400_BAD_REQUEST);
-                return data;
+                outData.setResponseCode(MHttpResponseStatusCodes._400_BAD_REQUEST);
+                return outData;
             }
         }
 
         // Setze die extrahierten Werte ins `data`-Objekt
-        data.setResourcePath(resourcePath);
-        data.setResourceMethod(methodName);
+        outData.setResourcePath(resourcePath);
+        outData.setResourceMethod(methodName);
 
         mout.println("Url-Syntax ist korrekt!");
         mout.println("Ressource: " + resourcePath);
         mout.println("resourceMethod: " + methodName);
         mout.println("Query-Parameter: " + parameterPart);
-        return data;
+        return outData;
     }
 }

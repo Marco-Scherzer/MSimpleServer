@@ -127,11 +127,6 @@ public final class MySimpleServerConfig {
         MHttpResource root = new MHttpResource(Locale.ENGLISH, "/test2__.html")
                 .addResourceMethod("validateTestForm1", new MResourceMethod() {
                     @Override
-                    public HashMap<String, String> mapParamsIfStructured(String bodyOrUrlParams) {
-                        return null;
-                    }
-
-                    @Override
                     public byte[] call(Map<String, String> params) {
                         String r = "MSimpleServer says: validateTestForm1(" + params + ") called";
                         mout.println(r);
@@ -139,10 +134,6 @@ public final class MySimpleServerConfig {
                     }
                 })
                 .addResourceMethod("validateTestForm2", new MResourceMethod() {
-                    @Override
-                    public HashMap<String, String> mapParamsIfStructured(String bodyOrUrlParams) {
-                        return null;
-                    }
                     @Override
                     public byte[] call(Map<String, String> params) {
                         String r = "MSimpleServer says: validateTestForm2(" + params + ") called";
