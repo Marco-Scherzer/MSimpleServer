@@ -16,7 +16,7 @@ import com.marcoscherzer.msimpleserver.http.request.MHttpContentMap;
 import com.marcoscherzer.msimpleserver.http.request.MHttpRequestHandler;
 import com.marcoscherzer.msimpleserver.http.request.MHttpResource;
 import com.marcoscherzer.msimpleserver.http.request.MResourceMethod;
-import com.marcoscherzer.msimpleserver.http.request.MSimpleRuntimeTypecastMap;
+import com.marcoscherzer.msimpleserver.http.request.MParameterMap;
 import com.marcoscherzer.msimpleserver.http.validation.MHttpRequestValidator;
 import com.marcoscherzer.msimpleserver.http.validation.MHttpVersion;
 import com.marcoscherzer.msimpleserver.http.validation.MHttp_1_1;
@@ -26,9 +26,7 @@ import com.marcoscherzer.msimpleserver.util.fileloader.MMultiPlatformFileLoader;
 import com.marcoscherzer.msimpleserver.util.logging.MThreadLocalPrintStream;
 import com.marcoscherzer.msimpleserver.util.logging.MThreadLocalPrintStream.MLogHeader;
 
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
 
 /**
  * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
@@ -128,9 +126,9 @@ public final class MySimpleServerConfig {
         MHttpResource root = new MHttpResource(Locale.ENGLISH, "/test2__.html")
                 .addResourceMethod("validateTestForm1", new MResourceMethod() {
                     @Override
-                    public byte[] call(MSimpleRuntimeTypecastMap params) {
-                        String r = "MSimpleServer says: validateTestForm1(" + params + ") called";
-                        String s= params.get("name");
+                    public byte[] call(MParameterMap p) {
+                        String r = "MSimpleServer says: validateTestForm1(" + p + ") called";
+                        String s= p.get("name");
                         mout.println(r);
 
                         return r.getBytes();
@@ -138,8 +136,8 @@ public final class MySimpleServerConfig {
                 })
                 .addResourceMethod("validateTestForm2", new MResourceMethod() {
                     @Override
-                    public byte[] call(Map<String, Object> params) {
-                        String r = "MSimpleServer says: validateTestForm2(" + params + ") called";
+                    public byte[] call(MParameterMap p) {
+                        String r = "MSimpleServer says: validateTestForm2(" + p + ") called";
                         mout.println(r);
                         return r.getBytes();
                     }

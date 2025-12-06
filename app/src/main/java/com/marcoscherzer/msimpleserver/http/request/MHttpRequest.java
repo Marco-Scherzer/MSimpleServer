@@ -5,7 +5,6 @@ import com.marcoscherzer.msimpleserver.http.validation.MParameterMode;
 import com.marcoscherzer.msimpleserver.util.logging.MNullPrintStringWriter;
 
 import java.io.PrintWriter;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -21,7 +20,7 @@ public final class MHttpRequest {
     private final MParameterMode mode;
 
     public PrintWriter out = new MNullPrintStringWriter();
-    private Map<String, Object> resourceMethodParameters = new HashMap<>();
+    private MParameterMap resourceMethodParameters = new MParameterMap();
 
 
     /**
@@ -49,7 +48,7 @@ public final class MHttpRequest {
     /**
      * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
-    public Map<String, Object> getResourceMethodParameters() {
+    public MParameterMap getResourceMethodParameters() {
         return resourceMethodParameters;
     }
 

@@ -1,6 +1,7 @@
 package com.marcoscherzer.msimpleserver.http.validation;
 
 import com.marcoscherzer.msimpleserver.http.constants.MHttpResponseStatusCodes;
+import com.marcoscherzer.msimpleserver.http.request.MParameterMap;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,7 +14,7 @@ public final class MHttpRequestData {
     private byte[] bodyBytes;
     private MParameterMode mode;
     //private boolean validAndComplete;
-    private final Map<String, Object> resourceMethodParameters = new HashMap<>();
+    private final MParameterMap resourceMethodParameters = new MParameterMap();
     private String requestMethod;
     private String resourcePath;
     private String resourceMethod;
@@ -101,7 +102,7 @@ public final class MHttpRequestData {
     /**
      * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
-    public Map<String, Object> getResourceMethodParameters() {
+    public MParameterMap getResourceMethodParameters() {
         return resourceMethodParameters;
     }
 

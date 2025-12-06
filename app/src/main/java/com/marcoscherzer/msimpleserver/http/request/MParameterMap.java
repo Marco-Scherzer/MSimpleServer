@@ -2,7 +2,10 @@ package com.marcoscherzer.msimpleserver.http.request;
 
 import java.util.HashMap;
 
-    public final class MSimpleRuntimeTypecastMap extends HashMap<String,Object> {
+/**
+ * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
+ */
+    public final class MParameterMap extends HashMap<String,Object> {
 
         /**
          * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
