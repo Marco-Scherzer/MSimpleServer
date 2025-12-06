@@ -63,6 +63,7 @@ private final Map<MHttpContentType, MContentTypeHandler > handlers = new HashMap
             String body = new String(bodyBytes, charset);
             mout.println("Hinweis: JSON-Body empfangen. Übergabe an Gson-Parser.");
             try {
+                //toDo
                 // JSON direkt in Map<String,Object> parsen
                 Map<String,Object> params = gson.fromJson(body, new TypeToken<Map<String,Object>>(){}.getType());
                 outData.getResourceMethodParameters().putAll(params);
