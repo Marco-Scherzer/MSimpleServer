@@ -21,7 +21,7 @@ public final class MHttpRequest {
     private final MParameterMode mode;
 
     public PrintWriter out = new MNullPrintStringWriter();
-    private Map<String, String> resourceMethodParameters = new HashMap<>();
+    private Map<String, Object> resourceMethodParameters = new HashMap<>();
 
 
     /**
@@ -49,7 +49,7 @@ public final class MHttpRequest {
     /**
      * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
-    public Map<String, String> getResourceMethodParameters() {
+    public Map<String, Object> getResourceMethodParameters() {
         return resourceMethodParameters;
     }
 
@@ -108,7 +108,7 @@ public final class MHttpRequest {
         for (final Map.Entry<String, String> header : headers.entrySet()) {
             result.append("  ").append(header.getKey()).append(": ").append(header.getValue()).append("\n");
         }
-        for (final Map.Entry<String, String> resourceMethodParameter : resourceMethodParameters.entrySet()) {
+        for (final Map.Entry<String, Object> resourceMethodParameter : resourceMethodParameters.entrySet()) {
             result.append("  ").append(resourceMethodParameter.getKey()).append(": ").append(resourceMethodParameter.getValue()).append("\n");
         }
         if (body != null && !body.isEmpty()) {

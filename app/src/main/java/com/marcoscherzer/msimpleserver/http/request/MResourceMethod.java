@@ -1,5 +1,6 @@
 package com.marcoscherzer.msimpleserver.http.request;
 
+import java.io.Serializable;
 import java.util.Map;
 
 /**
@@ -7,5 +8,5 @@ import java.util.Map;
  */
 @FunctionalInterface
 public interface MResourceMethod {
-    byte[] call(Map<String,String> params);
+    byte[] call(Map<String,Object> params);
 }

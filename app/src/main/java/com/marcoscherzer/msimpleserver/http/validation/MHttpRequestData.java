@@ -13,7 +13,7 @@ public final class MHttpRequestData {
     private byte[] bodyBytes;
     private MParameterMode mode;
     //private boolean validAndComplete;
-    private final Map<String, String> resourceMethodParameters = new HashMap<>();
+    private final Map<String, Object> resourceMethodParameters = new HashMap<>();
     private String requestMethod;
     private String resourcePath;
     private String resourceMethod;
@@ -101,7 +101,7 @@ public final class MHttpRequestData {
     /**
      * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
-    public Map<String, String> getResourceMethodParameters() {
+    public Map<String, Object> getResourceMethodParameters() {
         return resourceMethodParameters;
     }
 
@@ -126,7 +126,7 @@ public final class MHttpRequestData {
         for (final Map.Entry<String, String> header : headers.entrySet()) {
             sb.append("  ").append(header.getKey()).append(": ").append(header.getValue()).append("\n");
         }
-        for (final Map.Entry<String, String> resourceMethodParameter : resourceMethodParameters.entrySet()) {
+        for (final Map.Entry<String, Object> resourceMethodParameter : resourceMethodParameters.entrySet()) {
             sb.append("  ").append(resourceMethodParameter.getKey()).append(": ").append(resourceMethodParameter.getValue()).append("\n");
         }
         sb.append("Internal Code or Error-ReponseCode: ").append(responseCode).append("\n");

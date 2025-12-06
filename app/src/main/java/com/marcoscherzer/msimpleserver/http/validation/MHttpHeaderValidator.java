@@ -8,7 +8,6 @@ import static com.marcoscherzer.msimpleserver.util.logging.MThreadLocalPrintStre
 final class MHttpHeaderValidator {
 //private static final Pattern HEADER_PATTERN = Pattern.compile("^[a-zA-Z0-9-]+:\\s.*$");
 
-
     private int MAX_HEADER_SIZE = 8192; // Maximale Größe der Header private int MAX_HEADER_SIZE = 8192; // Maximale Größe der Header
 
     /**

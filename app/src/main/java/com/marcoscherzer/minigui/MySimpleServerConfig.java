@@ -127,15 +127,16 @@ public final class MySimpleServerConfig {
         MHttpResource root = new MHttpResource(Locale.ENGLISH, "/test2__.html")
                 .addResourceMethod("validateTestForm1", new MResourceMethod() {
                     @Override
-                    public byte[] call(Map<String, String> params) {
+                    public byte[] call(Map<String, Object> params) {
                         String r = "MSimpleServer says: validateTestForm1(" + params + ") called";
                         mout.println(r);
+
                         return r.getBytes();
                     }
                 })
                 .addResourceMethod("validateTestForm2", new MResourceMethod() {
                     @Override
-                    public byte[] call(Map<String, String> params) {
+                    public byte[] call(Map<String, Object> params) {
                         String r = "MSimpleServer says: validateTestForm2(" + params + ") called";
                         mout.println(r);
                         return r.getBytes();

@@ -200,7 +200,9 @@ public class MHttpRequestHandler extends MRequestHandler {
             MResourceMethod m = resource.getResourceMethod(request.getResourceMethod());
 
             //strukturierte parameter in map schreiben
-            resourceBytes = m.call(request.getResourceMethodParameters());
+
+
+            resourceBytes =  m.call(request.getResourceMethodParameters());
 
         } else {
             resourceBytes = resource.loadResource(contentLanguage);
