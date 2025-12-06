@@ -5,5 +5,5 @@ package com.marcoscherzer.msimpleserver.http.request;
  */
 @FunctionalInterface
 public interface MResourceMethod {
-    byte[] call(MParameterMap p);
+    byte[] call(MParameterMap p) throws Exception;
 }

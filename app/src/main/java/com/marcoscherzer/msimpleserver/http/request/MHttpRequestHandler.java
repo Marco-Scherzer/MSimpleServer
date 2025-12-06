@@ -4,8 +4,11 @@ import static com.marcoscherzer.msimpleserver.MInternalStatusCodes.VALID;
 import static com.marcoscherzer.msimpleserver.http.constants.MHttpResponseStatusCodes.VALID_AND_COMPLETE;
 import static com.marcoscherzer.msimpleserver.http.constants.MHttpResponseStatusCodes._200_OK;
 import static com.marcoscherzer.msimpleserver.http.constants.MHttpResponseStatusCodes._301_MOVED_PERMANENTLY;
+import static com.marcoscherzer.msimpleserver.http.constants.MHttpResponseStatusCodes._400_BAD_REQUEST;
 import static com.marcoscherzer.msimpleserver.http.constants.MHttpResponseStatusCodes._404_NOT_FOUND;
 import static com.marcoscherzer.msimpleserver.http.constants.MHttpResponseStatusCodes._406_NOT_ACCEPTABLE;
+import static com.marcoscherzer.msimpleserver.http.constants.MHttpResponseStatusCodes._500_INTERNAL_SERVER_ERROR;
+import static com.marcoscherzer.msimpleserver.http.constants.MHttpResponseStatusCodes._501_NOT_IMPLEMENTED;
 import static com.marcoscherzer.msimpleserver.util.compression.MCompression.MSupportedCompressionType.IDENTITY;
 import static com.marcoscherzer.msimpleserver.util.logging.MThreadLocalPrintStream.MLogHeaderFieldType.THREADNAME;
 import static com.marcoscherzer.msimpleserver.util.logging.MThreadLocalPrintStream.MLogHeaderFieldType.TIMEFIELD;
@@ -121,7 +124,7 @@ public class MHttpRequestHandler extends MRequestHandler {
         MHttpResponseStatusCodes httpErrorCode = null;
         switch (errorCode) {
             case INTERNAL_SERVER_ERROR:
-                httpErrorCode = MHttpResponseStatusCodes._500_INTERNAL_SERVER_ERROR;
+                httpErrorCode = _500_INTERNAL_SERVER_ERROR;
                 break;
             case REQUEST_TIMEOUT:
                 httpErrorCode = MHttpResponseStatusCodes._408_REQUEST_TIMEOUT;
@@ -196,13 +199,31 @@ public class MHttpRequestHandler extends MRequestHandler {
         }
 
         byte[] resourceBytes;
-        if (request.getResourceMethod() != "") {
+        if (!request.getResourceMethod().equals("")) {
+
             MResourceMethod m = resource.getResourceMethod(request.getResourceMethod());
 
-            //strukturierte parameter in map schreiben
+            try {
+                //toDo
+
+                resourceBytes = m.call(request.getResourceMethodParameters());
 
 
-            resourceBytes =  m.call(request.getResourceMethodParameters());
+            } catch (ClassCastException exc) {
+                mout.println("Client lieferte falschen Typ: " + exc.getMessage());
+                exc.printStackTrace(mout);
+                return new MValue3D(_400_BAD_REQUEST, "Invalid parameter type", null);
+
+            } catch (UnsupportedOperationException exc) {
+                mout.println("Nicht implementiert: " + exc.getMessage());
+                return new MValue3D(_501_NOT_IMPLEMENTED, "Not implemented", null);
+
+            } catch (Exception exc) {
+                mout.println("Interner Fehler: " + exc.getMessage());
+                exc.printStackTrace(mout);
+                return new MValue3D(_500_INTERNAL_SERVER_ERROR, "Internal error", null);
+            }
+
 
         } else {
             resourceBytes = resource.loadResource(contentLanguage);
