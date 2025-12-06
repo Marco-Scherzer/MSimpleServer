@@ -1,6 +1,7 @@
 package com.marcoscherzer.msimpleserver.http.validation;
 
 import static com.marcoscherzer.msimpleserver.http.constants.MHttpResponseStatusCodes.VALID_AND_COMPLETE;
+import static com.marcoscherzer.msimpleserver.http.constants.MHttpResponseStatusCodes._302_FOUND;
 import static com.marcoscherzer.msimpleserver.http.constants.MHttpResponseStatusCodes._400_BAD_REQUEST;
 import static com.marcoscherzer.msimpleserver.http.constants.MHttpResponseStatusCodes._405_METHOD_NOT_ALLOWED;
 import static com.marcoscherzer.msimpleserver.http.constants.MHttpResponseStatusCodes._413_PAYLOAD_TOO_LARGE;
@@ -13,7 +14,6 @@ import com.marcoscherzer.msimpleserver.MRequestValidator;
 import com.marcoscherzer.msimpleserver.http.constants.MHttpContentType;
 import com.marcoscherzer.msimpleserver.http.constants.MHttpResponseStatusCodes;
 import com.marcoscherzer.msimpleserver.http.request.MHttpContentMap;
-import com.marcoscherzer.msimpleserver.http.validation.MHttpRequestValidator.MHttpRequestData;
 import com.marcoscherzer.msimpleserver.http.validation.MHttpVersion.MValidationPattern;
 
 import java.io.BufferedReader;
@@ -99,7 +99,7 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
      * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
     public MHttpRequestValidator setMaxUrlLength(int maxUrlLength) {
-        urlParser.maxUriLength = maxUrlLength;
+        urlParser.setMaxUrlLength(maxUrlLength);
         return this;
     }
 
@@ -119,6 +119,7 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
     @Override
     public MHttpRequestData isValidRequest(Socket socket) {
         MHttpRequestData outData = new MHttpRequestData();
+        outData.setMode(mode);
         StringBuilder request = new StringBuilder();
         try {
             InputStream inputStream = socket.getInputStream();
@@ -129,7 +130,7 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
                     String name = Character.getName(ch);
                     if (name == null) name = "unassigned Character";
                     mout.println("Fehler: Ungültiges Zeichen erkannt - " + name);
-                    outData.responseCode = _400_BAD_REQUEST;
+                    outData.setResponseCode(_400_BAD_REQUEST);
                     return outData;
                 }
                 request.append((char) ch);
@@ -145,14 +146,14 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
             mout.println("Überprüfe die Request-Line: " + lines[0]);
             if (lines.length == 0) {
                 mout.println("Fehler: Fehlende Request-Line.");
-                outData.responseCode = _400_BAD_REQUEST;
+                outData.setResponseCode(_400_BAD_REQUEST);
                 return outData;
             }
 
             String[] parts = lines[0].split(" ");
             if (parts.length < 3) {
                 mout.println("Fehler: Das Format der Request-Line ist falsch. Überprüfte Teile: " + Arrays.toString(parts));
-                outData.responseCode = _400_BAD_REQUEST;
+                outData.setResponseCode(_400_BAD_REQUEST);
                 return outData;
             }
 
@@ -162,13 +163,13 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
             MHttpVersion version = null;
             for (int i = 0; i < getSupportedProtocols().size(); i++) {
                 version = getSupportedProtocols().get(i);
-                if (version.getVersion() == outData.protocol) break;
+                if (version.getVersion() == outData.getProtocol()) break;
             }
 
             // Überprüfe Protokoll
             if (!this.getSupportedProtocolsPattern().matcher(protocol).matches()) {
                 mout.println("Fehler: Ungültiges Protokoll: " + protocol);
-                outData.responseCode = _505_HTTP_VERSION_NOT_SUPPORTED;
+                outData.setResponseCode(_505_HTTP_VERSION_NOT_SUPPORTED);
                 return outData;
             }
             //(Protokoll ist vorhanden und supported)
@@ -176,30 +177,29 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
             // Überprüfe Methode
             if (!version.getSupportedMethods().matcher(method).matches()) {
                 mout.println("Fehler: Ungültige Methode: " + method);
-                outData.responseCode = _405_METHOD_NOT_ALLOWED;
+                outData.setResponseCode(_405_METHOD_NOT_ALLOWED);
                 return outData;
             }
 
             //Überprüfe Url und setze data-attribute für url meth name und query-parameters oder return errorResponseCode
             outData = urlParser.parseUrl(parts[1], outData);
-            if (outData.responseCode != null) return outData;
+            if (outData.getResponseCode()!= null) return outData;
 
-            outData.requestMethod = method;
-            outData.protocol = protocol;
+            outData.setRequestMethod(method);
+            outData.setProtocol(protocol);
 
             // Upgrade unsicherer Verbindungen
             if (!(socket instanceof SSLSocket) && upgradeUnencrypted) {
                 mout.println("Fehler: Request kam über unsicheres http");
-                outData.responseCode = MHttpResponseStatusCodes._302_FOUND;
+                outData.setResponseCode(_302_FOUND);
                 return outData;
             }
 
             //----------------------------------------- HTTP-Version > 0.9 -------------------------------------------
             if(!version.getVersion().equals("0.9")) {
-                outData.mode = mode;
                 // Überprüfe Header
                 validateHeaders(version, lines, outData);
-                if (outData.responseCode != VALID_AND_COMPLETE) return outData;
+                if (outData.getResponseCode() != VALID_AND_COMPLETE) return outData;
 
                 /*
                  * benutzungskonventionsdefinition: POST wirkt überschreibend bzgl kompletter URL-Parameter
@@ -212,7 +212,7 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
                     String cl = outData.getHeaders().get("Content-Length");
                     if (cl == null) {
                         mout.println("Fehler: Content-Length fehlt.");
-                        outData.responseCode = _400_BAD_REQUEST;
+                        outData.setResponseCode(_400_BAD_REQUEST);
                         return outData;
                     }
                     int contentLength;
@@ -220,7 +220,7 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
                         contentLength = Integer.parseInt(cl.trim());
                     } catch (NumberFormatException e) {
                         mout.println("Fehler: Ungültiger Content-Length.");
-                        outData.responseCode = _400_BAD_REQUEST;
+                        outData.setResponseCode(_400_BAD_REQUEST);
                         return outData;
                     }
 
@@ -234,27 +234,25 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
                     }
                     if (readTotal < contentLength) {
                         mout.println("Fehler: Body unvollständig gelesen.");
-                        outData.responseCode = _400_BAD_REQUEST;
+                        outData.setResponseCode(_400_BAD_REQUEST);
                         return outData;
                     }
 
-                    outData.bodyBytes = bodyBytes; // Binärdaten speichern
-
-                    validatePost(outData.bodyBytes, outData);
-                    if (outData.responseCode != VALID_AND_COMPLETE) return outData;
+                    validatePost(bodyBytes, outData);
+                    if (outData.getResponseCode() != VALID_AND_COMPLETE) return outData;
                 }
 
-                outData.responseCode = VALID_AND_COMPLETE;
+                outData.setResponseCode(VALID_AND_COMPLETE);
             }
         } catch (UnsupportedEncodingException exc) {
             mout.println("Fehler: Nicht unterstützte URL Kodierung - ");
             exc.printStackTrace(mout);
-            outData.responseCode = _400_BAD_REQUEST;
+            outData.setResponseCode(_400_BAD_REQUEST);
             return outData;
         } catch (IOException exc) {
             mout.println("Fehler beim Lesen des InputStreams. IO-Exception - ");
             exc.printStackTrace(mout);
-            outData.responseCode = _400_BAD_REQUEST;
+            outData.setResponseCode(_400_BAD_REQUEST);
             return outData;
         }
 
@@ -276,14 +274,14 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
                 contentType = URLConnection.guessContentTypeFromStream(bais);
             } catch (IOException e) {
                 mout.println("Fehler: Content-Type konnte nicht bestimmt werden.");
-                outData.responseCode = _415_UNSUPPORTED_MEDIA_TYPE;
+                outData.setResponseCode(_415_UNSUPPORTED_MEDIA_TYPE);
                 return;
             }
         }
 
         if (bodyBytes == null || bodyBytes.length == 0) {
             mout.println("Fehler: POST-Body fehlt oder leer.");
-            outData.responseCode = _400_BAD_REQUEST;
+            outData.setResponseCode(_400_BAD_REQUEST);
             return;
         }
 
@@ -302,7 +300,7 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
             charset = Charset.forName(charsetName);
         } catch (Exception e) {
             mout.println("Fehler: Ungültiges Charset im Content-Type: " + charsetName);
-            outData.responseCode = _415_UNSUPPORTED_MEDIA_TYPE;
+            outData.setResponseCode(_415_UNSUPPORTED_MEDIA_TYPE);
             return;
         }
 
@@ -318,27 +316,21 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
         if (type != null) {
             MContentTypeHandler handler = handlers.get(type);
             if (handler != null) {
-                handler.handle(bodyBytes, charset, outData);
+                MHttpResponseStatusCodes responseCode = handler.handle(bodyBytes, charset);
+                //outDataCheck
+
             } else {
                 mout.println("Fehler: Kein Handler für Content-Type: " + type.getValue());
-                outData.responseCode = _415_UNSUPPORTED_MEDIA_TYPE;
+                outData.setResponseCode(_415_UNSUPPORTED_MEDIA_TYPE);
             }
         } else {
             mout.println("Fehler: Unsupported Content-Type: " + contentType);
-            outData.responseCode = _415_UNSUPPORTED_MEDIA_TYPE;
+            outData.setResponseCode(_415_UNSUPPORTED_MEDIA_TYPE);
         }
     }
 
 
-    /**
-     * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
-     * Jeder Handler verarbeitet den Body und setzt den responseCode in outData.
-     */
-    public interface MContentTypeHandler {
-        void handle(byte[] bodyBytes, Charset charset, MHttpRequestData outData);
-    }
-
-    private final Map<MHttpContentType, MContentTypeHandler> handlers = new HashMap<>();
+    private final Map<MHttpContentType, MContentTypeHandler > handlers = new HashMap<>();
 
     /**
      * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
@@ -354,8 +346,6 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
         mout.println("Handler für Content-Type '" + type.getValue() + "' registriert.");
     }
 
-
-
     /**
      * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
@@ -370,7 +360,7 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
 
             headerSize += line.length();
             if (!checkHeaderSize(httpVersion, headerSize)) {
-                outData.responseCode = _413_PAYLOAD_TOO_LARGE;
+                outData.setResponseCode(_413_PAYLOAD_TOO_LARGE);
                 return;
             }
 
@@ -379,7 +369,7 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
                 line += " " + lines[++i].trim();
                 headerSize += lines[i].length();
                 if (!checkHeaderSize(httpVersion, headerSize)) {
-                    outData.responseCode = _413_PAYLOAD_TOO_LARGE;
+                    outData.setResponseCode(_413_PAYLOAD_TOO_LARGE);
                     return;
                 }
             }
@@ -390,13 +380,13 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
                 if (validateHeader(line, p)) {
                     String[] headerParts = line.split(":", 2);
                     if (headerParts.length == 2) {
-                        outData.headers.put(headerParts[0].trim(), headerParts[1].trim());
+                        outData.getHeaders().put(headerParts[0].trim(), headerParts[1].trim());
                         break;
                     }
-                } else outData.responseCode = _400_BAD_REQUEST;
+                } else outData.setResponseCode(_400_BAD_REQUEST);
             }
         }
-        outData.responseCode = VALID_AND_COMPLETE;
+        outData.setResponseCode(VALID_AND_COMPLETE);
         return;
     }
 
@@ -411,263 +401,6 @@ public final class MHttpRequestValidator extends MRequestValidator<MHttpRequestD
         }
         return true;
     }
-
-    /**
-     * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
-     */
-    public static final class MHttpRequestData {
-        private final Map<String, String> headers = new HashMap<>();
-        private byte[] bodyBytes;
-        private MParameterMode mode;
-        //private boolean validAndComplete;
-        private final Map<String, String> resourceMethodParameters = new HashMap<>();
-        private String requestMethod;
-        private String resourcePath;
-        private String resourceMethod;
-        private String protocol;
-        private MHttpResponseStatusCodes responseCode;
-
-        /**
-         * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
-         */
-        public MParameterMode getMode() {
-            return mode;
-        }
-
-        /**
-         * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
-         */
-        public String getRequestMethod() {
-            return requestMethod;
-        }
-
-        /**
-         * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
-         */
-        public String getResourcePath() {
-            return resourcePath;
-        }
-
-        /**
-         * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
-         */
-        public String getEndpointQuery() {
-            return resourceMethod;
-        }
-
-        /**
-         * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
-         */
-        public String getProtocol() {
-            return protocol;
-        }
-
-        /**
-         * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
-         */
-        public Map<String, String> getHeaders() {
-            return headers;
-        }
-
-        /**
-         * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
-         */
-        public String getBodyBytes() {
-            return bodyBytes;
-        }
-
-        /**
-         * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
-         */
-        public Map<String, String> getResourceMethodParameters() {
-            return resourceMethodParameters;
-        }
-
-        /**
-         * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
-         */
-        public MHttpResponseStatusCodes isValidAndCompleteOrErrorCode() {
-            return responseCode;
-        }
-
-        /**
-         * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
-         */
-        @Override
-        public String toString() {
-            StringBuilder sb = new StringBuilder();
-            sb.append("Method: ").append(requestMethod).append("\n");
-            sb.append("ResourcePath: ").append(resourcePath).append("\n");
-            sb.append("EndpointQuery: ").append(resourceMethod).append("\n");
-            sb.append("Protocol: ").append(protocol).append("\n");
-            sb.append("Headers: ").append("\n");
-            for (final Map.Entry<String, String> header : headers.entrySet()) {
-                sb.append("  ").append(header.getKey()).append(": ").append(header.getValue()).append("\n");
-            }
-            for (final Map.Entry<String, String> resourceMethodParameter : resourceMethodParameters.entrySet()) {
-                sb.append("  ").append(resourceMethodParameter.getKey()).append(": ").append(resourceMethodParameter.getValue()).append("\n");
-            }
-            sb.append("Internal Code or Error-ReponseCode: ").append(responseCode).append("\n");
-            return sb.toString();
-        }
-    }
-
-    /**
-     * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
-     */
-    public static final class MUrlParser {
-
-        private static final int MAX_PARAM_LENGTH = 128; // Maximale erlaubte Länge für Parameterwerte
-        private static final Pattern PATH_PATTERN = Pattern.compile("^/[^=&\\s]*$"); // Kein '=', '&' oder Leerraum erlaubt
-        private static final Pattern METHOD_NAME_PATTERN = Pattern.compile("^[a-zA-Z_][a-zA-Z0-9_]*$");
-        private static final Pattern QUERY_PATTERN = Pattern.compile("^([a-zA-Z0-9_]+=[^&]*)(&[a-zA-Z0-9_]+=[^&]*)*$");
-
-        private int maxUriLength = 1024;
-
-        /**
-         * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
-         */
-        public void setMaxUrlLength(int maxUrlLength) {
-            this.maxUriLength = maxUrlLength;
-        }
-
-        /**
-         * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
-         */
-        public MHttpRequestData parseUrl(String url, MHttpRequestData data) {
-            String path = "";
-
-            // Überprüfe URL-Länge
-            if (url.length() > maxUriLength) {
-                mout.println("Fehler: URI Länge zu lang: " + url.length() + ", Maximal erlaubte Länge: " + maxUriLength);
-                data.responseCode = MHttpResponseStatusCodes._414_URI_TOO_LONG;
-                return data;
-            }
-
-            path = URLDecoder.decode(url, StandardCharsets.UTF_8);
-
-            // Überprüfe doppelte Fragezeichen
-            int firstQuestionMark = path.indexOf("?");
-            int lastQuestionMark = path.lastIndexOf("?");
-
-            if (firstQuestionMark != -1 && firstQuestionMark != lastQuestionMark) {
-                mout.println("Fehler: Mehrere '?' in der URL.");
-                data.responseCode = MHttpResponseStatusCodes._400_BAD_REQUEST;
-                return data;
-            }
-
-            // **Überprüfung: Falls `=` oder `&` vor `?` auftaucht, ist die URL ungültig**
-            if (firstQuestionMark != -1 && path.substring(0, firstQuestionMark).contains("=")) {
-                mout.println("Fehler: '=' darf nur als Zuweisungsoperator nach '?' verwendet werden.");
-                data.responseCode = MHttpResponseStatusCodes._400_BAD_REQUEST;
-                return data;
-            }
-            if (firstQuestionMark != -1 && path.substring(0, firstQuestionMark).contains("&")) {
-                mout.println("Fehler: '&' darf nur als Parametertrenner nach einem Methodenaufruf verwendet werden.");
-                data.responseCode = MHttpResponseStatusCodes._400_BAD_REQUEST;
-                return data;
-            }
-
-            String resourcePath = "";
-            String methodName = "";
-            String parameterPart = "";
-
-            // Aufteilung in Resource und Methode
-            if (firstQuestionMark != -1) {
-                String[] splitParts = path.split("\\?");
-                methodName = splitParts[0].substring(splitParts[0].lastIndexOf("/") + 1);
-                resourcePath = splitParts[0].substring(0, splitParts[0].lastIndexOf("/"));
-                parameterPart = splitParts.length > 1 ? splitParts[1] : "";
-
-                // **Methoden ohne Ressourcen verhindern**
-                if (resourcePath.isEmpty()) {
-                    mout.println("Fehler: Methode kann nicht ohne eine Ressource existieren.");
-                    data.responseCode = MHttpResponseStatusCodes._400_BAD_REQUEST;
-                    return data;
-                }
-
-                // **Überprüfung des Methoden-Namens gemäß Java-Konventionen**
-                if (!METHOD_NAME_PATTERN.matcher(methodName).matches() || methodName.length() > 64) {
-                    mout.println("Fehler: Ungültiger Methodenname nach Java-Konventionen: " + methodName);
-                    data.responseCode = MHttpResponseStatusCodes._400_BAD_REQUEST;
-                    return data;
-                }
-
-                // **Methoden ohne Parameter sind erlaubt (`testresource/method?`)**
-                if (!parameterPart.isEmpty()) {
-                    // **Überprüfung der Query-Syntax**
-                    if (!QUERY_PATTERN.matcher(parameterPart).matches()) {
-                        mout.println("Fehler: Ungültige Query-Syntax oder nicht alle Parameter vorhanden: " + parameterPart);
-                        data.responseCode = MHttpResponseStatusCodes._400_BAD_REQUEST;
-                        return data;
-                    }
-
-                    // Query-Parameter speichern und doppelte Parameter verhindern
-                    String[] params = parameterPart.split("&");
-                    for (String param : params) {
-                        String[] keyValue = param.split("=", 2);
-
-                        if (keyValue.length < 2 || keyValue[1].isEmpty()) {
-                            mout.println("Fehler: Alle Parameter müssen einen Wert haben: " + param);
-                            data.responseCode = MHttpResponseStatusCodes._400_BAD_REQUEST;
-                            return data;
-                        }
-
-                        // **Prüfung: Nur genau ein `=` in jedem Parameter erlaubt**
-                        if (param.chars().filter(ch -> ch == '=').count() > 1) {
-                            mout.println("Fehler: Mehrfache '=' in einem Parameter sind nicht erlaubt: " + param);
-                            data.responseCode = MHttpResponseStatusCodes._400_BAD_REQUEST;
-                            return data;
-                        }
-
-                        // **Prüfung der Parameterlänge**
-                        if (keyValue[1].length() > MAX_PARAM_LENGTH) {
-                            mout.println("Fehler: Parameterwert überschreitet die maximale Länge von " + MAX_PARAM_LENGTH + " Zeichen: " + keyValue[1]);
-                            data.responseCode = MHttpResponseStatusCodes._400_BAD_REQUEST;
-                            return data;
-                        }
-
-                        // **Prüfung des Parameternamens gemäß Java-Konventionen**
-                        if (!METHOD_NAME_PATTERN.matcher(keyValue[0]).matches()) {
-                            mout.println("Fehler: Ungültiger Parametername nach Java-Konventionen: " + keyValue[0]);
-                            data.responseCode = MHttpResponseStatusCodes._400_BAD_REQUEST;
-                            return data;
-                        }
-
-                        // **Einheitliche Fehlermeldung bei doppelten Parametern**
-                        if (data.resourceMethodParameters.containsKey(keyValue[0])) {
-                            mout.println("Fehler: Doppelter Parameter '" + keyValue[0] + "' erkannt. Bitte korrigieren.");
-                            data.responseCode = MHttpResponseStatusCodes._400_BAD_REQUEST;
-                            return data;
-                        }
-
-                        data.resourceMethodParameters.put(keyValue[0], keyValue[1]);
-                    }
-                }
-            } else {
-                // Wenn kein `?` vorhanden ist, dann ist es nur eine Ressource
-                resourcePath = path;
-
-                if (!PATH_PATTERN.matcher(resourcePath).matches()) {
-                    mout.println("Fehler: Ungültiger Ressourcenpfad: '=' und '&' sind nur in Query-Parametern erlaubt.");
-                    data.responseCode = MHttpResponseStatusCodes._400_BAD_REQUEST;
-                    return data;
-                }
-            }
-
-            // Setze die extrahierten Werte ins `data`-Objekt
-            data.resourcePath = resourcePath;
-            data.resourceMethod = methodName;
-
-            mout.println("Url-Syntax ist korrekt!");
-            mout.println("Ressource: " + resourcePath);
-            mout.println("resourceMethod: " + methodName);
-            mout.println("Query-Parameter: " + parameterPart);
-            return data;
-        }
-    }
-
-
 }
 
 

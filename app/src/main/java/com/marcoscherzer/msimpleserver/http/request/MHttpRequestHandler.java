@@ -17,8 +17,8 @@ import com.marcoscherzer.msimpleserver.MSimpleMiniServer.Mode;
 import com.marcoscherzer.msimpleserver.MSimpleObservableSocket;
 import com.marcoscherzer.msimpleserver.http.constants.MHttpResponseStatusCodes;
 import com.marcoscherzer.msimpleserver.http.response.MHttpResponse;
+import com.marcoscherzer.msimpleserver.http.validation.MHttpRequestData;
 import com.marcoscherzer.msimpleserver.http.validation.MHttpRequestValidator;
-import com.marcoscherzer.msimpleserver.http.validation.MHttpRequestValidator.MHttpRequestData;
 import com.marcoscherzer.msimpleserver.mpool.MSimplePool.MJob;
 import com.marcoscherzer.msimpleserver.util.MValue3D;
 import com.marcoscherzer.msimpleserver.util.logging.MThreadLocalPrintStream;
@@ -218,7 +218,7 @@ public class MHttpRequestHandler extends MRequestHandler {
     /**
      * @version 0.0.1 preAlpha unready intermediate state, @author Marco Scherzer, Author, Ideas, APIs, Nomenclatures & Architectures Marco Scherzer, Copyright Marco Scherzer, All rights reserved
      */
-    class MResponseJob extends MJob {
+    final class MResponseJob extends MJob {
 
         private final MSimpleObservableSocket socket;
         private final Mode mode;
@@ -261,7 +261,7 @@ public class MHttpRequestHandler extends MRequestHandler {
 
                 MHttpRequestData data = requestValidator.isValidRequest(socket.getSocket());
                 mout.println("Request Data:\n" + data);
-                if (data.isValidAndCompleteOrErrorCode() == VALID_AND_COMPLETE) {
+                if (data.getResponseCode() == VALID_AND_COMPLETE) {
                     MHttpRequest request = new MHttpRequest(data);
                     mout.println("Request:\n" + request + "\n");
                     mout.println("Creating response...");
@@ -278,14 +278,14 @@ public class MHttpRequestHandler extends MRequestHandler {
                     }
                 } else {
                     //mout.println(data.isValidAndCompleteOrErrorCode());
-                    if (data.isValidAndCompleteOrErrorCode() == MHttpResponseStatusCodes._302_FOUND || data.isValidAndCompleteOrErrorCode() == _301_MOVED_PERMANENTLY) {
+                    if (data.getResponseCode() == MHttpResponseStatusCodes._302_FOUND || data.getResponseCode() == _301_MOVED_PERMANENTLY) {
                         MHttpRequest request = new MHttpRequest(data);
                         mout.println("Request:\n" + request + "\n");
                         mout.println("...Creating redirect response.");
-                        response = createRedirectResponse(request, data.isValidAndCompleteOrErrorCode(), "");
+                        response = createRedirectResponse(request, data.getResponseCode(), "");
                     } else {
                         mout.println("...Creating error response.");
-                        response = createErrorResponse(null, data.isValidAndCompleteOrErrorCode(), "");
+                        response = createErrorResponse(null, data.getResponseCode(), "");
                     }
                     writeResponse(response);
                 }

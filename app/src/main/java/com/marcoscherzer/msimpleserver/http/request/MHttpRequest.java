@@ -1,6 +1,6 @@
 package com.marcoscherzer.msimpleserver.http.request;
 
-import com.marcoscherzer.msimpleserver.http.validation.MHttpRequestValidator.MHttpRequestData;
+import com.marcoscherzer.msimpleserver.http.validation.MHttpRequestData;
 import com.marcoscherzer.msimpleserver.http.validation.MParameterMode;
 import com.marcoscherzer.msimpleserver.util.logging.MNullPrintStringWriter;
 
@@ -17,7 +17,7 @@ public final class MHttpRequest {
     private final String endpointQuery;
     private final String protocol;
     private final MHttpRequestHeader headers;
-    private final String body;
+    private String body;
     private final MParameterMode mode;
 
     public PrintWriter out = new MNullPrintStringWriter();
@@ -34,7 +34,7 @@ public final class MHttpRequest {
         this.protocol = requestData.getProtocol();
         this.headers = new MHttpRequestHeader(requestData.getHeaders());
         this.resourceMethodParameters = requestData.getResourceMethodParameters();
-        this.body = requestData.getBodyBytes(); //post
+
         this.mode = requestData.getMode();
         //this.body = "";
     }
