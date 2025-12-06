@@ -30,48 +30,89 @@ Strictly prohibited:
 Forking, copying, reverse engineering, decompiling, modifying, redistributing, or any unauthorized
 use of this software.
 
-### Common About-Me (just to prevent wrong imaginations about people like me who write software):
-
-I am a 43‑year‑old old‑school developer. I am an all‑rounder, not a specialist. 
-Not for networking, not for HTTP things or Android. 
-I have been developing since my very early childhood. 
-According to the calculation of Microsoft Copilot, 
-I spent more than twice as many hours developing as someone who starts at 20, 
-is at the same age and has a 40‑hours‑per‑week job, 
-because I developed most of my life Monday till Sunday for more than 12 hours a day. 
-Since the end of my twenties despite massive health issues and having been operated 
-four times in the following years in this context. 
-Even if I let only count the time since I was 20, 
-sadly this is already more than two times 23 years 
-(calculated as 7/5 days × 1.5 × 8 hours = 2.1 × 23 years ≈ 48.3 years) sitting in front of a computer solving problems.
-Moreover, I have always been an extremely money‑poor person, intentionally living most of my life in an almost ascetic way, 
-enjoying only the simple things in life.
-This will finally be one of my last projects because I have planned for a long time already to stop development forever, 
-despite helpful things like Microsoft Copilot that, since I started using it in November 2024, 
-for the first time in my life has saved me an amount of time.
-Happily, any HTTP knowledge I needed to refresh for this project has been available on demand through Microsoft Copilot.
-
-I recently transitioned from multiplatform development to Android-specific projects.
-My current work is intended solely for internal use within my own self‑employment, which means for
-myself and my projects. Until now, all of my work has been closed-source. I have always worked independently and entirely on
-my own. Everything I have built has been done only on my local computer, and everything I create is formally
-protected by law. Only now, in my later years, I have published something here on GitHub for the first time.
-I did this in my old days as a kind of character test to the world,  
-because I always had more bad than good imaginations about open source and developing openly.  
-But sadly, until now it has always shown up sooner or later that I have been right from the beginning with my opinions about things in life, which I tell to others.  
-Despite that, I sometimes give certain things a chance to come to a final conclusion for myself.  
-But I calculate with the worst case (that my code is just stolen or other negative things happen).
-Except for what I publish here on this GitHub page (https://github.com/Marco-Scherzer),
-all of my software projects remain closed-source. I did this on my old days as a kind of character test to the world,
-because I always had more bad than good imagniations about open source and developing open. But sadly until know
-it always showed up sooner or later that I've benn from the beginning on always right with my opions about things during life.
-
-
 My source code and any compiled versions that may sometimes appear here,  
 as well as any texts or other content on this page, are protected by copyright. 
 All rights are reserved, which means that any kind of use, copying, linking or downloading and many
 things more is not permitted. If I ever decide to write a license for the binary, so that other people may at least be allowed to
 download the executable or installer, this text will also include the license and the exact location where the binaries can be downloaded.
+
+## Repository Sale Notice
+
+This repository is offered non-exclusiv for sale in its current, up‑to‑date code state.
+If you are interested, please contact me via my listed email address
+
+**Important Notice:**
+For security reasons, contracts are concluded exclusively after personal identification and
+presentation of the buyer’s official ID document in the presence of my trusted notary in Karlsruhe,
+Germany.
+I always identify with ID-Card.
+Since my childhood, I have always had exactly and only one banking account at a trusted local bank,
+ensuring protocolized secure banking.
+I never accept any transactions other than traditional, documented transactions processed directly
+through my local bank.
+
+Contact: fahrservice.1@gmail.com
+
+# Declaration to Avoid Scamming, Theft of Intellectual Property, and Deception by Fraudsters
+
+To prevent scamming, theft of intellectual property, and the deception of persons by fraudulent
+actions, I hereby make the following statement once and for all, clearly and explicitly:
+
+**Please note:** I never grant any permissions, not in the past, not now, and not in the future.
+
+---
+
+## 1. Abuse and Phishing
+
+To protect against abuse and phishing, please note:
+There are **no other websites, email addresses, or communication channels** associated with this software except the official contact listed here.
+
+If you encounter the code or binaries anywhere other than:
+
+- [https://github.com/Marco-Scherzer](https://github.com/Marco-Scherzer)
+- Wayback Machine (pre‑publication archiving of of this repository's content and URLs)
+- https://archive.today/ and https://archive.ph/ (pre‑publication archiving of of this repository's content and URLs)
+
+then it constitutes **abuse, a scam, and theft of law‑protected intellectual property**.
+
+In such a case, please inform GitHub and email me.
+
+---
+
+## 2. False Claims of Involvement or Permission
+
+Any false claim by any person to be in any way involved in my projects, or to have received any
+permission from me – whether for usage, reproduction, replication, especially of APIs,
+functionality, modularity, architecture, or for public display – is untrue and constitutes a *
+*serious criminal offense**.
+
+This includes in particular:
+
+- Scamming and fraudulent deception
+- Theft of intellectual property
+- Always implicit defamation of the true author of a work and his business, since the truth about
+  the origin of a work is reputation‑critical
+
+I explicitly declare that I **never grant any licenses of any kind for an open source work and
+especially not for its code – not in the past, not now, and not in the future.**
+
+---
+
+## 3. Reporting Criminal Acts
+
+If you have information pointing to criminal acts as described under points 1–2, I request that you
+immediately:
+
+- Inform the **Economic Cybercrime Division of the German Police (Zentrale Ansprechstellen
+  Cybercrime, ZAC)**
+  - [Polizei.de – Zentrale Ansprechstellen Cybercrime](https://www.polizei.de/Polizei/DE/Einrichtungen/ZAC/zac_node.html)
+  - [ZAC Contact List (Bund & Länder, PDF)](https://www.wirtschaftsschutz.info/DE/Themen/Cybercrime/Ansprechpartner/ZACErreichbarkeiten.pdf?__blob=publicationFile&v=3)
+
+- Contact **GitHub** via its official abuse reporting email: **abuse@github.com**
+  - [GitHub Docs – Reporting Abuse or Spam](https://docs.github.com/en/communities/maintaining-your-safety-on-github/reporting-abuse-or-spam)
+
+**Your civil courage counts. Help prevent such crimes, make Open Source safer, and protect the
+reputation of authors.**
 
 ### Example
 
@@ -162,84 +203,42 @@ private static MHttpContentMap createAndAddContent(MMultiPlatformFileLoader reso
 
 ```
 <br>
+### Common About-Me (just to prevent wrong imaginations about people like me who write software):
 
+I am a 43‑year‑old old‑school developer. I am an all‑rounder, not a specialist.
+Not for networking, not for HTTP things or Android.
+I have been developing since my very early childhood.
+According to the calculation of Microsoft Copilot,
+I spent more than twice as many hours developing as someone who starts at 20,
+is at the same age and has a 40‑hours‑per‑week job,
+because I developed most of my life Monday till Sunday for more than 12 hours a day.
+Since the end of my twenties despite massive health issues and having been operated
+four times in the following years in this context.
+Even if I let only count the time since I was 20,
+sadly this is already more than two times 23 years
+(calculated as 7/5 days × 1.5 × 8 hours = 2.1 × 23 years ≈ 48.3 years) sitting in front of a computer solving problems.
+Moreover, I have always been an extremely money‑poor person, intentionally living most of my life in an almost ascetic way,
+enjoying only the simple things in life.
+This will finally be one of my last projects because I have planned for a long time already to stop development forever,
+despite helpful things like Microsoft Copilot that, since I started using it in November 2024,
+for the first time in my life has saved me an amount of time.
+Happily, any HTTP knowledge I needed to refresh for this project has been available on demand through Microsoft Copilot.
 
-## Repository Sale Notice
+I recently transitioned from multiplatform development to Android-specific projects.
+My current work is intended solely for internal use within my own self‑employment, which means for
+myself and my projects. Until now, all of my work has been closed-source. I have always worked independently and entirely on
+my own. Everything I have built has been done only on my local computer, and everything I create is formally
+protected by law. Only now, in my later years, I have published something here on GitHub for the first time.
+I did this in my old days as a kind of character test to the world,  
+because I always had more bad than good imaginations about open source and developing openly.  
+But sadly, until now it has always shown up sooner or later that I have been right from the beginning with my opinions about things in life, which I tell to others.  
+Despite that, I sometimes give certain things a chance to come to a final conclusion for myself.  
+But I calculate with the worst case (that my code is just stolen or other negative things happen).
+Except for what I publish here on this GitHub page (https://github.com/Marco-Scherzer),
+all of my software projects remain closed-source. I did this on my old days as a kind of character test to the world,
+because I always had more bad than good imaginations about open source and developing open. But sadly until know
+it always showed up sooner or later that I've been from the beginning on always right with my opions about things during life.
 
-This repository is offered non-exclusiv for sale in its current, up‑to‑date code state.
-If you are interested, please contact me via my listed email address
-
-**Important Notice:**
-For security reasons, contracts are concluded exclusively after personal identification and
-presentation of the buyer’s official ID document in the presence of my trusted notary in Karlsruhe,
-Germany.
-I always identify with ID-Card.
-Since my childhood, I have always had exactly and only one banking account at a trusted local bank,
-ensuring protocolized secure banking.
-I never accept any transactions other than traditional, documented transactions processed directly
-through my local bank.
-
-Contact: fahrservice.1@gmail.com
-
-# Declaration to Avoid Scamming, Theft of Intellectual Property, and Deception by Fraudsters
-
-To prevent scamming, theft of intellectual property, and the deception of persons by fraudulent
-actions, I hereby make the following statement once and for all, clearly and explicitly:
-
-**Please note:** I never grant any permissions, not in the past, not now, and not in the future.
-
----
-
-## 1. Abuse and Phishing
-
-To protect against abuse and phishing, please note:
-There are **no other websites, email addresses, or communication channels** associated with this software except the official contact listed here.
-
-If you encounter the code or binaries anywhere other than:
-
-- [https://github.com/Marco-Scherzer](https://github.com/Marco-Scherzer)
-- The same repository archived in the Wayback Machine (pre‑publication archiving)
-
-then it constitutes **abuse, a scam, and theft of law‑protected intellectual property**.
-
-In such a case, please inform GitHub and email me.
-
----
-
-## 2. False Claims of Involvement or Permission
-
-Any false claim by any person to be in any way involved in my projects, or to have received any
-permission from me – whether for usage, reproduction, replication, especially of APIs,
-functionality, modularity, architecture, or for public display – is untrue and constitutes a *
-*serious criminal offense**.
-
-This includes in particular:
-
-- Scamming and fraudulent deception
-- Theft of intellectual property
-- Always implicit defamation of the true author of a work and his business, since the truth about
-  the origin of a work is reputation‑critical
-
-I explicitly declare that I **never grant any licenses of any kind for an open source work and
-especially not for its code – not in the past, not now, and not in the future.**
-
----
-
-## 3. Reporting Criminal Acts
-
-If you have information pointing to criminal acts as described under points 1–2, I request that you
-immediately:
-
-- Inform the **Economic Cybercrime Division of the German Police (Zentrale Ansprechstellen
-  Cybercrime, ZAC)**
-    - [Polizei.de – Zentrale Ansprechstellen Cybercrime](https://www.polizei.de/Polizei/DE/Einrichtungen/ZAC/zac_node.html)
-    - [ZAC Contact List (Bund & Länder, PDF)](https://www.wirtschaftsschutz.info/DE/Themen/Cybercrime/Ansprechpartner/ZACErreichbarkeiten.pdf?__blob=publicationFile&v=3)
-
-- Contact **GitHub** via its official abuse reporting email: **abuse@github.com**
-    - [GitHub Docs – Reporting Abuse or Spam](https://docs.github.com/en/communities/maintaining-your-safety-on-github/reporting-abuse-or-spam)
-
-**Your civil courage counts. Help prevent such crimes, make Open Source safer, and protect the
-reputation of authors.**
 
 ---
 
