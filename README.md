@@ -1,4 +1,7 @@
 # This is the Page of MSimpleServer and my Simple Mini Server Architecture.
+# This software is proprietary and protected by copyright law.
+# Idea, Author, and Copyright: Marco Scherzer
+# All rights reserved. This repository is to be treated as private.
 
 #### Development started in early 2025 and had reached 3 to 4 weeks of progress when it started to work for my own simple scenario purposes. 
 #### This early version focuses on HTTP and HTTPS handler implementations and currently supports only simple HttpServer and HttpsServer features with a focus on security through minimalism.
